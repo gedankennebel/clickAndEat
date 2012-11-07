@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cooked: false
+  served: false
+  quantity: 1
+
+two:
+  cooked: false
+  served: false
+  quantity: 1

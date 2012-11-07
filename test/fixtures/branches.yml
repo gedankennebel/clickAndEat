@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  info_text: MyText
+  opening_hours: MyText
+
+two:
+  info_text: MyText
+  opening_hours: MyText
