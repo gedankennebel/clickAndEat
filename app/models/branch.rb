@@ -3,4 +3,6 @@ class Branch < ActiveRecord::Base
   has_one :address
   has_many :tables
   belongs_to :restaurant
+
+  validates_associated :address, :tables, :restaurants
 end
