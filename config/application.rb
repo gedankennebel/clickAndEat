@@ -58,5 +58,8 @@ module ClickAndEat
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Revert to old numbering scheme 
+    config.active_record.timestamped_migrations = false
   end
 end

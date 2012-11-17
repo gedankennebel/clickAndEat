@@ -5,6 +5,10 @@ class CreateOrderItems < ActiveRecord::Migration
       t.boolean :served
       t.integer :quantity
 
+      #foreign key
+      t.integer :item_id
+      t.integer :order_id
+
       t.timestamps
     end
   end

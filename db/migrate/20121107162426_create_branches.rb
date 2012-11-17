@@ -5,6 +5,10 @@ class CreateBranches < ActiveRecord::Migration
       t.text :opening_hours
 
       t.timestamps
+
+      #foreign keys
+      t.integer :restaurant_id
+      t.integer :address:id
     end
   end
 end

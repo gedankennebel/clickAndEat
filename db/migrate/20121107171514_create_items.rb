@@ -6,6 +6,9 @@ class CreateItems < ActiveRecord::Migration
       t.integer :cooktime
       t.binary :picture
 
+      #foreign key
+      t.integer :item_category_id
+
       t.timestamps
     end
   end
