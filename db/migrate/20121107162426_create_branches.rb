@@ -8,7 +8,7 @@ class CreateBranches < ActiveRecord::Migration
 
       #foreign keys
       t.integer :restaurant_id
-      t.integer :address:id
+      t.integer :address_id
     end
   end
 end
