@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107171560) do
+ActiveRecord::Schema.define(:version => 20121107171562) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20121107171560) do
     t.integer  "item_category_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "description"
+    t.integer  "item_number"
   end
 
   create_table "order_items", :force => true do |t|
@@ -74,11 +76,25 @@ ActiveRecord::Schema.define(:version => 20121107171560) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "restaurants_types", :id => false, :force => true do |t|
+    t.integer "restaurant_id", :null => false
+    t.integer "type_id",       :null => false
+  end
+
+  add_index "restaurants_types", ["restaurant_id", "type_id"], :name => "index_restaurants_types_on_restaurant_id_and_type_id", :unique => true
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "roles_user_accounts", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_account_id"
+  end
+
+  add_index "roles_user_accounts", ["role_id", "user_account_id"], :name => "index_roles_user_accounts_on_role_id_and_user_account_id", :unique => true
 
   create_table "tables", :force => true do |t|
     t.integer  "table_number"
@@ -105,11 +121,6 @@ ActiveRecord::Schema.define(:version => 20121107171560) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "restaurant_id"
-  end
-
-  create_table "user_accounts_roles", :id => false, :force => true do |t|
-    t.integer "user_account_id"
-    t.integer "role_id"
   end
 
 end

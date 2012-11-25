@@ -1,8 +1,9 @@
 class Branch < ActiveRecord::Base
   attr_accessible :info_text, :opening_hours
-  has_one :address
+  belongs_to :address
   has_many :tables
   belongs_to :restaurant
 
-  validates_associated :address, :tables, :restaurants
+  validates_presence_of :restaurant
+  validates_associated :tables, :restaurant, :address
 end

@@ -2,6 +2,6 @@ class Type < ActiveRecord::Base
   attr_accessible :name
   has_and_belongs_to_many :restaurants
 
-  validates :name, presence: true
-  validates_associated :restaurants
+  validates_presence_of :name
+  validates_uniqueness_of :name
 end
