@@ -7,7 +7,6 @@ class CreateItemCategories < ActiveRecord::Migration
 
       #foreign key
       t.integer :restaurant_id
-      t.integer :item_category_id
       t.timestamps
     end
   end

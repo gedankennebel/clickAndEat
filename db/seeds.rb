@@ -63,12 +63,11 @@
   drinks = ItemCategory.new(cookable: 0,  name: "Getränke")
   drinks.restaurant=restaurant
   drinks.save!
-  food = ItemCategory.new(cookable: 1,  name: "Essen")
+  food = ItemCategory.new(cookable: 1,  name: "Hauptspeisen")
   food.restaurant=restaurant
   food.save!
   starters = ItemCategory.new(cookable: 1,  name: "Vorspeisen")
   starters.restaurant=restaurant
-  starters.item_category = food
   starters.save!
 #end
 

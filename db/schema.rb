@@ -36,9 +36,8 @@ ActiveRecord::Schema.define(:version => 20121107171562) do
     t.boolean  "cookable"
     t.binary   "default_picture"
     t.integer  "restaurant_id"
-    t.integer  "item_category_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "items", :force => true do |t|
@@ -64,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20121107171562) do
   end
 
   create_table "orders", :force => true do |t|
+    t.boolean  "closed"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "table_id"
