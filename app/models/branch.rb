@@ -5,5 +5,5 @@ class Branch < ActiveRecord::Base
   belongs_to :restaurant
 
   validates_presence_of :restaurant
-  validates_associated :tables, :restaurant, :address
+  validates_associated :restaurant, :address
 end

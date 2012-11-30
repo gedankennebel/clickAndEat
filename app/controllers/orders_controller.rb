@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   # GET /orders
   def index
-    @orders = Order.all
+    @orders = Order.where(closed: false)
   end
 
   # GET /orders/1
@@ -22,10 +22,12 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = Order.new(params[:order])
+    @order.closed=0
+    #@order.save
     if @order.save
-      redirect_to(@order, :notice => 'Order was successfully created.') 
+      redirect_to(@order, :notice => 'Order was successfully created.')
     else
-     render :action => "new" 
+    render :action => "new"
     end
   end
 
