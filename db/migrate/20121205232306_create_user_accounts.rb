@@ -7,7 +7,7 @@ class CreateUserAccounts < ActiveRecord::Migration
 
       t.timestamps
       #foreign key
-      t.integer :restaurant_id
+      #t.integer :restaurant_id
     end
   end
 end
