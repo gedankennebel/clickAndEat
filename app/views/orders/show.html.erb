@@ -1,2 +1,10 @@
 <h1>Orders#show</h1>
 <p>Find me in app/views/orders/show.html.erb</p>
+Bestellnummer: <%= @order.id %> <br/>
+Tischnummer: <%= @order.table.table_number %> <br/>
+Bestellungspositionen (<%= @order.order_items.size %>):
+<% @order.order_items.each do |order_item| %><br/>
+    Name: <%= order_item.item.name %><br/>
+    Anzahl: <%= order_item.quantity %><br/>
+    Preis gesammt: <%= order_item.quantity * order_item.item.price %><br/>
+<% end %>

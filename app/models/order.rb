@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  attr_accessible :closed
+  attr_accessible :closed, :table_id
   has_many :order_items
   belongs_to :table
 
