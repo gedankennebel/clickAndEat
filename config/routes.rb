@@ -1,4 +1,9 @@
 ClickAndEat::Application.routes.draw do
+  # Log-In & session routes
+  get "login" => "sessions#new"
+  post "sessions" => "sessions#create"
+  delete "logout" => "sessions#destroy"
+
   post "orders/{order_id}/order_items" => "order_item#create"
 
   get "orders/{order_id}/order_items/new" => "order_item#new"
@@ -7,8 +12,5 @@ ClickAndEat::Application.routes.draw do
 
   resources :orders
   resources :user_accounts, only: [:new, :create]
-  get "login" => "sessions#new", as: "login"
-  post "session" => "sessions#create", as: "sessions"
-  #get orders #index
   root to: 'restaurants#index'
 end
