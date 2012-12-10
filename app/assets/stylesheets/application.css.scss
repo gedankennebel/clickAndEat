@@ -1,0 +1,93 @@
+$red: #990b02;
+$lightred: #FFA894;
+$grey: #bcbab9;
+$green: #008414;
+$lightgreen: #D8FFBB;
+
+* {
+  margin: 0;
+  font-size: 1.05em;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  width: 1000px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+#content {
+  border: 2px solid $red;
+  background-color: white;
+  padding: 10px;
+  min-height: 500px;
+
+  h2 {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+  }
+}
+
+header {
+  background-color: $red;
+  color: white;
+  padding: 10px;
+}
+
+header h1 {
+  padding: 25px;
+  font-weight: 400;
+  font-size: 5em;
+  text-align: center;
+}
+
+header h1:hover {
+  color: #fff;
+  text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
+}
+
+header p {
+  font-size: 1em;
+  text-decoration-line: none;
+  text-align: right;
+}
+
+footer {
+  background-color: #a09e9d;
+  color: white;
+  padding: 40px;
+}
+
+footer p {
+  font-size: 1em;
+  text-align: center;
+}
+
+#notice {
+  border: 1px solid $green;
+  color: $green;
+  background-color: $lightgreen;
+}
+
+#alert {
+  border: 1px solid $red;
+  color: $red;
+  background-color: $lightred;
+}
+
+label {
+  display: block;
+}
+
+input {
+  margin: 0.5em 0;
+}
+
+input[type="submit"] {
+  margin-top: 0.5em;
+}
+
+
+
+

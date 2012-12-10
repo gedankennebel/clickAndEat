@@ -1,0 +1,6 @@
+<h2>Check out <%= @restaurants.size %> new restaurants!</h2>
+<ul>
+  <% @restaurants.each do |restaurant| %>
+      <li><%= restaurant.name %></li>
+  <% end %>
+</ul>

@@ -2,13 +2,38 @@
 <html>
 <head>
   <title>ClickAndEat</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,400' rel='stylesheet' type='text/css'>  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div id="main_container">
+  <header>
+    <h1>Click&Eat</h1>
 
-<%= yield %>
+    <p><%= link_to "Create new user account", new_user_account_path, class: 'link' %> </p>
+  </header>
 
+  <div id="content">
+    <% if flash[:notice] %>
+        <p id="notice">
+          <%= flash[:notice] %>
+        </p>
+    <% end %>
+    <% if flash[:alert] %>
+        <p id="alert">
+          <%= flash[:alert] %>
+        </p>
+    <% end %>
+
+
+    <%= yield %>
+
+  </div>
+
+  <footer>
+    <p>Impressum</p>
+  </footer>
+</div>
 </body>
 </html>

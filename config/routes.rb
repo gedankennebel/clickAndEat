@@ -1,5 +1,8 @@
 ClickAndEat::Application.routes.draw do
   resources :orders
-  #get orders#index
-  #root to: orders#index
+  resources :user_accounts, only: [:new, :create]
+  get "login" => "sessions#new", as: "login"
+  post "session" => "sessions#create", as: "sessions"
+  #get orders #index
+  root to: 'restaurants#index'
 end

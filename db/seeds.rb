@@ -16,12 +16,12 @@
 
 #if UserAccount.count == 0
   #user_accounts
-  employee = UserAccount.create!(email: "employee@acme.com", name: "employee", password: "Employee1", password_confirmation: "Employee1")
-  employee.roles << employee_role
-  
-
-  manager = UserAccount.create!(email:"manager@acme.com", name: "manager", password: "Manager1", password_confirmation: "Manager1")
-  manager.roles << manager_role
+  #employee = UserAccount.create!(email: "employee@acme.com", name: "employee", password: "Employee1", password_confirmation: "Employee1")
+  #employee.roles << employee_role
+  #
+  #
+  #manager = UserAccount.create!(email:"manager@acme.com", name: "manager", password: "Manager1", password_confirmation: "Manager1")
+  #manager.roles << manager_role
   
 #end
 

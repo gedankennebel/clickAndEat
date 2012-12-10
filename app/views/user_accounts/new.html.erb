@@ -1,0 +1,33 @@
+<h2>Create your user account</h2>
+<br>
+<%= form_for @user_account do |form| %>
+    <% if @user_account.errors.any? %>
+        <ul>
+          <% @user_account.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <p>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </p>
+    <p>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </p>
+    <p>
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation %>
+    </p>
+    <p><%= form.submit %></p>
+<% end %>
+
+
+
+
+
