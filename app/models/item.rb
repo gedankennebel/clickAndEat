@@ -15,7 +15,7 @@ class Item < ActiveRecord::Base
         name: self.name,
         description: self.description,
         price: self.price,
-        picture: "/picture/item/#{id}",
+        picture: "/items/#{id}/picture",
     }
   end
 end

@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   has_many :order_items
   belongs_to :table
 
-  validates :closed, :inclusion => { :in => [true, false] }
+  validates :closed, :inclusion => {:in => [true, false]}
   validates_presence_of :table
-  validates_associated :order_items, :table
+  validates_associated :table
 end

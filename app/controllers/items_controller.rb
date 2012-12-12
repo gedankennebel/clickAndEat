@@ -1,6 +1,6 @@
-class ItemController < ApplicationController
+class ItemsController < ApplicationController
 
-  def list
+  def index
     @items = Item.where(item_category_id: params[:item_category_id])
     render json: @items
   end

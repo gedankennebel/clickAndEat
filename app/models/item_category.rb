@@ -5,13 +5,12 @@ class ItemCategory < ActiveRecord::Base
 
   validates_presence_of :name, :restaurant
   validates :cookable, :inclusion => {:in => [true, false]}
-  validates_associated :restaurant, :items # validate associated objects
+  validates_associated :restaurant
 
 
   def as_json(options = {})
     {
         name: self.name,
-        default_picture: "/picture/item_category/#{id}",
         items: "/item_categories/#{id}/items"
     }
   end

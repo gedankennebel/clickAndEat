@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   def show
     @order = Order.find(params[:id])
+    render json: @order
   end
 
   # GET /orders/new
@@ -27,7 +28,7 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to(@order, :notice => 'Order was successfully created.')
     else
-    render :action => "new"
+      render :action => "new"
     end
   end
 
