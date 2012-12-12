@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   # Get current user
   def current_user
-    if session[:user_id]
-      return @current_user ||= UserAccount.find(session[:user_id])
+    if session[:user_account_id]
+      return @current_user ||= UserAccount.find(session[:user_account_id])
     end
   end
 

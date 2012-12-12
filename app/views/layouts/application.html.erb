@@ -2,44 +2,44 @@
 <html>
 <head>
   <title>ClickAndEat</title>
-  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,400' rel='stylesheet' type='text/css'>  <%= stylesheet_link_tag "application", :media => "all" %>
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,400' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<div id="main_container">
-  <header>
-    <h1> <%= link_to "Click&Eat", root_path %> </h1>
+<header>
+  <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
-    <% if user_signed_id? %>
-        <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
-    <% else %>
-        <p> <%= link_to "Sign up", new_user_account_path %> </p>
+  <% if user_signed_id? %>
+      <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
+  <% else %>
+      <p> <%= link_to "Sign up", new_user_account_path %> </p>
 
-        <p> <%= link_to "Log in", login_path %> </p>
-    <% end %>
-  </header>
+      <p> <%= link_to "Log in", login_path %> </p>
+  <% end %>
+</header>
 
-  <div id="content">
-    <% if flash[:notice] %>
-        <p id="notice">
-          <%= flash[:notice] %>
-        </p>
-    <% end %>
-    <% if flash[:alert] %>
-        <p id="alert">
-          <%= flash[:alert] %>
-        </p>
-    <% end %>
+<div id="content">
+  <% if flash[:notice] %>
+      <p id="notice">
+        <%= flash[:notice] %>
+      </p>
+  <% end %>
+  <% if flash[:alert] %>
+      <p id="alert">
+        <%= flash[:alert] %>
+      </p>
+  <% end %>
 
-    <%= yield %>
-  </div>
-
-  <footer>
-    <p>Copyright &copy; 2012 Felix & Najum</p>
-  </footer>
+  <%= yield %>
 
 </div>
+
+<footer>
+  <p>Copyright &copy; 2012 Felix & Najum</p>
+</footer>
+
 </body>
 </html>
