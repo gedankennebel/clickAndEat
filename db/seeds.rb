@@ -79,10 +79,18 @@ lassi.save!
 jalfrezi = Item.new(cooktime: 25, name: "Chicken Jalfrezi", price: 10.9, item_number: 49)
 jalfrezi.item_category = food
 jalfrezi.save!
-pappad = Item.new(cooktime: 5, name: "Pappad ", price: 2, item_number: 16)
+pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16)
 pappad.item_category = starters
 pappad.save!
 #end
+
+order = Order.create!(table: table1)
+
+OrderItem.create!(order: order, item: pappad)
+OrderItem.create!(order: order, item: lassi)
+OrderItem.create!(order: order, item: jalfrezi)
+
+
 
 
 

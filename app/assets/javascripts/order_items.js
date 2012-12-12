@@ -31,7 +31,7 @@ $(document).ready(function () {
         }).success(function (items) {
                 var html = "<ul>";
                 $.each(items, function (index, item) {
-                    html += "<li><div>";
+                    html += "<li><div class='item'>";
                     html += "<img src=" + item.picture + ">";
                     html += "<p>" + item.name + "</p>";
                     html += "<p>" + item.price + "€ </p>";
@@ -42,5 +42,39 @@ $(document).ready(function () {
                 $('#items').html(html);
             });
     }
+
+    $(".item").on('click', function () {
+        addToOrder(1)
+    });
+
+    function addToOrder(itemId) {
+        $.ajax({
+            type:'post',
+            url:'/orders/1/order_items',
+            contentType:'application/json',
+            data:{item:{id:itemId}}
+        })
+    }
+
+    function getOrderItems() {
+        $.ajax({
+            url:'/orders/1/order_items',
+            contentType:'application/json'
+        }).success(function (orderItems) {
+                var html = "<ul>";
+                $.each(orderItems, function (index, orderItem) {
+                    html += "<li><div>";
+                    html += "<img src=" + orderItem.item.picture + ">";
+                    html += "<p>" + orderItem.item.name + "</p>";
+                    html += "<p>" + orderItem.item.price * orderItem.quantity + "€ </p>";
+                    html += "</div></li>";
+                });
+                html += "</ul>";
+
+                $('#order').html(html);
+            });
+    }
+
+    getOrderItems();
 
 });

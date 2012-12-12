@@ -92,6 +92,36 @@ input[type="submit"] {
   margin-top: 0.5em;
 }
 
+.menu {
+  float: left;
+}
+
+.menu ul {
+  list-style: none;
+}
+
+.menu button {
+  width: 100%;
+}
+
+#items {
+}
+
+#items ul li {
+  list-style: none;
+  float: left;
+}
+
+.footer {
+  clear: both;
+
+}
+
+.footer ul li {
+  float: left;
+  list-style: none;
+}
+
 
 
 

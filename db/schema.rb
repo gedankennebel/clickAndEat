@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(:version => 20121205232306) do
   end
 
   create_table "order_items", :force => true do |t|
-    t.boolean "cooked"
-    t.boolean "served"
-    t.integer "quantity"
+    t.boolean "cooked", :default => false
+    t.boolean "served", :default => false
+    t.integer "quantity", :default => 1
     t.integer "item_id"
     t.integer "order_id"
     t.datetime "created_at", :null => false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20121205232306) do
   end
 
   create_table "orders", :force => true do |t|
-    t.boolean "closed"
+    t.boolean "closed", :default => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer "table_id"
@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(:version => 20121205232306) do
     t.string "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer "restaurant_id"
   end
 
 end

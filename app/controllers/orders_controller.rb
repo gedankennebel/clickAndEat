@@ -32,16 +32,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  # PUT /orders/1
-  # def update
-  #   @order = Order.find(params[:id])
-  #   respond_to do |format|
-  #   if @order.update_attributes(params[:order])
-  #     redirect_to(@order, :notice => 'Order was successfully updated.')
-  #   else
-  #     render :action => "edit"
-  #   end
-  # end
+  #PUT /orders/1
+  def update
+    #respond_to do |format|
+    json = ActiveSupport::JSON.decode(request.body)
+
+    puts 'json:'
+    puts json
+    @order = Order.new.from_json(json)
+    puts '@order'
+    puts @order
+    @order.update_attributes(params[:order])
+
+    #if @order.update_attributes(params[:order])
+    #  redirect_to(@order, :notice => 'Order was successfully updated.')
+    #else
+    #  render :action => "edit"
+    #end
+  end
 
   # DELETE /orders/1
   # def destroy
