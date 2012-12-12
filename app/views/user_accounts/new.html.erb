@@ -2,9 +2,9 @@
 <br>
 <%= form_for @user_account do |form| %>
     <% if @user_account.errors.any? %>
-        <ul>
+        <ul id="errors">
           <% @user_account.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
+              <li><p id="alert"><%= msg %></p></li>
           <% end %>
         </ul>
     <% end %>

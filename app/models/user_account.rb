@@ -1,7 +1,7 @@
 class UserAccount < ActiveRecord::Base
-  #attr_accessible :email, :name, :password, :password_confirmation
-  #has_and_belongs_to_many :roles
-  #belongs_to :restaurant
+  attr_accessible :email, :name, :password, :password_confirmation
+  has_and_belongs_to_many :roles
+  belongs_to :restaurant
   has_secure_password
 
   # validate email with RFC-822
@@ -9,5 +9,5 @@ class UserAccount < ActiveRecord::Base
                                                message: "Invalid mail syntax!"}
   validates :name, length: {minimum: 2, message: "A name shoud contain at least 2 letters!"}
 
-  #validates_associated :roles, :restaurant
+  validates_associated :roles, :restaurant
 end

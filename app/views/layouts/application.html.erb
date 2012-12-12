@@ -7,16 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 <div id="main_container">
   <header>
-    <h1>Click&Eat</h1>
+    <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
-    <p> <%= link_to "Sign up", new_user_account_path %> </p>
+    <% if user_signed_id? %>
+        <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
+    <% else %>
+        <p> <%= link_to "Sign up", new_user_account_path %> </p>
 
-    <p> <%= link_to "Log in", login_path %>  </p>
-
-    <p> <%= link_to "Log out", logout_path, method: :delete %>  </p>
-
+        <p> <%= link_to "Log in", login_path %> </p>
+    <% end %>
   </header>
 
   <div id="content">
@@ -32,12 +34,12 @@
     <% end %>
 
     <%= yield %>
-
   </div>
 
   <footer>
     <p>Copyright &copy; 2012 Felix & Najum</p>
   </footer>
+
 </div>
 </body>
 </html>
