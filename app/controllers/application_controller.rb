@@ -6,13 +6,14 @@ class ApplicationController < ActionController::Base
   # Get current user
   def current_user
     if session[:user_account_id]
-      return @current_user ||= UserAccount.find(session[:user_account_id])
+      @current_user ||= UserAccount.find(session[:user_account_id])
     end
   end
 
   def user_signed_id?
-    return current_user.present?
+    current_user.present?
   end
 
   helper_method :user_signed_id?
+  helper_method :current_user
 end

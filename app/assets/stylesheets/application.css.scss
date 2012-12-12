@@ -33,7 +33,18 @@ body {
 header {
   background-color: $red;
   color: white;
+  padding: 8px;
+}
+
+header h1 {
   padding: 10px;
+  font-weight: 400;
+  font-size: 5em;
+  text-align: center;
+}
+
+header h1:hover {
+  text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
 }
 
 header a {
@@ -44,17 +55,6 @@ header a {
 header a:hover {
   color: $white;
   text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
-}
-
-header h1 {
-  padding: 25px;
-  font-weight: 400;
-  font-size: 5em;
-  text-align: center;
-
-  h1:hover {
-    text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
-  }
 }
 
 header p {

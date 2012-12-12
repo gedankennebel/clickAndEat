@@ -13,6 +13,8 @@
   <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
   <% if user_signed_id? %>
+      <p> Welcom <%= current_user.name %>!</p>
+
       <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
   <% else %>
       <p> <%= link_to "Sign up", new_user_account_path %> </p>
