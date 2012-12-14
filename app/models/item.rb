@@ -12,7 +12,8 @@ class Item < ActiveRecord::Base
 
   def as_json(options = {})
     {
-        id: id,
+        id: self.id,
+        itemNumber: self.item_number,
         name: self.name,
         description: self.description,
         price: self.price,

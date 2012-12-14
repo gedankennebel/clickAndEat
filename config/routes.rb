@@ -24,7 +24,7 @@ ClickAndEat::Application.routes.draw do
   end
 
   #OrderItem
-  get "branches/:branch_id/order_items" => "order_item#monitor"
+  get "branches/:branch_id/order_items" => "order_items#monitor"
 
   #Order
   resources :orders do

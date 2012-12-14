@@ -8,37 +8,40 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="main_container">
-  <header>
-    <h1>Click&Eat</h1>
 
-    <p> <%= link_to "Sign up", new_user_account_path %> </p>
+<header>
+  <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
-    <p> <%= link_to "Log in", login_path %>  </p>
+  <% if user_signed_id? %>
+      <p> Welcom <%= current_user.name %>!</p>
 
-    <p> <%= link_to "Log out", logout_path, method: :delete %>  </p>
+      <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
+  <% else %>
+      <p> <%= link_to "Sign up", new_user_account_path %> </p>
 
-  </header>
+      <p> <%= link_to "Log in", login_path %> </p>
+  <% end %>
+</header>
 
-  <div id="content">
-    <% if flash[:notice] %>
-        <p id="notice">
-          <%= flash[:notice] %>
-        </p>
-    <% end %>
-    <% if flash[:alert] %>
-        <p id="alert">
-          <%= flash[:alert] %>
-        </p>
-    <% end %>
+<div id="content">
+  <% if flash[:notice] %>
+      <p id="notice">
+        <%= flash[:notice] %>
+      </p>
+  <% end %>
+  <% if flash[:alert] %>
+      <p id="alert">
+        <%= flash[:alert] %>
+      </p>
+  <% end %>
 
-    <%= yield %>
+  <%= yield %>
 
-  </div>
-
-  <footer>
-    <p>Copyright &copy; 2012 Felix & Najum</p>
-  </footer>
 </div>
+
+<footer>
+  <p>Copyright &copy; 2012 Felix & Najum</p>
+</footer>
+
 </body>
 </html>

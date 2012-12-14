@@ -3,6 +3,7 @@ $lightred: #FFA894;
 $grey: #bcbab9;
 $green: #008414;
 $lightgreen: #D8FFBB;
+$white: #FFFFFF;
 
 * {
   margin: 0;
@@ -11,7 +12,7 @@ $lightgreen: #D8FFBB;
 }
 
 body {
-  background-color: #ffffff;
+  background-color: $white;
   width: 1000px;
   padding: 10px;
   margin: 0 auto;
@@ -32,22 +33,32 @@ body {
 header {
   background-color: $red;
   color: white;
-  padding: 10px;
+  padding: 8px;
 }
 
 header h1 {
-  padding: 25px;
+  padding: 10px;
   font-weight: 400;
   font-size: 5em;
   text-align: center;
 }
 
 header h1:hover {
-  color: #fff;
-  text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
+  text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
+}
+
+header a {
+  color: $white;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: $white;
+  text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
 }
 
 header p {
+  margin: 8px;
   font-size: 1em;
   text-decoration-line: none;
   text-align: right;
@@ -92,12 +103,12 @@ input[type="submit"] {
   margin-top: 0.5em;
 }
 
-.menu {
-  float: left;
+ul {
+  list-style-type: none;
 }
 
-.menu ul {
-  list-style: none;
+.menu {
+  float: left;
 }
 
 .menu button {
@@ -107,14 +118,12 @@ input[type="submit"] {
 #items {
 }
 
-#items ul li {
-  list-style: none;
+#items ul {
   float: left;
 }
 
 .footer {
   clear: both;
-
 }
 
 .footer ul li {
@@ -122,6 +131,17 @@ input[type="submit"] {
   list-style: none;
 }
 
+.orderItem {
+  margin: 0.5em;
+}
+
+.plusminus {
+  float: right;
+}
+
+.cooked, .served {
+
+}
 
 
 

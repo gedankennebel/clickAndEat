@@ -6,8 +6,13 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
-    @order = Order.find(params[:id])
-    render json: @order
+    respond_to do |format|
+      format.html
+      format.json {
+        @order = Order.find(params[:id])
+        render json: @order
+      }
+    end
   end
 
   # GET /orders/new
@@ -34,27 +39,14 @@ class OrdersController < ApplicationController
 
   #PUT /orders/1
   def update
-    #respond_to do |format|
-    json = ActiveSupport::JSON.decode(request.body)
-
-    puts 'json:'
-    puts json
-    @order = Order.new.from_json(json)
-    puts '@order'
-    puts @order
+    @order = Order.new.from_json(request.body)
     @order.update_attributes(params[:order])
-
-    #if @order.update_attributes(params[:order])
-    #  redirect_to(@order, :notice => 'Order was successfully updated.')
-    #else
-    #  render :action => "edit"
-    #end
   end
 
   # DELETE /orders/1
-  # def destroy
-  #   @order = Order.find(params[:id])
-  #   @order.destroy
-  #   redirect_to(orders_url)
-  # end
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    render status: :no_content
+  end
 end

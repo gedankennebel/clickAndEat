@@ -1,10 +1,5 @@
 class OrderItemsController < ApplicationController
 
-  def new
-
-  end
-
-
   def index
     @order_items = OrderItem.where(order_id: params[:order_id])
     render json: @order_items
@@ -16,21 +11,24 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @order_item = OrderItem.new.from_json(request.body)
-    @order_item.save!
-    render status: 201, nothing: true, location: order_order_item_url(@order_item.order, @order_item)
+    @order_item = OrderItem.save_or_update_from_json(request.body)
+    render status: :created, nothing: true, location: order_order_item_url(@order_item.order, @order_item)
   end
 
   def update
     @order_item = OrderItem.find(params[:id])
-    @order_item.from_json(request.body)
-    @order_item.save!
-    render status: 204, nothing: true
+    @order_item.update_from_json(request.body)
+    render status: :no_content, nothing: true
   end
 
   def monitor
-    @order_items = OrderItem.joins(:order => [:table => :branch]).where('branches.id' => params[:branch_id])
-    render json: @order_items
+    respond_to do |format|
+      format.html
+      format.json {
+        @order_items = OrderItem.joins(:order => [:table => :branch]).where('branches.id' => params[:branch_id])
+        render json: @order_items
+      }
+    end
   end
 
 end
