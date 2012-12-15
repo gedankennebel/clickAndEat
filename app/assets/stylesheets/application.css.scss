@@ -105,4 +105,47 @@ input[type="submit"] {
 
 ul {
   list-style-type: none;
+<<<<<<< HEAD
 }
+=======
+}
+
+.menu {
+  float: left;
+}
+
+.menu button {
+  width: 100%;
+}
+
+#items {
+}
+
+#items ul {
+  float: left;
+}
+
+.footer {
+  clear: both;
+}
+
+.footer ul li {
+  float: left;
+  list-style: none;
+}
+
+.orderItem {
+  margin: 0.5em;
+}
+
+.plusminus {
+  float: right;
+}
+
+.cooked, .served {
+
+}
+
+
+
+>>>>>>> 11630d9754909da46eaa03fd900dd4c2853270bb

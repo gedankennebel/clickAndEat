@@ -3,10 +3,10 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.boolean :closed
       t.timestamps
-      
+
       #foreign key
       t.integer :table_id
-      
+
     end
   end
 end
