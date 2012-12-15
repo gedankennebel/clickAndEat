@@ -1,6 +1,28 @@
-<h2>Check out <%= @restaurants.size %> new restaurants!</h2>
-<ul>
+<%= stylesheet_link_tag 'restaurants.css.scss' %>
+
+<h2>Check out all new restaurants!</h2>
+<ul id="new_restaurants">
   <% @restaurants.each do |restaurant| %>
-      <li><%= restaurant.name %></li>
+      <li>
+        <ul class="new_comer">
+          <li class="picture">
+            <%= image_tag url_for(:action => 'get_restaurant_picture', :restaurant_id => restaurant.id, :controller => 'picture') %>
+          </li>
+          <li>
+            <ul class="info">
+              <li class="name"><%= restaurant.name %></li>
+              <li>Kitchen:
+                <% restaurant.types.each do |type| %>
+                    <% if type.eql? restaurant.types.last %>
+                        <%= type.name %>
+                    <% else %>
+                        <%= type.name+ ", " %>
+                    <% end %>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
   <% end %>
 </ul>

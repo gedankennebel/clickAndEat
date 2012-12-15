@@ -1,9 +1,8 @@
 class PictureController < ApplicationController
 
-  def get_picture
+  def get_item_picture
     @item = Item.find(params[:item_id])
     fresh_when :last_modified => @item.updated_at, :etag => @item
-
     if @item.picture
       @picture = item.picture
     else
@@ -19,5 +18,12 @@ class PictureController < ApplicationController
     send_data @picture, type: 'image/jpeg', disposition: 'inline'
   end
 
+  def get_restaurant_picture
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    fresh_when :last_modified => @restaurant.updated_at, :etag => @restaurant
+    if @restaurant.picture
+      send_data @restaurant.picture, type: 'image/png', disposition: 'inline'
+    end
+  end
 
 end
