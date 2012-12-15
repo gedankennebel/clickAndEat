@@ -3,8 +3,7 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all(:order => 'created_at DESC')
   end
 
-  def image
-    send_data @restaurants.picture, :type => 'image/png', :disposition => 'inline'
+  def show
+    @restaurant = Restaurant.find(params[:id])
   end
-
 end

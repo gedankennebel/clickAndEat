@@ -27,10 +27,18 @@ manager_role = Role.create!(name: 'ROLE_MANAGER')
 
 #restaurants
 #if Restaurant.count == 0
-type = Type.create!(name: "indian")
-restaurant = Restaurant.new(name: "Royal India", picture: File.new(Rails.root+"app/assets/indian.jpeg").read)
-restaurant.types << type
+#indian restaurant
+indian_type = Type.create!(name: "indian")
+chinese_type = Type.create!(name: "chinese")
+vietnamese_type = Type.create!(name: "vietnamese")
+restaurant = Restaurant.new(name: "Royal India", picture: File.new(Rails.root.join "app/assets/indian.jpeg").read)
+restaurant.types << indian_type
 restaurant.save!
+
+#chinese restaurant
+chinese_restaurant = Restaurant.new(name: "Chopstix", picture: File.new(Rails.root.join "app/assets/chinese.jpeg").read)
+chinese_restaurant.types << chinese_type
+chinese_restaurant.save!
 #end
 
 #branches
@@ -63,7 +71,7 @@ table3.save!
 drinks = ItemCategory.new(cookable: 0, name: "Drinks")
 drinks.restaurant=restaurant
 drinks.save!
-food = ItemCategory.new(cookable: 1, name: "Meals")
+food = ItemCategory.new(cookable: 1, name: "Food")
 food.restaurant=restaurant
 food.save!
 starters = ItemCategory.new(cookable: 1, name: "Starters")

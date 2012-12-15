@@ -1,28 +1,30 @@
 <%= stylesheet_link_tag 'restaurants.css.scss' %>
 
 <h2>Check out all new restaurants!</h2>
-<ul id="new_restaurants">
+<table id="latest_restaurants">
   <% @restaurants.each do |restaurant| %>
-      <li>
-        <ul class="new_comer">
-          <li class="picture">
-            <%= image_tag url_for(:action => 'get_restaurant_picture', :restaurant_id => restaurant.id, :controller => 'picture') %>
-          </li>
-          <li>
-            <ul class="info">
-              <li class="name"><%= restaurant.name %></li>
-              <li>Kitchen:
-                <% restaurant.types.each do |type| %>
-                    <% if type.eql? restaurant.types.last %>
-                        <%= type.name %>
-                    <% else %>
-                        <%= type.name+ ", " %>
-                    <% end %>
-                <% end %>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+      <tr>
+        <td>
+          <%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: restaurant.id) %>
+        </td>
+        <td>
+          <ul>
+            <li class="name"><%= restaurant.name %></li>
+            <li>Kitchen:
+              <% restaurant.types.each do |type| %>
+                  <% if type.eql? restaurant.types.last %>
+                      <%= type.name %>
+                  <% else %>
+                      <%= type.name+ ", " %>
+                  <% end %>
+              <% end %>
+            </li>
+            <li class="restaurant_links">
+              show menu |
+              <%= link_to "show details", url_for(controller: 'restaurants', action: 'show', id: restaurant.id) %>
+            </li>
+          </ul>
+        </td>
+      </tr>
   <% end %>
-</ul>
+</table>
