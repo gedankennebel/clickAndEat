@@ -8,6 +8,6 @@ class RestaurantsController < ApplicationController
   end
 
   def menu
-    @item_categories = Restaurant.find(params[:id]).item_categories
+    @restaurant = Restaurant.find(params[:id])
   end
 end
