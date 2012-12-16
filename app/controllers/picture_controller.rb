@@ -14,7 +14,6 @@ class PictureController < ApplicationController
         return
       end
     end
-
     send_data @picture, type: 'image/jpeg', disposition: 'inline'
   end
 

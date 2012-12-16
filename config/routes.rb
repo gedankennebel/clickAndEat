@@ -8,6 +8,8 @@ ClickAndEat::Application.routes.draw do
   get "/items/:item_id/picture" => "picture#get_item_picture"
   get "/restaurants/:restaurant_id/picture" => "picture#get_restaurant_picture"
 
+  get "/restaurants/:id/menu" => "restaurants#menu"
+
   resources :user_accounts, only: [:new, :create]
 
   resources :restaurants do
