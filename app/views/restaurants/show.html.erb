@@ -1,11 +1,32 @@
-<h2>
-  <%= @restaurant.name %>
-</h2>
+<%= stylesheet_link_tag 'restaurants.css.scss' %>
+<div id="details">
+  <h2 id="details_name">
+    <%= @restaurant.name %>
+  </h2>
 
-<%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: @restaurant.id) %>
+  <p><%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: @restaurant.id) %></p>
 
-Branches/Address: TODO
+  <p class="small"><%= @restaurant.branches.first.info_text %> </p>
 
-Infotext: TODO
+</div>
 
-OpeningTimes: TODO
+<div id="branches">
+  <% if @restaurant.branches.length.eql? 1 %>
+      <p class="bold"><%= @restaurant.name %> has at the moment only <%= @restaurant.branches.length %> branch:</p>
+  <% else %>
+      <p class="bold"><%= @restaurant.name %> has <%= @restaurant.branches.length %> branches:</p>
+  <% end %>
+  <ul id="address">
+    <% @restaurant.branches.each do |branch| %>
+        <li>
+          <% address = branch.address %>
+          <p><%= address.street %>  <%= address.number %>   </p>
+
+          <p> <%= address.postcode %> <%= address.city %></p>
+
+          <p class="small"> <%= branch.opening_hours %></p>
+        </li>
+    <% end %>
+  </ul>
+
+</div>
