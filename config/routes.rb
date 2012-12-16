@@ -8,6 +8,8 @@ ClickAndEat::Application.routes.draw do
   get "/items/:item_id/picture" => "picture#get_item_picture"
   get "/restaurants/:restaurant_id/picture" => "picture#get_restaurant_picture"
 
+  get "/restaurants/:id/menu" => "restaurants#menu"
+
   #post "orders/{order_id}/order_items" => "order_item#create"
 
   #get "orders/{order_id}/order_items/new" => "order_item#new"
