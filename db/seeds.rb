@@ -132,13 +132,16 @@ starters.save!
 
 #items
 #if Item.count == 0
-lassi = Item.new(cooktime: 5, name: "Mango Lassi", price: 2.9, item_number: 123)
+lassi = Item.new(cooktime: 5, name: "Mango Lassi", price: 2.9, item_number: 123, description: "Mango lassi is most commonly found in India and Pakistan though it is gaining popularity worldwide. It is made from yogurt, water and mango pulp.", picture: File.new(Rails.root.join "app/assets/mango_lassi.jpg").read)
 lassi.item_category = drinks
 lassi.save!
-jalfrezi = Item.new(cooktime: 25, name: "Chicken Jalfrezi", price: 10.9, item_number: 49)
+jalfrezi = Item.new(cooktime: 25, name: "Chicken Jalfrezi", price: 10.9, item_number: 49, description: "Jalfrezi is a type of curry in which marinated pieces of meat or vegetables are fried in oil and spices to produce a dry, thick sauce. It is cooked with green chillies, with the result that a jalfrezi can range in heat from a medium dish to a very hot one. ", picture: File.new(Rails.root.join "app/assets/jalfrezi.jpg").read)
 jalfrezi.item_category = food
 jalfrezi.save!
-pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16)
+biryani = Item.new(cooktime: 35, name: "Biryani", price: 13.9, item_number: 50, description: "Biryani is a set of rice-based foods made with spices, rice (usually basmati) and Chicken, mutton, fish, eggs or vegetables.", picture: File.new(Rails.root.join "app/assets/biryani.jpg").read)
+biryani.item_category = food
+biryani.save!
+pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16, description: "Pappad is a thin, crisp Indian preparation sometimes described as a cracker. It is typically served as an accompaniment to a meal in India.", picture: File.new(Rails.root.join "app/assets/pappad.jpg").read)
 pappad.item_category = starters
 pappad.save!
 #end

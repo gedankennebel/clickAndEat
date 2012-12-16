@@ -1,13 +1,19 @@
+<%= stylesheet_link_tag 'restaurants.css.scss' %>
+
 <h2>Online menu card</h2>
 <h2><%= @item_categories.first.restaurant.name %> </h2>
 <ul>
   <% @item_categories.each do |category| %>
       <li>
-        <%= category.name %>
+        <p class="category_name"><%= category.name %></p>
         <ul>
           <% category.items.each do |item| %>
-              <li>
-                <p><%= item.name %>  <%= item.price %>&#8364;
+              <li class="item">
+                <%= image_tag url_for(controller: 'picture', action: 'get_item_picture', item_id: item.id) %>
+                <%= item.name %>  <%= item.price %>&#8364;
+                <span class="hidden_text">
+                <p class="item_description"><%= item.description %></p>
+                </span>
               </li>
           <% end %>
         </ul>
