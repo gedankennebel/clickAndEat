@@ -3,6 +3,11 @@ ClickAndEat::Application.routes.draw do
   get "login" => "sessions#new"
   post "sessions" => "sessions#create"
   delete "logout" => "sessions#destroy"
+  resources :restaurants
+
+  #Picture
+  get "/items/:item_id/picture" => "picture#get_item_picture"
+  get "/restaurants/:restaurant_id/picture" => "picture#get_restaurant_picture"
 
   #post "orders/{order_id}/order_items" => "order_item#create"
 
@@ -30,9 +35,6 @@ ClickAndEat::Application.routes.draw do
   resources :orders do
     resources :order_items
   end
-
-  #Picture
-  get "/items/:item_id/picture" => "picture#get_picture"
 
   root to: 'restaurants#index'
 end

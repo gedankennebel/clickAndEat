@@ -27,17 +27,25 @@ manager_role = Role.create!(name: 'ROLE_MANAGER')
 
 #restaurants
 #if Restaurant.count == 0
-type = Type.create!(name: "Indisch")
-restaurant = Restaurant.new(name: "Royal India")
-restaurant.types << type
+#indian restaurant
+indian_type = Type.create!(name: "indian")
+chinese_type = Type.create!(name: "chinese")
+vietnamese_type = Type.create!(name: "vietnamese")
+restaurant = Restaurant.new(name: "Royal India", picture: File.new(Rails.root.join "app/assets/indian.jpeg").read)
+restaurant.types << indian_type
 restaurant.save!
+
+#chinese restaurant
+chinese_restaurant = Restaurant.new(name: "Chopstix", picture: File.new(Rails.root.join "app/assets/chinese.jpeg").read)
+chinese_restaurant.types << chinese_type
+chinese_restaurant.save!
 #end
 
 #branches
 #if Branch.count == 0
 address = Address.create!(city: "München", number: "117", postcode: "80339", street: "Westendstraße")
 
-branch = Branch.new(info_text: "Royal India - Indian restaurant in Munich", opening_hours: "tgl. 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
+branch = Branch.new(info_text: "Royal India - Indian restaurant in Munich", opening_hours: "daily. 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
 branch.restaurant = restaurant
 branch.address = address
 branch.save!
@@ -60,13 +68,13 @@ table3.save!
 
 #item_categories
 #if ItemCategory.count == 0
-drinks = ItemCategory.new(cookable: 0, name: "Getränke")
+drinks = ItemCategory.new(cookable: 0, name: "Drinks")
 drinks.restaurant=restaurant
 drinks.save!
-food = ItemCategory.new(cookable: 1, name: "Hauptspeisen")
+food = ItemCategory.new(cookable: 1, name: "Food")
 food.restaurant=restaurant
 food.save!
-starters = ItemCategory.new(cookable: 1, name: "Vorspeisen")
+starters = ItemCategory.new(cookable: 1, name: "Starters")
 starters.restaurant=restaurant
 starters.save!
 #end
