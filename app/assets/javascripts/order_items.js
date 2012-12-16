@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     // variables  #############################################################
     var _order;
+    var _items;
 
     // init  ##################################################################
     getCategories();
@@ -26,6 +27,10 @@ $(document).ready(function () {
         incrementQuantity(-1, orderItemId);
     });
 
+    $('#order').on('click', '#submitOrder', function () {
+        submitOrder();
+    });
+
     // AJAX   #################################################################
     function getCategories() {
         $.ajax({
@@ -42,21 +47,22 @@ $(document).ready(function () {
             url:url,
             dataType:"json"
         }).done(function (items) {
-                $('#items').html(createItemsHtml(items));
+                _items = items;
+                renderItems(items);
             });
     }
 
     function addToOrder(itemId) {
-        $.ajax({
-            type:'post',
-            //TODO HATEOAS
-            url:document.URL + '/order_items',
-            contentType:'application/json; charset=utf-8',
-            dataType:"json",
-            data:JSON.stringify({order_id:_order.id, quantity:1, item:{id:itemId}})
-        }).always(function () {
-                getOrder();
-            });
+        var orderItem = getOrderItemByItemId(_order.order_items, itemId);
+        console.log(orderItem);
+        if (orderItem != null) {
+            orderItem.quantity++;
+        } else {
+            var item = getObjectById(_items, itemId);
+            var newOrderItem = {id:Math.random(), quantity:1, item:item};
+            _order.order_items.push(newOrderItem);
+        }
+        renderOrderItems(_order.order_items);
     }
 
     function getOrder() {
@@ -65,66 +71,38 @@ $(document).ready(function () {
             dataType:'json'
         }).done(function (order) {
                 _order = order;
-                $('#order').html(createOrderItemHtml(order.order_items));
+                renderOrderItems(order.order_items);
             });
     }
 
-    function incrementQuantity(increment, orderItemId) {
-        var orderItem = getOrderItemById(_order.order_items, orderItemId);
-        orderItem.quantity += increment;
+    function submitOrder() {
         $.ajax({
+            url:document.URL,
             type:'put',
-            url:getSelfLink(orderItem),
+            dataType:'json',
             contentType:'application/json; charset=utf-8',
-            dataType:"json",
-            data:JSON.stringify(orderItem)
-        }).always(function () {
+            data:JSON.stringify(_order),
+            statusCode:{
+                204:function () {
+                    alert('Successfully submitted order');
+                }
+            }
+        }).fail(function () {
+                alert('Failed');
+            }).always(function () {
                 getOrder();
             });
     }
 
-    // HTML templates  ########################################################
+    function incrementQuantity(increment, orderItemId) {
+        var orderItem = getObjectById(_order.order_items, orderItemId);
+        orderItem.quantity += increment;
+        if (orderItem.quantity <= 0) {
 
-    function createCategoriesHtml(categories) {
-        var html = "<ul>";
-        $.each(categories, function (index, category) {
-            html += "<li>" +
-                "   <button class='categoryLink'  value='" + category.items + "'> " + category.name + "</button>" +
-                "</li>";
-        });
-        html += "</ul>";
-        return html;
-    }
-
-    function createItemsHtml(items) {
-        var html = "<ul>";
-        $.each(items, function (index, item) {
-            html += "<li><div class='item' id='" + item.id + "'>";
-            html += "   <input type='image'  src='" + item.picture + "'/>";
-            html += "   <p>" + item.name + "</p>";
-            html += "   <p>#" + item.itemNumber + "</p>";
-            html += "   <p>" + parseFloat(item.price).toFixed(2) + "€ </p>";
-            html += "</div></li>";
-        });
-        html += "</ul>";
-        return html;
-    }
-
-    function createOrderItemHtml(orderItems) {
-        var html = "<ul>";
-        $.each(orderItems, function (index, orderItem) {
-            html += "<li>";
-            html += "   <div class='orderItem' id='" + orderItem.id + "'>";
-            html += "      <span class='plusminus'>";
-            html += "         <input type='image' class='plus' src='/images/plus.png'><br/>";
-            html += "         <input type='image' class='minus' src='/images/minus.png'>";
-            html += "      </span>";
-            html += "      <p>" + orderItem.item.name + " (" + orderItem.quantity + ")</p>";
-            html += "      <p>" + (orderItem.item.price * orderItem.quantity).toFixed(2) + "€ </p>";
-            html += "   </div>";
-            html += "</li>";
-        });
-        html += "</ul>";
-        return html;
+            console.log(_order);
+            console.log(_order.order_items);
+            _order.order_items.splice(_order.order_items.indexOf(orderItem), 1);
+        }
+        renderOrderItems(_order.order_items);
     }
 });

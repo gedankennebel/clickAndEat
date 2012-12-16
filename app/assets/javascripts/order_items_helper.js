@@ -14,12 +14,30 @@ function getSelfLink(hypermedia) {
     return getLink('self', hypermedia);
 }
 
-function getOrderItemById(orderItems, orderItemId) {
+function getObjectById(objectList, id) {
     var result;
-    $.each(orderItems, function (index, orderItem) {
-        if (orderItem.id == orderItemId) {
+    $.each(objectList, function (index, orderItem) {
+        if (orderItem.id == id) {
             result = orderItem;
         }
+    });
+    return result;
+}
+
+function getOrderItemByItemId(orderItems, itemId) {
+    var result;
+    $.each(orderItems, function (index, orderItem) {
+        if (orderItem.item.id == itemId) {
+            result = orderItem;
+        }
+    });
+    return result;
+}
+
+function getTotalAmount(orderItems) {
+    var result = 0;
+    $.each(orderItems, function (index, orderItem) {
+        result += orderItem.quantity * orderItem.item.price;
     });
     return result;
 }

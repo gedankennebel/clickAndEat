@@ -3,8 +3,9 @@ class OrderItem < ActiveRecord::Base
   attr_accessible :cooked, :quantity, :served, :order, :item, :item_id
   belongs_to :order
   belongs_to :item
+  #default_scope joins: :item
 
-  validates_presence_of :order
+  validates_presence_of :order, :item
   validates :quantity, numericality: {only_integer: true, greater_than: 0} # quantity in positive integer
   validates :cooked, :inclusion => {:in => [true, false]}
   validates :served, :inclusion => {:in => [true, false]}
@@ -46,10 +47,14 @@ class OrderItem < ActiveRecord::Base
 
   def from_json(json, include_root=include_root_in_json)
     hash = ActiveSupport::JSON.decode(json)
-    puts hash
     hash = hash.values.first if include_root
+    from_hash(hash)
+    self
+  end
+
+  def from_hash(hash)
     self.item_id= hash['item']['id']
-    self.order_id= hash['order_id']
+    #self.order_id= hash['order_id']
     self.cooked= hash['cooked']
     self.quantity= hash['quantity']
     self.served= hash['served']
