@@ -8,13 +8,13 @@ $(document).ready(function () {
 
     // Event Handler  #########################################################
     $("#monitor").on('click', '.cooked', function () {
-        var orderItem = getOrderItemById(_orderItems, this.parentNode.id);
+        var orderItem = getObjectById(_orderItems, this.parentNode.id);
         orderItem.cooked = true;
         updateOrderItem(orderItem);
     });
 
     $("#monitor").on('click', '.served', function () {
-        var orderItem = getOrderItemById(_orderItems, this.parentNode.id);
+        var orderItem = getObjectById(_orderItems, this.parentNode.id);
         orderItem.served = true;
         updateOrderItem(orderItem);
     });

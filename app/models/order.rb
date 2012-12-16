@@ -1,8 +1,9 @@
 class Order < ActiveRecord::Base
   before_validation :default_values
   attr_accessible :closed, :table_id, :table
-  has_many :order_items
+  has_many :order_items, autosave: true
   belongs_to :table
+  #default_scope joins: [:order_items, :table] #eager loading
 
   validates :closed, :inclusion => {:in => [true, false]}
   validates_presence_of :table
@@ -18,10 +19,59 @@ class Order < ActiveRecord::Base
     }
   end
 
+  def from_json(json, include_root=include_root_in_json)
+    hash = ActiveSupport::JSON.decode(json)
+    hash = hash.values.first if include_root
+    self.table_id = hash['table']
+    update_order_items(hash)
+  end
+
   private
   def default_values
     self.closed||=0
   end
 
+  def update_order_items(hash)
+    order_item_ids = delete_not_included_order_items(hash)
+    create_or_update_order_items(hash, order_item_ids)
+
+  end
+
+  def delete_not_included_order_items(hash)
+    order_item_ids = []
+    hash['order_items'].each do |order_item_hash|
+      order_item_ids << order_item_hash['id']
+    end
+    #delete order_items that are not included
+    self.order_items.each do |order_item|
+      unless order_item_ids.include?(order_item.id)
+        order_item.destroy
+      end
+    end
+    order_item_ids
+  end
+
+  def create_or_update_order_items(hash, order_item_ids)
+    hash['order_items'].each do |order_item_hash|
+      order_item_ids << order_item_hash['id']
+      order_item = get_order_item_by_id(self.order_items, order_item_hash['id'])
+      if order_item
+        #update old
+        order_item.from_hash(order_item_hash)
+      else
+        #create new
+        self.order_items << OrderItem.new.from_hash(order_item_hash)
+      end
+    end
+  end
+
+  def get_order_item_by_id(order_items, id)
+    order_items.each do |order_item|
+      if order_item.id == id
+        return order_item
+      end
+    end
+    nil
+  end
 
 end

@@ -39,8 +39,10 @@ class OrdersController < ApplicationController
 
   #PUT /orders/1
   def update
-    @order = Order.new.from_json(request.body)
-    @order.update_attributes(params[:order])
+    @order = Order.find(params[:id])
+    @order.from_json(request.body)
+    @order.save!
+    render status: :no_content, nothing: true
   end
 
   # DELETE /orders/1

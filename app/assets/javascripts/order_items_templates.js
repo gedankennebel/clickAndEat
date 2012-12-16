@@ -9,7 +9,7 @@ function createCategoriesHtml(categories) {
     return html;
 }
 
-function createItemsHtml(items) {
+function renderItems(items) {
     var html = "<ul>";
     $.each(items, function (index, item) {
         html += "<li><div class='item' id='" + item.id + "'>";
@@ -20,10 +20,10 @@ function createItemsHtml(items) {
         html += "</div></li>";
     });
     html += "</ul>";
-    return html;
+    $('#items').html(html);
 }
 
-function createOrderItemHtml(orderItems) {
+function renderOrderItems(orderItems) {
     var html = "<ul>";
     $.each(orderItems, function (index, orderItem) {
         html += "<li>";
@@ -38,7 +38,11 @@ function createOrderItemHtml(orderItems) {
         html += "</li>";
     });
     html += "</ul>";
-    return html;
+    html += "<div class='totalAmount'>";
+    html += "   <h2>Total Amount: </h2>" + getTotalAmount(orderItems).toFixed(2)
+    html += "</div>";
+    html += "<input id='submitOrder' type='button' value='Submit'>";
+    $('#order').html(html);
 }
 
 function createOrderItemMonitorHtml(orderItems) {
