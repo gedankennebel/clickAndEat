@@ -39,7 +39,7 @@ function renderOrderItems(orderItems) {
     });
     html += "</ul>";
     html += "<div class='totalAmount'>";
-    html += "   <h2>Total Amount: </h2>" + getTotalAmount(orderItems).toFixed(2)
+    html += "   <h2>Total Amount: </h2>" + getTotalAmount(orderItems).toFixed(2);
     html += "</div>";
     html += "<input id='submitOrder' type='button' value='Submit'>";
     $('#order').html(html);
@@ -51,7 +51,8 @@ function createOrderItemMonitorHtml(orderItems) {
         html += "<li>";
         html += "   <div class='orderItemMonitor' id='" + orderItem.id + "'>";
         html += "      <p>" + orderItem.item.name + " (" + orderItem.quantity + ")</p>";
-        html += "      <p>" + orderItem.cooked + "</p>";
+//        html += "      <p>" + orderItem.cooked + "</p>";
+//        html += "      <p>" + orderItem.served + "</p>";
         html += "      <p>" + orderItem.served + "</p>";
         html += "      <input type='submit' class='cooked' value='Cooked'/>";
         html += "      <input type='submit' class='served' value='Served'/>";

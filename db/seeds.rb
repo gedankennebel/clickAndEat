@@ -12,6 +12,7 @@
 #if Role.count == 0
 employee_role = Role.create!(name: 'ROLE_EMPLOYEE')
 manager_role = Role.create!(name: 'ROLE_MANAGER')
+manager_role = Role.create!(name: 'ROLE_USER')
 #end
 
 #if UserAccount.count == 0

@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
-  # GET /orders
   def index
-    @orders = Order.where(closed: false)
+    @order = Order.new
+    @tables = Table.where(branch_id: params[:branch_id])
+    @orders = Order.where(table_id: @tables.map(&:id), closed: false)
   end
 
-  # GET /orders/1
   def show
     respond_to do |format|
       format.html
@@ -15,17 +15,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/new
-  def new
-    @order = Order.new
-  end
-
-  # GET /orders/1/edit
-  # def edit
-  #   @order = Order.find(params[:id])
-  # end
-
-  # POST /orders
   def create
     @order = Order.new(params[:order])
     @order.closed=0
@@ -33,11 +22,10 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to(@order, :notice => 'Order was successfully created.')
     else
-      render :action => "new"
+      render :action => "show"
     end
   end
 
-  #PUT /orders/1
   def update
     @order = Order.find(params[:id])
     @order.from_json(request.body)
@@ -45,10 +33,9 @@ class OrdersController < ApplicationController
     render status: :no_content, nothing: true
   end
 
-  # DELETE /orders/1
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    render status: :no_content
+    render status: :no_content, nothing: true
   end
 end

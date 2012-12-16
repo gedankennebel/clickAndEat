@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  after_filter :set_vary_header
+
 
   private
+  def set_vary_header
+    response.headers['Vary'] = 'Accept-Encoding, Accept'
+  end
 
   # Get current user
   def current_user

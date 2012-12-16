@@ -1,8 +1,0 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
-<%= form_for @order, :url => {:action => "create"} do |f| %>
-    <%= select("order", "table_id", Table.all.collect { |p| [p.table_number, p.id] }) %>
-    <%= f.submit "Create" %>
-<% end %>
-
-

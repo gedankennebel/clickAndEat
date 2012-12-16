@@ -34,7 +34,9 @@ class OrderItem < ActiveRecord::Base
   end
 
   def as_json(options = {})
+    #includeOrder = options[:includeOrder] if options.try(:key?, :includeOrder)
     {
+
         id: id,
         order_id: order_id,
         cooked: cooked,
@@ -54,7 +56,6 @@ class OrderItem < ActiveRecord::Base
 
   def from_hash(hash)
     self.item_id= hash['item']['id']
-    #self.order_id= hash['order_id']
     self.cooked= hash['cooked']
     self.quantity= hash['quantity']
     self.served= hash['served']
