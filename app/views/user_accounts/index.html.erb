@@ -1,0 +1,8 @@
+<h2>My Account</h2>
+<% if @user_account.roles.nil? %>
+    no role?
+<% else %>
+    <% @user_account.roles.each do |role| %>
+        <%= role.name %>
+    <% end %>
+<% end %>

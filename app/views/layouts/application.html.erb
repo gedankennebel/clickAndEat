@@ -13,9 +13,12 @@
   <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
   <% if user_signed_id? %>
-      <p> Welcome <%= current_user.name %>!</p>
+      <p id="welcome"> Welcome <%= current_user.name %>!</p>
+
+      <p> <%= link_to "My Account", url_for(controller: 'user_accounts', action: 'index', id: current_user.id) %></p>
 
       <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
+
   <% else %>
       <p> <%= link_to "Sign up", new_user_account_path %> </p>
 

@@ -10,18 +10,19 @@
 
 #roles
 #if Role.count == 0
-employee_role = Role.create!(name: 'ROLE_EMPLOYEE')
-manager_role = Role.create!(name: 'ROLE_MANAGER')
+user_role = Role.create!(name: 'user')
+employee_role = Role.create!(name: 'employee')
+manager_role = Role.create!(name: 'manager')
 #end
 
 #if UserAccount.count == 0
 #user_accounts
-#employee = UserAccount.create!(email: "employee@acme.com", name: "employee", password: "Employee1", password_confirmation: "Employee1")
-#employee.roles << employee_role
+employee = UserAccount.create!(email: "emp@test.de", name: "Tom de Rofl", password: "test", password_confirmation: "test")
+employee.roles << employee_role
 #
 #
-#manager = UserAccount.create!(email:"manager@acme.com", name: "manager", password: "Manager1", password_confirmation: "Manager1")
-#manager.roles << manager_role
+manager = UserAccount.create!(email:"mgr@test.de", name: "Big Boss", password: "test", password_confirmation: "test")
+manager.roles << manager_role
 
 #end
 
