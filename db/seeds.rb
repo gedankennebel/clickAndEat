@@ -21,7 +21,7 @@ employee = UserAccount.create!(email: "emp@test.de", name: "Tom de Rofl", passwo
 employee.roles << employee_role
 #
 #
-manager = UserAccount.create!(email:"mgr@test.de", name: "Big Boss", password: "test", password_confirmation: "test")
+manager = UserAccount.create!(email: "mgr@test.de", name: "Big Boss", password: "test", password_confirmation: "test")
 manager.roles << manager_role
 
 #end
@@ -101,6 +101,9 @@ indian_restaurant.save!
 pakistani_restaurant.save!
 chinese_restaurant.save!
 
+
+manager.restaurant = indian_restaurant
+manager.save!
 #end
 
 #tables
