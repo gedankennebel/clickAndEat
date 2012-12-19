@@ -35,7 +35,7 @@ $(document).ready(function () {
     function getCategories() {
         $.ajax({
             // TODO restaurant_id
-            url:'/restaurants/1/item_categories',
+            url:'/restaurants/3/item_categories',
             dataType:"json"
         }).done(function (categories) {
                 $('#categories').html(createCategoriesHtml(categories));

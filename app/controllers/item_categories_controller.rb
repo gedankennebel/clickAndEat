@@ -1,8 +1,8 @@
 class ItemCategoriesController < ApplicationController
 
   def index
-    @item_category = ItemCategory.where(restaurant_id: params[:restaurant_id])
-    render json: @item_category
+    @item_categories = ItemCategory.where(restaurant_id: Branch.find(params[:restaurant_id]))
+    render json: @item_categories
   end
 
 end

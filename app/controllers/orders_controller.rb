@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.from_json(request.body)
     @order.save!
-    broadcast("/branches/#{params[:branch_id]}/orders", @order.as_json)
+    broadcast("/branches/#{params[:branch_id]}/orders", @order)
     render status: :no_content, nothing: true
   end
 
@@ -38,5 +38,12 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.destroy
     render status: :no_content, nothing: true
+  end
+
+  private
+  def broadcast(channel, data)
+    message = {:channel => channel, :data => data, :ext => {:auth_token => FAYE_TOKEN}}.to_json
+    uri = URI.parse("http://localhost:9292/faye")
+    Net::HTTP.post_form(uri, :message => message)
   end
 end
