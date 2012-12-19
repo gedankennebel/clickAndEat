@@ -2,9 +2,9 @@ class PictureController < ApplicationController
 
   def get_item_picture
     @item = Item.find(params[:item_id])
-    fresh_when :last_modified => @item.updated_at, :etag => @item
+    #fresh_when :last_modified => @item.updated_at, :etag => @item
     if @item.picture
-      @picture = item.picture
+      @picture = @item.picture
     else
       if @item.item_category.default_picture
         @picture = @item.item_category.default_picture

@@ -1,0 +1,29 @@
+<h2>My Account</h2>
+<% @user_account.roles.each do |role| %>
+    <% if @user_account.roles.size.eql? 1 and role.name.eql? 'user' %>
+        <p>This is only a normal user account.</p>
+        <p>You can select one of these options:</p>
+        <ul id="user_options">
+          <li>Create your <span class="clickAndEat">click&eat</span> restaurant!</li>
+          <li>Join your restaurant as an employee!</li>
+        </ul>
+    <% end %>
+    <% if role.name.eql? 'employee' %>
+        <ul id="emp_options">
+          <li>Take an order</li>
+          <li>Open cook monitor</li>
+        </ul>
+    <% end %>
+    <% if role.name.eql? 'manager' %>
+        <% if not @user_account.restaurant.nil? %>
+            <ul id="manager_options">
+              <li>Edit your restaurants</li>
+              <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
+                  <li>Edit your online menu</li>
+              <% else %>
+                  <li>Create your online menu</li>
+              <% end %>
+            </ul>
+        <% end %>
+    <% end %>
+<% end %>

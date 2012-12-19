@@ -3,10 +3,8 @@ class ItemCategory < ActiveRecord::Base
   belongs_to :restaurant
   has_many :items
 
-  validates_presence_of :name, :restaurant
+  validates_presence_of :name
   validates :cookable, :inclusion => {:in => [true, false]}
-  validates_associated :restaurant
-
 
   def as_json(options = {})
     {
