@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.from_json(request.body)
     @order.save!
+    broadcast("/branches/#{params[:branch_id]}/orders", @order.as_json)
     render status: :no_content, nothing: true
   end
 
