@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    var faye = new Faye.Client('http://localhost:9292/faye');
-    faye.subscribe("/branches/1/orders", function (data) {
-        console.log(data);
-    });
+//    var faye = new Faye.Client('http://localhost:9292/faye');
+//    faye.subscribe("/branches/2/orders", function (data) {
+//        console.log(data);
+//    });
 
     // variables  #############################################################
     var _orderItems;
