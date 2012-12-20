@@ -31,10 +31,9 @@ td {
   padding-bottom: 3px;
 }
 
-#address {
+.address_ul {
   margin: 10px;
-  list-style: disc;
-
+  list-style-type: square;
   li {
     margin: 15px;
   }
@@ -48,8 +47,9 @@ td {
   margin-top: 10px;
 }
 
-.item:hover .hidden_text{
+.item:hover .hidden_text {
   display: block;
+  padding: 5px;
 }
 
 .item_description {

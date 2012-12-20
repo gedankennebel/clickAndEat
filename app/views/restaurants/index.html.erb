@@ -8,7 +8,7 @@
           <%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: restaurant.id) %>
         </td>
         <td>
-          <ul>
+          <ul class="no_enum_ul">
             <li class="name"><%= restaurant.name %></li>
             <li>Kitchen:
               <% restaurant.types.each do |type| %>
