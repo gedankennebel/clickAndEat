@@ -18,11 +18,17 @@ manager_role = Role.create!(name: 'manager')
 #if UserAccount.count == 0
 #user_accounts
 employee = UserAccount.create!(email: "emp@test.de", name: "Tom de Rofl", password: "test", password_confirmation: "test")
-employee.roles << employee_role
+employee.roles << [employee_role, user_role]
 #
 #
 manager = UserAccount.create!(email: "mgr@test.de", name: "Big Boss", password: "test", password_confirmation: "test")
-manager.roles << manager_role
+manager.roles << [manager_role, employee_role, user_role]
+manager.save!
+
+user = UserAccount.create!(email: "user@test.de", name: "Normal Boy", password: "test", password_confirmation: "test")
+user.roles << [user_role]
+user.save!
+
 
 #end
 

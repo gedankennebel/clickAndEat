@@ -5,11 +5,11 @@
 <% if @restaurant.item_categories.length == 0 || @restaurant.item_categories.nil? %>
     <h2>This restaurant has no online menu yet</h2>
 <% else %>
-    <ul>
+    <ul class="no_enum_ul">
       <% @restaurant.item_categories.each do |category| %>
           <li>
             <p class="category_name"><%= category.name %></p>
-            <ul>
+            <ul class="no_enum_ul">
               <% category.items.each do |item| %>
                   <li class="item">
                     <%= image_tag url_for(controller: 'picture', action: 'get_item_picture', item_id: item.id) %>

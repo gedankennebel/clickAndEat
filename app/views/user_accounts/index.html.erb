@@ -1,29 +1,39 @@
+<%= stylesheet_link_tag 'user_accounts.css.scss' %>
+
 <h2>My Account</h2>
-<% @user_account.roles.each do |role| %>
-    <% if @user_account.roles.size.eql? 1 and role.name.eql? 'user' %>
-        <p>This is only a normal user account.</p>
-        <p>You can select one of these options:</p>
-        <ul id="user_options">
-          <li>Create your <span class="clickAndEat">click&eat</span> restaurant!</li>
-          <li>Join your restaurant as an employee!</li>
-        </ul>
-    <% end %>
-    <% if role.name.eql? 'employee' %>
-        <ul id="emp_options">
-          <li>Take an order</li>
-          <li>Open cook monitor</li>
-        </ul>
-    <% end %>
-    <% if role.name.eql? 'manager' %>
-        <% if not @user_account.restaurant.nil? %>
-            <ul id="manager_options">
-              <li>Edit your restaurants</li>
-              <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
-                  <li>Edit your online menu</li>
-              <% else %>
-                  <li>Create your online menu</li>
-              <% end %>
+<% if @user_account.roles.size.eql? 1 and @user_account.roles.first.name.eql? 'user' %>
+    <h3>This is only a normal user account, but you can select one of these options to your account:</h3>
+    <ul class="account_options">
+      <li>Create your <span class="clickAndEat">click&eat</span> restaurant!</li>
+      <li>Join your restaurant as an employee!</li>
+    </ul>
+<% else %>
+    <% @user_account.roles.each do |role| %>
+        <% if role.name.eql? 'employee' %>
+            <p class="option_type">Service options:</p>
+            <ul class="account_options">
+              <li>Take a new order</li>
+              <li>Open cook monitor</li>
             </ul>
         <% end %>
+        <% if role.name.eql? 'manager' %>
+            <% if not @user_account.restaurant.nil? %>
+                <p class="option_type">Management options:</p>
+                <ul class="account_options">
+                  <li>Edit your restaurant</li>
+                  <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
+                      <li>Edit your online menu</li>
+                  <% else %>
+                      <li>Create your online menu</li>
+                  <% end %>
+                </ul>
+            <% end %>
+        <% end %>
     <% end %>
+    <p class="option_type">Account Settings:</p>
+    <ul class="account_options">
+      <li>Set your brach</li>
+      <li>Edit your name</li>
+      <li>Change your password</li>
+    </ul>
 <% end %>

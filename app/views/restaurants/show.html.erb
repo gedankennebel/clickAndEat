@@ -16,7 +16,7 @@
   <% else %>
       <p class="bold"><%= @restaurant.name %> has <%= @restaurant.branches.length %> branches:</p>
   <% end %>
-  <ul id="address">
+  <ul class="address_ul">
     <% @restaurant.branches.each do |branch| %>
         <li>
           <% address = branch.address %>
