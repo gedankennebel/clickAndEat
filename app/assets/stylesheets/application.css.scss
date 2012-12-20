@@ -122,6 +122,7 @@ ul {
   width: 100%;
 }
 
+// order_items new
 #items {
 }
 
@@ -154,5 +155,48 @@ ul {
   float: right;
 }
 
+// monitor
 .cooked, .served {
+  height: 100%;
+  border-top-left-radius: 0.7em;
+  border-top-right-radius: 0.7em;
+  -moz-border-radius-topleft: 0.7em;
+  -moz-border-radius-topright: 0.7em;
+  -webkit-border-top-left-radius: 0.7em;
+  -webkit-border-top-right-radius: 0.7em;
+
+  border-bottom-left-radius: 0.7em;
+  border-bottom-right-radius: 0.7em;
+  -moz-border-radius-bottomleft: 0.7em;
+  -moz-border-radius-bottomright: 0.7em;
+  -webkit-border-bottom-left-radius: 0.7em;
+  -webkit-border-bottom-right-radius: 0.7em;
+}
+
+.orderItemMonitor {
+  width: 100%;
+  border: solid;
+  margin: 0.5em;
+
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  -moz-border-radius-topleft: 1em;
+  -moz-border-radius-topright: 1em;
+  -webkit-border-top-left-radius: 1em;
+  -webkit-border-top-right-radius: 1em;
+
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  -moz-border-radius-bottomleft: 1em;
+  -moz-border-radius-bottomright: 1em;
+  -webkit-border-bottom-left-radius: 1em;
+  -webkit-border-bottom-right-radius: 1em;
+}
+
+.orderItemMonitor td {
+  width: 50%;
+}
+
+.separator {
+  width: 100%;
 }

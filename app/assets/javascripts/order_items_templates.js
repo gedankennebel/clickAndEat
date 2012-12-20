@@ -45,18 +45,24 @@ function renderOrderItems(orderItems) {
     $('#order').html(html);
 }
 
-function createOrderItemMonitorHtml(orderItems) {
+function createOrderItemMonitorHtml(order) {
     var html = "<ul>";
-    $.each(orderItems, function (index, orderItem) {
+    $.each(order.order_items, function (index, orderItem) {
+        var cookedDisabled = orderItem.cooked ? "disabled" : "";
+        var servedDisabled = orderItem.served ? "disabled" : "";
         html += "<li>";
-        html += "   <div class='orderItemMonitor' id='" + orderItem.id + "'>";
-        html += "      <p>" + orderItem.item.name + " (" + orderItem.quantity + ")</p>";
-//        html += "      <p>" + orderItem.cooked + "</p>";
-//        html += "      <p>" + orderItem.served + "</p>";
-        html += "      <p>" + orderItem.served + "</p>";
-        html += "      <input type='submit' class='cooked' value='Cooked'/>";
-        html += "      <input type='submit' class='served' value='Served'/>";
-        html += "   </div>";
+        html += "   <table class='orderItemMonitor'>";
+        html += "       <tr id='" + orderItem.id + "'>";
+        html += "         <td>" + orderItem.item.name + " (" + orderItem.quantity + ")</td>";
+        html += "         <td>";
+        html += "           <p>Table: " + order.table + "</p>";
+        html += "           <p>Order: " + order.id + "</p>";
+        html += "         </td>";
+        html += "         <td class='separator'></td>";
+        html += "         <td><input type='submit' class='cooked' value='Cooked' " + cookedDisabled + "/></td>";
+        html += "         <td><input type='submit' class='served' value='Served' " + servedDisabled + "/></td>";
+        html += "       <tr>";
+        html += "   </table>";
         html += "</li>";
     });
     html += "</ul>";

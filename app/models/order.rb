@@ -13,6 +13,7 @@ class Order < ActiveRecord::Base
     {
         id: id,
         table: table.table_number,
+        closed: closed,
         order_items: order_items,
         links: {link: {rel: 'self', href: "/orders/#{id}"}}
         #links: {link: {rel:'self', href: orders_path(self)}}
@@ -23,6 +24,7 @@ class Order < ActiveRecord::Base
     hash = ActiveSupport::JSON.decode(json)
     hash = hash.values.first if include_root
     self.table_id = hash['table']
+    self.closed = hash['closed']
     update_order_items(hash)
   end
 

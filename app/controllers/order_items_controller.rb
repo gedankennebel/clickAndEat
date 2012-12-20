@@ -25,8 +25,8 @@ class OrderItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        @order_items = OrderItem.joins(:order => [:table => :branch]).where('branches.id' => params[:branch_id])
-        render json: @order_items, :include => :order
+        @orders = Order.joins(:table => :branch).where('branches.id' => params[:branch_id])
+        render json: @orders
       }
     end
   end

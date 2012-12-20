@@ -41,3 +41,9 @@ function getTotalAmount(orderItems) {
     });
     return result;
 }
+
+function getCurrentPath() {
+    var l = document.createElement("a");
+    l.href = document.URL;
+    return l.pathname;
+}
