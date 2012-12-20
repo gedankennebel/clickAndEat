@@ -1,0 +1,74 @@
+td {
+  padding-bottom: 1em;
+}
+
+.name {
+  font-size: 1.4em;
+}
+
+.restaurant_links {
+  font-size: 0.8em;
+}
+
+#details {
+  text-align: center;
+}
+
+.small {
+  font-size: 0.9em;
+  margin: 3px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.category_name {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.2em;
+  padding-top: 10px;
+  padding-bottom: 3px;
+}
+
+#address {
+  margin: 10px;
+  list-style: disc;
+
+  li {
+    margin: 15px;
+  }
+}
+
+#branches {
+  margin: 10px;
+}
+
+.item {
+  margin-top: 10px;
+}
+
+.item:hover .hidden_text{
+  display: block;
+}
+
+.item_description {
+  font-size: 0.7em;
+}
+
+.hidden_text {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
