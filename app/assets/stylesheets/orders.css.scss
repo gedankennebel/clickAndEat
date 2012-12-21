@@ -1,3 +1,31 @@
-// Place all the styles related to the orders controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+li {
+  list-style: none;
+}
+
+#items ul {
+  float: left;
+}
+
+.totalAmount {
+  clear: both;
+}
+
+#submitOrder {
+  float: right;
+}
+
+.footer {
+  clear: both;
+}
+
+.footer ul li {
+  float: left;
+}
+
+.orderItem {
+  margin: 0.5em;
+}
+
+.plusminus {
+  float: right;
+}

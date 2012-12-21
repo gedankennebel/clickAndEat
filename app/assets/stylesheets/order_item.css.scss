@@ -1,3 +1,48 @@
-// Place all the styles related to the order_item controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+ul li {
+  list-style: none;
+}
+
+.cooked, .served {
+  height: 100%;
+  border-top-left-radius: 0.7em;
+  border-top-right-radius: 0.7em;
+  -moz-border-radius-topleft: 0.7em;
+  -moz-border-radius-topright: 0.7em;
+  -webkit-border-top-left-radius: 0.7em;
+  -webkit-border-top-right-radius: 0.7em;
+
+  border-bottom-left-radius: 0.7em;
+  border-bottom-right-radius: 0.7em;
+  -moz-border-radius-bottomleft: 0.7em;
+  -moz-border-radius-bottomright: 0.7em;
+  -webkit-border-bottom-left-radius: 0.7em;
+  -webkit-border-bottom-right-radius: 0.7em;
+}
+
+.orderItemMonitor {
+  width: 100%;
+  border: solid;
+  margin: 0.5em;
+
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  -moz-border-radius-topleft: 1em;
+  -moz-border-radius-topright: 1em;
+  -webkit-border-top-left-radius: 1em;
+  -webkit-border-top-right-radius: 1em;
+
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  -moz-border-radius-bottomleft: 1em;
+  -moz-border-radius-bottomright: 1em;
+  -webkit-border-bottom-left-radius: 1em;
+  -webkit-border-bottom-right-radius: 1em;
+}
+
+.orderItemMonitor td {
+  width: 50%;
+}
+
+.separator {
+  width: 100%;
+}
