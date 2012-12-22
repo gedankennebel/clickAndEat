@@ -30,11 +30,9 @@ class Order < ActiveRecord::Base
   end
 
   def broadcast(channel)
-    puts self.to_json
-    puts channel
     message = {:channel => channel, :data => self, :ext => {:auth_token => FAYE_TOKEN}}.to_json
     uri = URI.parse("http://localhost:9292/faye")
-    puts Net::HTTP.post_form(uri, :message => message)
+    Net::HTTP.post_form(uri, :message => message)
   end
 
   private

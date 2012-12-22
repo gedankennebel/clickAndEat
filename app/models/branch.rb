@@ -6,4 +6,15 @@ class Branch < ActiveRecord::Base
 
   validates_presence_of :restaurant
   validates_associated :restaurant, :address
+
+  def as_json(options = {})
+    tables = []
+    self.tables.each do |table|
+      tables << table.table_number
+    end
+
+    {
+        tables: tables
+    }
+  end
 end

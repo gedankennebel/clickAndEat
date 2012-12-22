@@ -8,6 +8,7 @@ $(document).ready(function () {
 
     // init  ##################################################################
     getCurrentOrders();
+    getTables();
 
     // Event Handler  #########################################################
     $("#monitor").on('click', '.cooked', function () {
@@ -27,6 +28,10 @@ $(document).ready(function () {
         renderOrderItemMonitor();
     });
 
+    //Periodic refresh (countdown)
+    window.setInterval(function () {
+        renderOrderItemMonitor();
+    }, 10000);
 });
 // variables  #############################################################
 var _orders;
@@ -56,6 +61,17 @@ function updateOrderItem(orderItem) {
         });
 }
 
+function getTables() {
+    var url = getCurrentPath();
+    url = url.substring(0, url.lastIndexOf('/'));
+    $.ajax({
+        url:url,
+        dataType:'json'
+    }).done(function (branch) {
+            $("#tables").html(getTablesHtml(branch.tables));
+        });
+}
+
 // Utils
 function renderOrderItemMonitor() {
     var filteredOrders = filterOrders(_orders);
@@ -67,7 +83,7 @@ function renderOrderItemMonitor() {
 }
 
 function filterOrders(orders) {
-    var filteredOrders = jQuery.extend(true, {}, orders); // clone
+    var filteredOrders = JSON.parse(JSON.stringify(orders)); // clone
     $.each(filteredOrders, function (index, order) {
         var filteredOrderItems = [];
         $.each(order.order_items, function (index, order_item) {

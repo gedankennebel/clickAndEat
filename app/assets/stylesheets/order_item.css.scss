@@ -39,15 +39,19 @@ ul li {
   -webkit-border-bottom-right-radius: 1em;
 }
 
-.orderItemMonitor td {
-  width: 50%;
+.timeUp {
+  border-color: #dc0d02;
 }
 
-.separator {
-  width: 100%;
+.orderItemMonitor td {
+  width: 33%;
 }
 
 #filterDefinition li {
   margin: 1em;
   float: left;
+}
+
+input[disabled] {
+  color: silver;
 }

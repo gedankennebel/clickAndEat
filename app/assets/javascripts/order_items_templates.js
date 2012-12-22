@@ -50,15 +50,21 @@ function createOrderItemMonitorHtml(order) {
     $.each(order.order_items, function (index, orderItem) {
         var cookedDisabled = orderItem.cooked ? "disabled" : "";
         var servedDisabled = orderItem.served ? "disabled" : "";
+        var timeLeft = getMinutesLeft(orderItem.item, order);
+        var timeUpClass = timeLeft < 0 ? 'timeUp' : '';
+
         html += "<li>";
-        html += "   <table class='orderItemMonitor'>";
+        html += "   <table class='orderItemMonitor " + timeUpClass + "'>";
         html += "       <tr id='" + orderItem.id + "'>";
         html += "         <td>" + orderItem.item.name + " (" + orderItem.quantity + ")</td>";
         html += "         <td>";
         html += "           <p>Table: " + order.table + "</p>";
         html += "           <p>Order: " + order.id + "</p>";
         html += "         </td>";
-        html += "         <td class='separator'></td>";
+        html += "         <td>";
+        html += "           <p>Time&nbsp;remaining:</p>";
+        html += "           <p class='timer'>" + timeLeft + "&nbsp;min</p>";
+        html += "         </td>";
         html += "         <td><input type='submit' class='cooked button' value='Cooked' " + cookedDisabled + "/></td>";
         html += "         <td><input type='submit' class='served button' value='Served' " + servedDisabled + "/></td>";
         html += "       <tr>";
@@ -66,5 +72,22 @@ function createOrderItemMonitorHtml(order) {
         html += "</li>";
     });
     html += "</ul>";
+    return html;
+}
+
+function getMinutesLeft(item, order) {
+    var createdAt = Date.parse(order.created_at);
+    var now = new Date();
+    var cooktimeMs = item.cooktime * 60 * 1000;
+
+    var endTime = createdAt + cooktimeMs;
+    return ((endTime - now) / (60 * 1000)).toFixed(0);
+}
+
+function getTablesHtml(tables) {
+    var html = "";
+    $.each(tables, function (index, table) {
+        html += "<option value='" + table + "'>Table " + table + "</option>";
+    });
     return html;
 }
