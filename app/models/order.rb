@@ -15,6 +15,7 @@ class Order < ActiveRecord::Base
         table: table.table_number,
         closed: closed,
         order_items: order_items,
+        created_at: created_at,
         links: {link: {rel: 'self', href: "/orders/#{id}"}}
         #links: {link: {rel:'self', href: orders_path(self)}}
     }
@@ -26,6 +27,14 @@ class Order < ActiveRecord::Base
     self.table_id = hash['table']
     self.closed = hash['closed']
     update_order_items(hash)
+  end
+
+  def broadcast(channel)
+    puts self.to_json
+    puts channel
+    message = {:channel => channel, :data => self, :ext => {:auth_token => FAYE_TOKEN}}.to_json
+    uri = URI.parse("http://localhost:9292/faye")
+    puts Net::HTTP.post_form(uri, :message => message)
   end
 
   private

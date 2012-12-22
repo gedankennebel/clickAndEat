@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
     #@order.save
     if @order.save
       redirect_to(@order, :notice => 'Order was successfully created.')
+      @order.broadcast("/branches/#{params[:branch_id]}/order_items")
     else
       render :action => "show"
     end
@@ -30,8 +31,8 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.from_json(request.body)
     @order.save!
-    broadcast("/branches/#{params[:branch_id]}/order_items", @order)
     render status: :no_content, nothing: true
+    Order.find(params[:id]).broadcast("/branches/#{params[:branch_id]}/order_items")
   end
 
   def destroy
@@ -40,10 +41,4 @@ class OrdersController < ApplicationController
     render status: :no_content, nothing: true
   end
 
-  private
-  def broadcast(channel, data)
-    message = {:channel => channel, :data => data, :ext => {:auth_token => FAYE_TOKEN}}.to_json
-    uri = URI.parse("http://localhost:9292/faye")
-    Net::HTTP.post_form(uri, :message => message)
-  end
 end

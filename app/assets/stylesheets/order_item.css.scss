@@ -2,7 +2,7 @@ ul li {
   list-style: none;
 }
 
-.cooked, .served {
+.button {
   height: 100%;
   border-top-left-radius: 0.7em;
   border-top-right-radius: 0.7em;
@@ -45,4 +45,9 @@ ul li {
 
 .separator {
   width: 100%;
+}
+
+#filterDefinition li {
+  margin: 1em;
+  float: left;
 }

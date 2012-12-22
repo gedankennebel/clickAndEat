@@ -17,7 +17,9 @@ class Item < ActiveRecord::Base
         name: self.name,
         description: self.description,
         price: self.price,
-        picture: "/items/#{id}/picture",
+        cookable: self.item_category.cookable,
+        cooktime: self.cooktime,
+        picture: "/items/#{id}/picture"
     }
   end
 end

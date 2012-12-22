@@ -1,5 +1,47 @@
 <%= stylesheet_link_tag 'order_item.css.scss' %>
 <h1>Monitor</h1>
+<div id="filterDefinition">
+  <h1>Filter</h1>
+
+  <form>
+    <ul>
+      <li>
+        <label for="cookable">Cookable</label>
+        <select id="cookable" name="cookable">
+          <option value="null">both</option>
+          <option value="false">Not cookable</option>
+          <option value="true">Cookable</option>
+        </select>
+      </li>
+      <li>
+        <label for="cooked">Cooked</label>
+        <select id="cooked" name="cooked">
+          <option value="null">both</option>
+          <option value="false">Not cooked</option>
+          <option value="true">Cooked</option>
+        </select>
+      </li>
+      <li>
+        <label for="served">Served</label>
+        <select id="served" name="served">
+          <option value="null">both</option>
+          <option value="false">Not served</option>
+          <option value="true">Served</option>
+        </select>
+      </li>
+      <li>
+        <label for="table">Table no</label>
+        <select id="table" name="tables" multiple>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </li>
+      <li>
+        <input type="button" value="Apply" id="apply" class="button">
+      </li>
+    </ul>
+  </form>
+</div>
 
 <div id="monitor">
 

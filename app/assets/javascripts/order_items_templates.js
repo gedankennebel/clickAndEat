@@ -59,8 +59,8 @@ function createOrderItemMonitorHtml(order) {
         html += "           <p>Order: " + order.id + "</p>";
         html += "         </td>";
         html += "         <td class='separator'></td>";
-        html += "         <td><input type='submit' class='cooked' value='Cooked' " + cookedDisabled + "/></td>";
-        html += "         <td><input type='submit' class='served' value='Served' " + servedDisabled + "/></td>";
+        html += "         <td><input type='submit' class='cooked button' value='Cooked' " + cookedDisabled + "/></td>";
+        html += "         <td><input type='submit' class='served button' value='Served' " + servedDisabled + "/></td>";
         html += "       <tr>";
         html += "   </table>";
         html += "</li>";

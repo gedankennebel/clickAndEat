@@ -13,12 +13,14 @@ class OrderItemsController < ApplicationController
   def create
     @order_item = OrderItem.save_or_update_from_json(request.body)
     render status: :created, nothing: true, location: order_order_item_url(@order_item.order, @order_item)
+    @order_item.order.broadcast("/branches/#{@order_item.order.table.branch.id}/order_items")
   end
 
   def update
     @order_item = OrderItem.find(params[:id])
     @order_item.update_from_json(request.body)
     render status: :no_content, nothing: true
+    @order_item.order.broadcast("/branches/#{@order_item.order.table.branch.id}/order_items")
   end
 
   def monitor
