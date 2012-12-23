@@ -7,8 +7,8 @@ $(document).ready(function () {
     });
 
     // init  ##################################################################
+    getFilterDefinition();
     getCurrentOrders();
-    getTables();
 
     // Event Handler  #########################################################
     $("#monitor").on('click', '.cooked', function () {
@@ -26,6 +26,7 @@ $(document).ready(function () {
     $("#apply").on('click', function () {
         _filterDefinition = $(this.form).serializeObject();
         renderOrderItemMonitor();
+        saveFilterDefinition();
     });
 
     //Periodic refresh (countdown)
@@ -38,6 +39,23 @@ var _orders;
 var _filterDefinition;
 
 // AJAX   #################################################################
+
+function getFilterDefinition() {
+    $.ajax({
+        url:"/user_account/filter_definition",
+        dataType:'json'
+    }).done(function (filterDefinition) {
+            _filterDefinition = filterDefinition;
+        });
+}
+function saveFilterDefinition() {
+    $.ajax({
+        type:'put',
+        url:"/user_account/filter_definition",
+        contentType:'application/json; charset=utf-8',
+        data:JSON.stringify(_filterDefinition)
+    });
+}
 
 function getCurrentOrders() {
     $.ajax({
@@ -61,17 +79,6 @@ function updateOrderItem(orderItem) {
         });
 }
 
-function getTables() {
-    var url = getCurrentPath();
-    url = url.substring(0, url.lastIndexOf('/'));
-    $.ajax({
-        url:url,
-        dataType:'json'
-    }).done(function (branch) {
-            $("#tables").html(getTablesHtml(branch.tables));
-        });
-}
-
 // Utils
 function renderOrderItemMonitor() {
     var filteredOrders = filterOrders(_orders);
@@ -85,14 +92,18 @@ function renderOrderItemMonitor() {
 function filterOrders(orders) {
     var filteredOrders = JSON.parse(JSON.stringify(orders)); // clone
     $.each(filteredOrders, function (index, order) {
-        var filteredOrderItems = [];
-        $.each(order.order_items, function (index, order_item) {
-            if (!isFiltered(order, order_item))
-                filteredOrderItems.push(order_item);
-        });
-        order.order_items = filteredOrderItems;
+        filterOrder(order);
     });
     return filteredOrders;
+}
+
+function filterOrder(order) {
+    var filteredOrderItems = [];
+    $.each(order.order_items, function (index, order_item) {
+        if (!isFiltered(order, order_item))
+            filteredOrderItems.push(order_item);
+    });
+    order.order_items = filteredOrderItems;
 }
 
 function isFiltered(order, orderItem) {
@@ -117,7 +128,7 @@ function isFiltered(order, orderItem) {
     }
     if (_filterDefinition.tables instanceof Array) {
         if (_filterDefinition.tables.length > 0) {
-            if (_filterDefinition.tables.indexOf(order.table) != -1) {
+            if (_filterDefinition.tables.indexOf(order.table) == -1) {
                 return true;
             }
         }

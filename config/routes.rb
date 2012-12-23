@@ -9,7 +9,9 @@ ClickAndEat::Application.routes.draw do
   get "/restaurants/:restaurant_id/picture" => "picture#get_restaurant_picture"
 
   get "/restaurants/:id/menu" => "restaurants#menu"
-  get "/user_accounts/:id/myAccount" => "user_accounts#index"
+  get "/user_account" => "user_accounts#index"
+  get "/user_account/filter_definition" => "user_accounts#get_filter_definition"
+  put "/user_account/filter_definition" => "user_accounts#save_filter_definition"
 
   resources :user_accounts, only: [:new, :create]
 
@@ -29,7 +31,7 @@ ClickAndEat::Application.routes.draw do
   resources :branches do
     resources :orders
   end
-  get "branches/:branch_id/order_items" => "order_items#monitor"
+  match "branches/:branch_id/order_items", to: "order_items#monitor", as: :monitor
 
   root to: 'restaurants#index'
 end

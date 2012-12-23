@@ -2,6 +2,7 @@ class UserAccount < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_and_belongs_to_many :roles
   belongs_to :restaurant
+  belongs_to :filter_definition
   has_secure_password
 
   # validate email with RFC-822

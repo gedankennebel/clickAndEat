@@ -8,9 +8,4 @@ class Table < ActiveRecord::Base
   validates :table_number, numericality: {only_integer: true, greater_than: 0}
   validates_uniqueness_of :table_number, :scope => :branch_id
 
-  def as_json(options = {})
-    {
-        tables: tables
-    }
-  end
 end

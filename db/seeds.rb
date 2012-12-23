@@ -9,14 +9,10 @@
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
 
 #roles
-#if Role.count == 0
 user_role = Role.create!(name: 'user')
 employee_role = Role.create!(name: 'employee')
 manager_role = Role.create!(name: 'manager')
-#end
 
-#if UserAccount.count == 0
-#user_accounts
 employee = UserAccount.create!(email: "emp@test.de", name: "Tom de Rofl", password: "test", password_confirmation: "test")
 employee.roles << [employee_role, user_role]
 #
@@ -30,10 +26,13 @@ user.roles << [user_role]
 user.save!
 
 
-#end
+#filter definitions
+definition = FilterDefinition.create!(cookable: false, tables: [1, 2, 3])
+employee.filter_definition = definition
+employee.save!
+
 
 #restaurants
-#if Restaurant.count == 0
 indian_type = Type.create!(name: "indian")
 chinese_type = Type.create!(name: "chinese")
 vietnamese_type = Type.create!(name: "vietnamese")
@@ -48,7 +47,6 @@ indian_restaurant.types << indian_type
 chinese_restaurant = Restaurant.new(name: "Chopstix", picture: File.new(Rails.root.join "app/assets/chinese.jpeg").read)
 chinese_restaurant.types << [chinese_type, vietnamese_type]
 chinese_restaurant.save!
-#end
 
 #pakistani_restaurant
 pakistani_restaurant = Restaurant.new(name: "Tandoori Palace", picture: File.new(Rails.root.join "app/assets/pakistan.png").read)
@@ -59,7 +57,6 @@ mexican_restaurant = Restaurant.new(name: "El Charro", picture: File.new(Rails.r
 mexican_restaurant.types << [mexian_type]
 
 #branches
-#if Branch.count == 0
 address = Address.create!(city: "Munich", number: "117", postcode: "80339", street: "Westendstraße")
 chinese_address = Address.create!(city: "Munich", number: "12", postcode: "80319", street: "Marktstraße")
 pakistani_address1 = Address.create!(city: "Munich", number: "23", postcode: "81249", street: "Hofstraße")
@@ -110,10 +107,8 @@ chinese_restaurant.save!
 
 manager.restaurant = indian_restaurant
 manager.save!
-#end
 
 #tables
-#if Table.count == 0
 table1 = Table.new(table_number: 1)
 table1.branch = indian_branch
 table1.save!
@@ -125,10 +120,8 @@ table2.save!
 table3 = Table.new(table_number: 3)
 table3.branch = indian_branch
 table3.save!
-#end
 
 #item_categories
-#if ItemCategory.count == 0
 drinks = ItemCategory.new(cookable: 0, name: "Drinks")
 drinks.restaurant=indian_restaurant
 drinks.save!
@@ -138,10 +131,8 @@ food.save!
 starters = ItemCategory.new(cookable: 1, name: "Starters")
 starters.restaurant=indian_restaurant
 starters.save!
-#end
 
 #items
-#if Item.count == 0
 lassi = Item.new(cooktime: 5, name: "Mango Lassi", price: 2.9, item_number: 123, description: "Mango lassi is most commonly found in India and Pakistan though it is gaining popularity worldwide. It is made from yogurt, water and mango pulp.", picture: File.new(Rails.root.join "app/assets/mango_lassi.jpg").read)
 lassi.item_category = drinks
 lassi.save!
@@ -154,7 +145,6 @@ biryani.save!
 pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16, description: "Pappad is a thin, crisp Indian preparation sometimes described as a cracker. It is typically served as an accompaniment to a meal in India.", picture: File.new(Rails.root.join "app/assets/pappad.jpg").read)
 pappad.item_category = starters
 pappad.save!
-#end
 
 order = Order.create!(table: table1)
 

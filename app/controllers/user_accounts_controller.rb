@@ -1,7 +1,16 @@
 class UserAccountsController < ApplicationController
 
   def index
-    @user_account = UserAccount.find(params[:id])
+    @user_account = current_user
+  end
+
+  def save_filter_definition
+    current_user.filter_definition.from_json(request.body).save!
+    render status: :no_content, nothing: true
+  end
+
+  def get_filter_definition
+    render json: current_user.filter_definition
   end
 
   def new

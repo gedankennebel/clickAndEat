@@ -83,11 +83,3 @@ function getMinutesLeft(item, order) {
     var endTime = createdAt + cooktimeMs;
     return ((endTime - now) / (60 * 1000)).toFixed(0);
 }
-
-function getTablesHtml(tables) {
-    var html = "";
-    $.each(tables, function (index, table) {
-        html += "<option value='" + table + "'>Table " + table + "</option>";
-    });
-    return html;
-}
