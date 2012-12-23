@@ -5,3 +5,4 @@
 require File.expand_path('../config/application', __FILE__)
 
 ClickAndEat::Application.load_tasks
+$in_rake=true
