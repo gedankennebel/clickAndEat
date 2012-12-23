@@ -13,7 +13,7 @@
   <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
   <div id="notifications">
-    <%= link_to "Notifications", monitor_path(2) %>
+    <%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span>
   </div>
   <% if user_signed_id? %>
       <p id="welcome"> Welcome <%= current_user.name %>!</p>
