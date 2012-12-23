@@ -54,7 +54,6 @@ function getItems(url) {
 
 function addToOrder(itemId) {
     var orderItem = getOrderItemByItemId(_order.order_items, itemId);
-    console.log(orderItem);
     if (orderItem != null) {
         orderItem.quantity++;
     } else {
@@ -99,8 +98,6 @@ function incrementQuantity(increment, orderItemId) {
     orderItem.quantity += increment;
     if (orderItem.quantity <= 0) {
 
-        console.log(_order);
-        console.log(_order.order_items);
         _order.order_items.splice(_order.order_items.indexOf(orderItem), 1);
     }
     renderOrderItems(_order.order_items);
