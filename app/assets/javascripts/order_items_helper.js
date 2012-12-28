@@ -49,14 +49,20 @@ function getCurrentPath() {
     return l.pathname;
 }
 
-function showFlash(message) {
-    var notice = '#notice';
-    jQuery(notice).html(message);
-    jQuery(notice).slideDown('slow');
-    jQuery(notice).fadeOut(3000);
-    jQuery(notice).click(function () {
-        $('#flash').toggle('highlight')
-    });
+function showSuccess(message) {
+    var selector = '#notice';
+    showFlash(selector, message);
+}
+
+function showError(message) {
+    var selector = '#alert';
+    showFlash(selector, message);
+}
+
+function showFlash(selector, message) {
+    jQuery(selector).html(message);
+    jQuery(selector).slideDown('slow');
+    jQuery(selector).fadeOut(3000);
 }
 
 // jQuery extensions

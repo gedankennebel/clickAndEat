@@ -81,14 +81,11 @@ function submitOrder() {
         type:'put',
         dataType:'json',
         contentType:'application/json; charset=utf-8',
-        data:JSON.stringify(_order),
-        statusCode:{
-            204:function () {
-                showFlash('Successfully submitted order');
-            }
-        }
-    }).fail(function () {
-            alert('Failed');
+        data:JSON.stringify(_order)
+    }).done(function () {
+            showSuccess('Successfully submitted order');
+        }).fail(function () {
+            showError('Failed to save order');
         }).always(function () {
             getOrder();
         });
