@@ -1,5 +1,7 @@
 class PictureController < ApplicationController
 
+  after_filter :set_cache_headers
+
   def get_item_picture
     @item = Item.find(params[:item_id])
     #fresh_when :last_modified => @item.updated_at, :etag => @item
@@ -26,6 +28,11 @@ class PictureController < ApplicationController
     else
       send_data Rails.root.join("public", "no_image.jpg"), type: "image/jpeg", disposition: "inline"
     end
+  end
+
+  private
+  def set_cache_headers
+    expires_in 30.minutes
   end
 
 end

@@ -33,13 +33,14 @@ var _items;
 
 // AJAX   #################################################################
 function getCategories() {
-    $.ajax({
-        // TODO restaurant_id
-        url:'/restaurants/3/item_categories',
-        dataType:"json"
-    }).done(function (categories) {
-            $('#categories').html(createCategoriesHtml(categories));
-        });
+    Index.get(function (index) {
+        $.ajax({
+            url:index.getLink('current_restaurant'),
+            dataType:"json"
+        }).done(function (restaurant) {
+                $('#categories').html(createCategoriesHtml(restaurant.item_categories));
+            });
+    });
 }
 
 function getItems(url) {
@@ -83,7 +84,7 @@ function submitOrder() {
         data:JSON.stringify(_order),
         statusCode:{
             204:function () {
-                alert('Successfully submitted order');
+                showFlash('Successfully submitted order');
             }
         }
     }).fail(function () {

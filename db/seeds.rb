@@ -107,6 +107,8 @@ chinese_restaurant.save!
 
 manager.restaurant = indian_restaurant
 manager.save!
+employee.restaurant = indian_restaurant
+employee.save!
 
 #tables
 table1 = Table.new(table_number: 1)

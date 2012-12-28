@@ -14,10 +14,11 @@
 <header>
   <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
-  <div id="notifications">
-    <%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span>
-  </div>
   <% if user_signed_id? %>
+      <div id="notifications">
+        <%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span>
+      </div>
+
       <p id="welcome"> Welcome <%= current_user.name %>!</p>
 
       <p> <%= link_to "My Account", url_for(controller: 'user_accounts', action: 'index') %></p>
@@ -32,16 +33,13 @@
 </header>
 
 <div id="content">
-  <% if flash[:notice] %>
-      <p id="notice">
-        <%= flash[:notice] %>
-      </p>
-  <% end %>
-  <% if flash[:alert] %>
-      <p id="alert">
-        <%= flash[:alert] %>
-      </p>
-  <% end %>
+  <p id="notice" <%= "style=display:none" unless flash[:notice] %>>
+    <%= flash[:notice] %>
+  </p>
+
+  <p id="alert" <%= "style=display:none" unless flash[:alert] %>>
+    <%= flash[:alert] %>
+  </p>
 
   <%= yield %>
 

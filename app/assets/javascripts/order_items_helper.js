@@ -49,6 +49,16 @@ function getCurrentPath() {
     return l.pathname;
 }
 
+function showFlash(message) {
+    var notice = '#notice';
+    jQuery(notice).html(message);
+    jQuery(notice).slideDown('slow');
+    jQuery(notice).fadeOut(3000);
+    jQuery(notice).click(function () {
+        $('#flash').toggle('highlight')
+    });
+}
+
 // jQuery extensions
 $.fn.serializeObject = function () {
     var o = {};

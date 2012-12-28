@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
         closed: closed,
         order_items: order_items,
         created_at: created_at,
-        links: {link: {rel: 'self', href: "/orders/#{id}"}}
+        links: [{rel: 'self', href: "/orders/#{id}"}]
         #links: {link: {rel:'self', href: orders_path(self)}}
     }
   end

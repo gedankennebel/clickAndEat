@@ -7,4 +7,11 @@ class Restaurant < ActiveRecord::Base
 
   validates :name, presence: true # validate name as not null
   validates :name, length: {minimum: 2} # a restaurant name must contain at least 2 letters
+
+  def as_json(options = {})
+    {
+        name: self.name,
+        item_categories: self.item_categories
+    }
+  end
 end

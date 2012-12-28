@@ -43,7 +43,7 @@ class OrderItem < ActiveRecord::Base
         quantity: quantity,
         served: served,
         item: item,
-        links: {link: {rel: 'self', href: "/orders/#{order.id}/order_items/#{id}"}}
+        links: [{rel: 'self', href: "/orders/#{order.id}/order_items/#{id}"}]
     }
   end
 
