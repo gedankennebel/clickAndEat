@@ -39,7 +39,7 @@ function renderOrderItems(orderItems) {
     });
     html += "</ul>";
     html += "<div class='totalAmount'>";
-    html += "   <h2>Total Amount: </h2>" + getTotalAmount(orderItems).toFixed(2);
+    html += "   <h1>Total Amount: </h1>" + getTotalAmount(orderItems).toFixed(2);
     html += "</div>";
     html += "<input id='submitOrder' type='button' value='Submit'>";
     $('#order').html(html);

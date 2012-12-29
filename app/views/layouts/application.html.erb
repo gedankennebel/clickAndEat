@@ -4,9 +4,9 @@
   <title>ClickAndEat</title>
   <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,400' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <!--TODO separate javascript files-->
   <!--TODO refactor javascript files-->
-  <%= javascript_include_tag "application", "http://localhost:9292/faye.js" %>
+  <%= javascript_include_tag :jquery, :jquery_ujs, :filter, :notifications, :order_items_helper, :order_items_templates, "http://localhost:9292/faye.js" %>
+  <%= yield(:head) %>
   <%= csrf_meta_tags %>
 </head>
 <body>

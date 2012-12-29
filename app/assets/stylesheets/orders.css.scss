@@ -2,16 +2,24 @@ li {
   list-style: none;
 }
 
-#items ul {
+ul {
+  padding: 0;
+}
+
+.item {
+  padding: 0.5em;
+}
+
+#items li {
   float: left;
 }
 
 .totalAmount {
-  clear: both;
+  clear: left;
 }
 
 #submitOrder {
-  float: right;
+  //float: right;
 }
 
 .footer {
