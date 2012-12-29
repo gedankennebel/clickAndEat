@@ -51,7 +51,7 @@ function saveFilterDefinition() {
 
 function getCurrentOrders() {
     $.ajax({
-        url:document.URL,
+        url:document.URL + '.json',
         dataType:'json'
     }).done(function (orders) {
             _orders = orders;

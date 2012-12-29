@@ -35,7 +35,7 @@ var _items;
 function getCategories() {
     Index.get(function (index) {
         $.ajax({
-            url:index.getLink('current_restaurant'),
+            url:index.getLink('current_restaurant') + '.json',
             dataType:"json"
         }).done(function (restaurant) {
                 $('#categories').html(createCategoriesHtml(restaurant.item_categories));
@@ -45,7 +45,7 @@ function getCategories() {
 
 function getItems(url) {
     $.ajax({
-        url:url,
+        url:url + '.json',
         dataType:"json"
     }).done(function (items) {
             _items = items;
@@ -67,7 +67,7 @@ function addToOrder(itemId) {
 
 function getOrder() {
     $.ajax({
-        url:document.URL,
+        url:document.URL + '.json',
         dataType:'json'
     }).done(function (order) {
             _order = order;
