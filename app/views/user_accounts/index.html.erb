@@ -4,7 +4,9 @@
 <% if @user_account.roles.size.eql? 1 and @user_account.roles.first.name.eql? 'user' %>
     <h3>This is only a normal user account, but you can select one of these options to your account:</h3>
     <ul class="account_options">
-      <li>Create your <span class="clickAndEat">click&eat</span> restaurant!</li>
+      <li>
+        <%= link_to "Create your click&eat restaurant!", new_restaurant_path %>
+      </li>
       <li>Join your restaurant as an employee!</li>
     </ul>
 <% else %>

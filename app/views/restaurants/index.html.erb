@@ -5,7 +5,8 @@
   <% @restaurants.each do |restaurant| %>
       <tr>
         <td>
-          <%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: restaurant.id) %>
+          <!--<%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: restaurant.id) %>-->
+          <%= image_tag restaurant.avatar.url(:thumb) %>
         </td>
         <td>
           <ul class="no_enum_ul">

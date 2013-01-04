@@ -1,4 +1,20 @@
 class RestaurantsController < ApplicationController
+
+  def new
+    @restaurant = Restaurant.new
+  end
+
+  def create
+    @restaurant = Restaurant.new(params[:restaurant])
+    # set default role for new created user account
+    if @restaurant.save
+      redirect_to root_path,
+                  notice: "Your restaurant has been created!"
+    else
+      render "new"
+    end
+  end
+
   def index
     respond_to do |format|
       format.html {

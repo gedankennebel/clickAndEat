@@ -7,7 +7,6 @@
 #
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
-
 #roles
 user_role = Role.create!(name: 'user')
 employee_role = Role.create!(name: 'employee')
@@ -31,7 +30,6 @@ definition = FilterDefinition.create!(cookable: false, tables: [1, 2, 3])
 employee.filter_definition = definition
 employee.save!
 
-
 #restaurants
 indian_type = Type.create!(name: "indian")
 chinese_type = Type.create!(name: "chinese")
@@ -40,20 +38,24 @@ pakistani_type = Type.create!(name: "pakistani")
 mexian_type = Type.create!(name: "mexican")
 
 #indian restaurant
-indian_restaurant = Restaurant.new(name: "Royal India", picture: File.new(Rails.root.join "app/assets/indian.jpeg").read)
+indian_restaurant = Restaurant.new(name: "Royal India")
+indian_restaurant.avatar = File.open(Rails.root.join "public/seed_image/indian.jpeg")
 indian_restaurant.types << indian_type
 
 #chinese restaurant
-chinese_restaurant = Restaurant.new(name: "Chopstix", picture: File.new(Rails.root.join "app/assets/chinese.jpeg").read)
+chinese_restaurant = Restaurant.new(name: "Chopstix")
+chinese_restaurant.avatar = File.open(Rails.root.join "public/seed_image/chinese.jpeg")
 chinese_restaurant.types << [chinese_type, vietnamese_type]
 chinese_restaurant.save!
 
 #pakistani_restaurant
-pakistani_restaurant = Restaurant.new(name: "Tandoori Palace", picture: File.new(Rails.root.join "app/assets/pakistan.png").read)
+pakistani_restaurant = Restaurant.new(name: "Tandoori Palace")
+pakistani_restaurant.avatar = File.open(Rails.root.join "public/seed_image/pakistan.png")
 pakistani_restaurant.types << [pakistani_type, indian_type]
 
 #mexian restaurant
-mexican_restaurant = Restaurant.new(name: "El Charro", picture: File.new(Rails.root.join "app/assets/mexican.jpg").read)
+mexican_restaurant = Restaurant.new(name: "El Charro")
+mexican_restaurant.avatar = File.open(Rails.root.join "public/seed_image/mexican.jpg")
 mexican_restaurant.types << [mexian_type]
 
 #branches

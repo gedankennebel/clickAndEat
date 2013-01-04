@@ -1,0 +1,22 @@
+<h2>Create your user account</h2>
+<br>
+<%= form_for @restaurant, :url => restaurants_path, :html => {:multipart => true} do |form| %>
+    <% if @restaurant.errors.any? %>
+        <ul id="errors">
+          <% @restaurant.errors.full_messages.each do |msg| %>
+              <li><p id="alert"><%= msg %></p></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <p>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </p>
+    <p><%= form.file_field :avatar %></p>
+    <p><%= form.submit %></p>
+<% end %>
+
+
+
+
+
