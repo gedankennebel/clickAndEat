@@ -1,5 +1,5 @@
 class Branch < ActiveRecord::Base
-  attr_accessible :info_text, :opening_hours
+  attr_accessible :opening_hours
   belongs_to :address
   has_many :tables
   belongs_to :restaurant

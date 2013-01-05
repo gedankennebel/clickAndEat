@@ -1,6 +1,7 @@
-<h2>Create your user account</h2>
-<br>
-<%= form_for @restaurant, :url => restaurants_path, :html => {:multipart => true} do |form| %>
+<%= stylesheet_link_tag 'restaurants.css.scss' %>
+
+<h2 xmlns="http://www.w3.org/1999/html">Create your user account</h2>
+<%= form_for @restaurant, url: restaurants_path, html: {:multipart => true} do |form| %>
     <% if @restaurant.errors.any? %>
         <ul id="errors">
           <% @restaurant.errors.full_messages.each do |msg| %>
@@ -8,11 +9,23 @@
           <% end %>
         </ul>
     <% end %>
-    <p>
-      <%= form.label :name %>
-      <%= form.text_field :name %>
-    </p>
-    <p><%= form.file_field :avatar %></p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+    <ul class="types_ul">
+      <% @types.each do |type| %>
+          <li>
+            <table class="types_table">
+              <tr>
+                <td><%= form.label type.name %></td>
+                <td><%= check_box_tag 'type[name][]', type.name, false %></td>
+              </tr>
+            </table>
+          </li>
+      <% end %>
+    </ul>
     <p><%= form.submit %></p>
 <% end %>
 

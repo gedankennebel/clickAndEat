@@ -60,6 +60,24 @@ td {
   display: none;
 }
 
+.types_ul {
+  list-style-type: none;
+  li {
+    display: inline-block;
+  }
+  li:hover {
+    font-weight: bold;
+  }
+}
+
+.types_table {
+  td {
+    padding: 10px;
+  }
+}
+
+
+
 
 
 

@@ -1,15 +1,31 @@
 class RestaurantsController < ApplicationController
 
   def new
-    @restaurant = Restaurant.new
+    if not current_user.nil?
+      if current_user.restaurant.nil?
+        @restaurant = Restaurant.new
+        @types = Type.all
+      else
+        redirect_to user_account_path
+      end
+    else
+      redirect_to new_user_account_path
+    end
   end
 
   def create
     @restaurant = Restaurant.new(params[:restaurant])
+    @types = params[:type][:name]
+    @types.each do |name|
+      @restaurant.types << Type.find_by_name(name)
+    end
     # set default role for new created user account
     if @restaurant.save
+      current_user.roles = Role.find_all_by_name("manager")
       redirect_to root_path,
                   notice: "Your restaurant has been created!"
+      current_user.restaurant = Restaurant.find_by_name(params[:restaurant][:name])
+      current_user.save!
     else
       render "new"
     end

@@ -1,5 +1,5 @@
 class Restaurant < ActiveRecord::Base
-  attr_accessible :name, :avatar
+  attr_accessible :name,:info_text, :avatar
   has_many :branches
   has_many :item_categories
   has_many :user_accounts
