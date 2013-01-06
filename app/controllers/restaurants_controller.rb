@@ -9,24 +9,18 @@ class RestaurantsController < ApplicationController
         redirect_to user_account_path
       end
     else
-      redirect_to new_user_account_path
+      redirect_to login_path
     end
   end
 
   def create
-    @restaurant = Restaurant.new(params[:restaurant])
-    @types = params[:type][:name]
-    @types.each do |name|
-      @restaurant.types << Type.find_by_name(name)
-    end
-    # set default role for new created user account
+    @restaurant = Restaurant.create_new_restaurant(params[:restaurant], params[:type][:name], params[:extra_type])
     if @restaurant.save
-      current_user.roles = Role.find_all_by_name("manager")
+      UserAccount.update_to_new_manager current_user, @restaurant
       redirect_to root_path,
                   notice: "Your restaurant has been created!"
-      current_user.restaurant = Restaurant.find_by_name(params[:restaurant][:name])
-      current_user.save!
     else
+      @types = Type.all
       render "new"
     end
   end

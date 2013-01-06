@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'restaurants.css.scss' %>
 
-<h2 xmlns="http://www.w3.org/1999/html">Create your user account</h2>
+<h2 xmlns="http://www.w3.org/1999/html">Create your <span class="clickAndEat">click&and</span> restaurant</h2>
 <%= form_for @restaurant, url: restaurants_path, html: {:multipart => true} do |form| %>
     <% if @restaurant.errors.any? %>
         <ul id="errors">
@@ -9,24 +9,41 @@
           <% end %>
         </ul>
     <% end %>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <ul class="form_structure">
+      <li>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </li>
+      <li>
+        <%= form.label :avatar %>
+        <%= form.file_field :avatar %>
+      </li>
+      <li>
+        <p>Select the type of your restaurant</p>
+        <ul class="types_ul">
+          <% @types.each do |type| %>
+              <li>
+                <table class="types_table">
+                  <tr>
+                    <td><%= form.label type.name %></td>
+                    <td><%= check_box_tag 'type[name][]', type.name, false %></td>
+                  </tr>
+                </table>
+              </li>
+          <% end %>
+        </ul>
+        <p>or set your own type</p>
+        <%= text_field_tag 'extra_type' %>
+      </li>
+      <%= hidden_field_tag 'type[name][]' %>
+      <li>
+        <%= form.label :info_text %>
+        <%= form.text_area :info_text, class: 'info_text' %>
+      </li>
 
-    <%= form.label :avatar %>
-    <%= form.file_field :avatar %>
-    <ul class="types_ul">
-      <% @types.each do |type| %>
-          <li>
-            <table class="types_table">
-              <tr>
-                <td><%= form.label type.name %></td>
-                <td><%= check_box_tag 'type[name][]', type.name, false %></td>
-              </tr>
-            </table>
-          </li>
-      <% end %>
+      <li><p><%= form.submit %></p>
+      </li>
     </ul>
-    <p><%= form.submit %></p>
 <% end %>
 
 

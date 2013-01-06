@@ -76,6 +76,19 @@ td {
   }
 }
 
+$red: #990b02;
+
+.clickAndEat:hover {
+  color: white;
+  text-shadow: -1px 1px 8px $red, 1px -1px 8px $red;
+}
+
+.info_text {
+  width: 20em;
+  height: 5em;
+  resize: none;
+}
+
 
 
 

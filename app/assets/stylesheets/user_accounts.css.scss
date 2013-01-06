@@ -12,6 +12,10 @@ $options_font: 1.4em;
 .account_options li {
   font-size: $options_font;
   padding: 10px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
 
 .account_options li:hover {

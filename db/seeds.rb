@@ -157,6 +157,19 @@ OrderItem.create!(order: order, item: pappad)
 OrderItem.create!(order: order, item: lassi)
 OrderItem.create!(order: order, item: jalfrezi)
 
+# generate 20 test user, to make restaurants and testing around
+i = 0
+20.times do
+  mail = i.to_s + "@lol.de"
+  name = "Test Name " + i.to_s
+  user = UserAccount.create!(email: mail, name: name, password: "lol", password_confirmation: "lol")
+  user.roles << [user_role]
+  user.save!
+  i += 1
+end
+
+
+
 
 
 
