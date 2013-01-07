@@ -11,15 +11,15 @@
     <% end %>
     <ul class="form_structure">
       <li>
-        <%= form.label :name %>
+        <p><%= form.label :name, 'Name:' %></p>
         <%= form.text_field :name %>
       </li>
       <li>
-        <%= form.label :avatar %>
+        <p><%= form.label :avatar, 'Upload an image as your restaurant avatar:' %></p>
         <%= form.file_field :avatar %>
       </li>
       <li>
-        <p>Select the type of your restaurant</p>
+        <p>Select the type/s of your restaurant</p>
         <ul class="types_ul">
           <% @types.each do |type| %>
               <li>
@@ -37,7 +37,7 @@
       </li>
       <%= hidden_field_tag 'type[name][]' %>
       <li>
-        <%= form.label :info_text %>
+        <p> <%= form.label :info_text, 'Write an info text about your restaurant:' %> </p>
         <%= form.text_area :info_text, class: 'info_text' %>
       </li>
 

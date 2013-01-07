@@ -55,6 +55,7 @@ header a {
 
 header a:hover {
   color: $white;
+  font-weight: bold;
   text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
 }
 
@@ -131,8 +132,19 @@ input[type="submit"] {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  background-color: #FFF5EE;
 }
 
 .form_structure > li {
   padding: 15px;
+  border: solid;
+  border-style: groove;
+}
+
+.form_structure input {
+  padding: 3px;
+}
+
+.form_structure p {
+  font-weight: bold;
 }

@@ -1,6 +1,6 @@
-<h2>Edit your restaurant</h2>
 <%= stylesheet_link_tag 'restaurants.css.scss' %>
 
+<h2>Edit your restaurant</h2>
 <%= form_for @restaurant, html: {:multipart => true} do |form| %>
     <% if @restaurant.errors.any? %>
         <ul id="errors">
@@ -11,15 +11,19 @@
     <% end %>
     <ul class="form_structure">
       <li>
-        <%= form.label :name %>
+        <p><%= form.label :name, 'Name:' %></p>
         <%= form.text_field :name %>
       </li>
       <li>
-        <%= form.label :avatar %>
+        <p><%= form.label :avatar, 'Change your avatar image or ignore if you want to keep your current image:' %></p>
         <%= form.file_field :avatar %>
+        <p>
+          Remove current avatar image?
+          <%= check_box_tag 'avatar' %>
+        </p>
       </li>
       <li>
-        <p>Select the type/s of your restaurant (only if you want to change!)</p>
+        <p>Select the type/s of your restaurant (only if you want to change!):</p>
         <ul class="types_ul">
           <% @types.each do |type| %>
               <li>
@@ -37,10 +41,9 @@
       </li>
       <%= hidden_field_tag 'type[name][]' %>
       <li>
-        <%= form.label :info_text %>
+        <p> <%= form.label :info_text, 'Write an info text about your restaurant:' %> </p>
         <%= form.text_area :info_text, class: 'info_text' %>
       </li>
-
       <li><p><%= form.submit %></p>
       </li>
     </ul>

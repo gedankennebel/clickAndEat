@@ -47,7 +47,7 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-    if Restaurant.update_restaurant(params[:restaurant], params[:id], params[:type][:name], params[:extra_type])
+    if Restaurant.update_restaurant(params[:restaurant], params[:id], params[:type][:name], params[:extra_type], params[:avatar])
       redirect_to root_path, notice: "Your restaurant has been updated!"
     else
       render 'edit'

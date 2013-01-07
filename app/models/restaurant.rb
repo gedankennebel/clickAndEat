@@ -21,15 +21,17 @@ class Restaurant < ActiveRecord::Base
     set_types_to_restaurant restaurant, selected_types, extra_type
   end
 
-  def self.update_restaurant restaurant_update, restaurant_id, selected_types, extra_type
+  def self.update_restaurant restaurant_update, restaurant_id, selected_types, extra_type, avatar_flag
     restaurant = Restaurant.find_by_id restaurant_id
     if not selected_types.first.blank? or not extra_type.blank?
       restaurant.types.delete_all
       restaurant = set_types_to_restaurant restaurant, selected_types, extra_type
     end
+    if not avatar_flag.blank?
+      restaurant.avatar = nil
+    end
     restaurant.update_attributes restaurant_update
   end
-
 
 #private methods starts form here
   private
