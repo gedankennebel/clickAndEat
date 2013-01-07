@@ -42,8 +42,20 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    @restaurant = Restaurant.find params[:id]
-    @types = Type.all
+    if not current_user.nil?
+      if not current_user.restaurant.nil?
+        @types = Type.all
+        if current_user.restaurant_id.eql? params[:id]
+          @restaurant = Restaurant.find params[:id]
+        else
+          @restaurant = Restaurant.find current_user.restaurant_id
+        end
+      else
+        redirect_to new_restaurant_path
+      end
+    else
+      redirect_to login_path
+    end
   end
 
   def update

@@ -76,6 +76,7 @@ header #welcome {
 
 footer {
   background-color: #a09e9d;
+  background-image: -webkit-gradient(linear,left top, left bottom, from($red), to($grey));
   color: white;
   padding: 40px;
 }
