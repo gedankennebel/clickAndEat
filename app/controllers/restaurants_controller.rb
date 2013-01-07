@@ -14,7 +14,7 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.create_new_restaurant(params[:restaurant], params[:type][:name], params[:extra_type])
+    @restaurant = Restaurant.create_new_restaurant params[:restaurant], params[:type][:name], params[:extra_type]
     if @restaurant.save
       UserAccount.update_to_new_manager current_user, @restaurant
       redirect_to root_path,
@@ -28,8 +28,9 @@ class RestaurantsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @restaurants = Restaurant.all(:order => 'created_at DESC')
+        @restaurants = Restaurant.all(order: 'created_at DESC')
       }
+      # TODO: verursacht FEHLER bei back-button im chrome-browser -> 'current_user.restaurant' (bei safari browser aber kein fehler)
       format.json {
         expires_in 5.seconds
         render json: {links: [
@@ -37,6 +38,19 @@ class RestaurantsController < ApplicationController
             {rel: 'current_restaurant', href: restaurant_path(current_user.restaurant)}
         ]}
       }
+    end
+  end
+
+  def edit
+    @restaurant = Restaurant.find params[:id]
+    @types = Type.all
+  end
+
+  def update
+    if Restaurant.update_restaurant(params[:restaurant], params[:id], params[:type][:name], params[:extra_type])
+      redirect_to root_path, notice: "Your restaurant has been updated!"
+    else
+      render 'edit'
     end
   end
 

@@ -18,6 +18,23 @@ class Restaurant < ActiveRecord::Base
 
   def self.create_new_restaurant restaurant, selected_types, extra_type
     restaurant = Restaurant.new restaurant
+    set_types_to_restaurant restaurant, selected_types, extra_type
+  end
+
+  def self.update_restaurant restaurant_update, restaurant_id, selected_types, extra_type
+    restaurant = Restaurant.find_by_id restaurant_id
+    if not selected_types.first.blank? or not extra_type.blank?
+      restaurant.types.delete_all
+      restaurant = set_types_to_restaurant restaurant, selected_types, extra_type
+    end
+    restaurant.update_attributes restaurant_update
+  end
+
+
+#private methods starts form here
+  private
+
+  def self.set_types_to_restaurant restaurant, selected_types, extra_type
     # dirty hack with hidden field for types, please forgive me! :(
     # if first element is blank
     # it means no types selected (only hidden field)
@@ -29,7 +46,6 @@ class Restaurant < ActiveRecord::Base
         add_type_to_restaurant(restaurant, name)
       end
     end
-
     # if user typed an extra type in form
     # e.g. if 'chinese' was not available to choose
     if not extra_type.blank?
@@ -47,12 +63,8 @@ class Restaurant < ActiveRecord::Base
         add_type_to_restaurant restaurant, extra_type.downcase
       end
     end
-    return restaurant
+    restaurant
   end
-
-
-#private methods starts form here
-  private
 
   # add types to a given restaurant
   def self.add_type_to_restaurant restaurant, type_name

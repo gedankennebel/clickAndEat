@@ -1,7 +1,7 @@
+<h2>Edit your restaurant</h2>
 <%= stylesheet_link_tag 'restaurants.css.scss' %>
 
-<h2 xmlns="http://www.w3.org/1999/html">Create your <span class="clickAndEat">click&and</span> restaurant</h2>
-<%= form_for @restaurant, url: restaurants_path, html: {:multipart => true} do |form| %>
+<%= form_for @restaurant, html: {:multipart => true} do |form| %>
     <% if @restaurant.errors.any? %>
         <ul id="errors">
           <% @restaurant.errors.full_messages.each do |msg| %>
@@ -19,7 +19,7 @@
         <%= form.file_field :avatar %>
       </li>
       <li>
-        <p>Select the type of your restaurant</p>
+        <p>Select the type/s of your restaurant (only if you want to change!)</p>
         <ul class="types_ul">
           <% @types.each do |type| %>
               <li>
