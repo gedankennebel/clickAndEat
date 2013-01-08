@@ -1,0 +1,10 @@
+<%= stylesheet_link_tag 'user_accounts.css.scss' %>
+
+<h2>Join your restaurant as an employee</h2>
+
+<p>Type the restaurant name where you work as an employee and send this request to your manager</p>
+<%= form_tag "/restaurantApply", method: "POST" do %>
+    Restaurant name:
+    <span class="restaurant_name"><%= text_field_tag :restaurant_name %></span>
+    <%= submit_tag 'send' %>
+<% end %>

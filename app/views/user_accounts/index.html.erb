@@ -7,7 +7,9 @@
       <li>
         <%= link_to "Create your click&eat restaurant!", new_restaurant_path %>
       </li>
-      <li>Join your restaurant as an employee!</li>
+      <li>
+        <%= link_to "Join your restaurant as an employee!", url_for(controller: 'user_accounts', action: 'join_restaurant') %>
+      </li>
     </ul>
 <% else %>
     <% @user_account.roles.each do |role| %>

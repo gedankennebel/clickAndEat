@@ -13,11 +13,21 @@ class UserAccount < ActiveRecord::Base
   validates_associated :roles, :restaurant
 
   MANAGER_ROLE = 'manager'
+  EMPLOYEE_ROLE = 'employee'
 
-  def self.update_to_new_manager current_user, restaurant
-    current_user.roles = Role.find_all_by_name(MANAGER_ROLE)
+  def self.update_role_to_manager current_user, restaurant
+    current_user.roles << Role.find_by_name(MANAGER_ROLE)
     current_user.restaurant = restaurant
     current_user.save!
   end
 
+  def self.update_role_to_employee current_user, restaurant
+    current_user.roles << Role.find_by_name(EMPLOYEE_ROLE)
+    current_user.restaurant = restaurant
+    current_user.save!
+  end
+
+  def self.send_employee_request_to_manager applicant_user_account, restaurant_name
+    logger.info "passt= "+restaurant_name.to_s
+  end
 end
