@@ -16,7 +16,10 @@
 
   <% if user_signed_in? %>
       <div id="notifications">
-        <%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span>
+        <!--TODO monitor_path parametrisieren-->
+        <p><%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span></p>
+
+        <p><%= link_to "Messages", messages_path %> (<%= current_user.messages.size %>)</p>
       </div>
 
       <p id="welcome"> Welcome <%= current_user.name %>!</p>

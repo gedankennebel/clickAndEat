@@ -76,7 +76,7 @@ header #welcome {
 
 footer {
   background-color: #a09e9d;
-  background-image: -webkit-gradient(linear,left top, left bottom, from($red), to($grey));
+  background-image: -webkit-gradient(linear, left top, left bottom, from($red), to($grey));
   color: white;
   padding: 40px;
 }
@@ -149,3 +149,33 @@ input[type="submit"] {
 .form_structure p {
   font-weight: bold;
 }
+
+.decision a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.decision td {
+  padding: 10px;
+  font-size: 1em;
+}
+
+.accept {
+  color: $green;
+}
+
+.decline {
+  color: $red;
+}
+
+.accept:hover {
+  text-shadow: -1px 1px 8px $green, 1px -1px 8px $green;
+}
+
+.decline:hover {
+  text-shadow: -1px 1px 8px $red, 1px -1px 8px $red;
+}
+
+
+
+

@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login, :require_unlocked_account
   skip_before_filter :require_login, only: [:index, :show, :menu]
+  skip_before_filter :require_unlocked_account, only: [:index, :show, :menu]
 
   def index
     respond_to do |format|
@@ -72,4 +73,11 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  private
+
+  def require_unlocked_account
+    if current_user.lock
+      redirect_to user_accounts_path
+    end
+  end
 end

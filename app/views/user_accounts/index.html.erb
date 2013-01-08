@@ -1,43 +1,42 @@
 <%= stylesheet_link_tag 'user_accounts.css.scss' %>
 
 <h2>My Account</h2>
-<% if @user_account.roles.size.eql? 1 and @user_account.roles.first.name.eql? 'user' %>
-    <h3>This is only a normal user account, but you can select one of these options to your account:</h3>
-    <ul class="account_options">
-      <li>
-        <%= link_to "Create your click&eat restaurant!", new_restaurant_path %>
-      </li>
-      <li>
-        <%= link_to "Join your restaurant as an employee!", url_for(controller: 'user_accounts', action: 'join_restaurant') %>
-      </li>
-    </ul>
-<% else %>
-    <% @user_account.roles.each do |role| %>
-        <% if role.name.eql? 'employee' %>
-            <p class="option_type">Service options:</p>
-            <ul class="account_options">
-              <li>Take a new order</li>
-              <li>Open cook monitor</li>
-            </ul>
-        <% end %>
-        <% if role.name.eql? 'manager' %>
-            <% if not @user_account.restaurant.nil? %>
-                <p class="option_type">Management options:</p>
+<% if not @user_account.lock %>
+    <% if @user_account.roles.size.eql? 1 and @user_account.roles.first.name.eql? 'user' %>
+        <h3>This is only a normal user account, but you can select one of these options to your account:</h3>
+        <ul class="account_options">
+          <li>
+            <%= link_to "Create your click&eat restaurant!", new_restaurant_path %>
+          </li>
+          <li>
+            <%= link_to "Join your restaurant as an employee!", url_for(controller: 'user_accounts', action: 'join_restaurant') %>
+          </li>
+        </ul>
+    <% else %>
+        <% @user_account.roles.each do |role| %>
+            <% if role.name.eql? 'employee' or role.name.eql? 'manager' %>
+                <p class="option_type">Service options:</p>
                 <ul class="account_options">
-                  <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
-                  <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
-                      <li>Edit your online menu</li>
-                  <% else %>
-                      <li>Create your online menu</li>
-                  <% end %>
+                  <li>Take a new order</li>
+                  <li>Open cook monitor</li>
                 </ul>
             <% end %>
+                <% if role.name.eql? 'manager' %>
+                    <% if not @user_account.restaurant.nil? %>
+                        <p class="option_type">Management options:</p>
+                        <ul class="account_options">
+                          <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
+                          <li>Set your branch</li>
+                          <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
+                              <li>Edit your online menu</li>
+                          <% else %>
+                              <li>Create your online menu</li>
+                          <% end %>
+                        </ul>
+                    <% end %>
+                <% end %>
+            <% end %>
         <% end %>
+        <% else %>
+        <h1>Your account console is currently unavailable, until your employee request has been responsed</h1>
     <% end %>
-    <p class="option_type">Account Settings:</p>
-    <ul class="account_options">
-      <li>Set your brach</li>
-      <li>Edit your name</li>
-      <li>Change your password</li>
-    </ul>
-<% end %>

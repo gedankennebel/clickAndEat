@@ -33,7 +33,13 @@ ClickAndEat::Application.routes.draw do
   resources :branches do
     resources :orders
   end
+
+  resources :messages
+
   match "branches/:branch_id/order_items", to: "order_items#monitor", as: :monitor
+
+  get "accept_employee/:message_id" => "user_accounts#accept_employee"
+  get "decline_employee/:message_id" => "user_accounts#decline_employee"
 
   root to: 'restaurants#index'
 end
