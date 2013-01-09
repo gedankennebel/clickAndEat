@@ -14,20 +14,21 @@
 <header>
   <h1> <%= link_to "Click&Eat", root_path %> </h1>
 
-  <% if user_signed_id? %>
+  <% if user_signed_in? %>
       <div id="notifications">
-        <%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span>
+        <!--TODO monitor_path parametrisieren-->
+        <p><%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span></p>
+
+        <p><%= link_to "Messages", messages_path %> (<%= current_user.messages.size %>)</p>
       </div>
 
       <p id="welcome"> Welcome <%= current_user.name %>!</p>
 
-      <p> <%= link_to "My Account", url_for(controller: 'user_accounts', action: 'index') %></p>
+      <p> <%= link_to "My Account", user_account_path %></p>
 
       <p> <%= link_to "Log out", logout_path, method: :delete %> </p>
 
   <% else %>
-      <p> <%= link_to "Sign up", new_user_account_path %> </p>
-
       <p> <%= link_to "Log in", login_path %> </p>
   <% end %>
 </header>

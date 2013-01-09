@@ -4,29 +4,32 @@
     <%= @restaurant.name %>
   </h2>
 
-  <p><%= image_tag url_for(controller: 'picture', action: 'get_restaurant_picture', restaurant_id: @restaurant.id) %></p>
+  <p><%= image_tag @restaurant.avatar.url(:medium) %></p>
 
-  <p class="small"><%= @restaurant.branches.first.info_text %> </p>
-
-</div>
-
-<div id="branches">
-  <% if @restaurant.branches.length.eql? 1 %>
-      <p class="bold"><%= @restaurant.name %> has at the moment only <%= @restaurant.branches.length %> branch:</p>
-  <% else %>
-      <p class="bold"><%= @restaurant.name %> has <%= @restaurant.branches.length %> branches:</p>
+  <% if not @restaurant.info_text.nil? %>
+      <p class="small"><%= @restaurant.info_text %> </p>
   <% end %>
-  <ul class="address_ul">
-    <% @restaurant.branches.each do |branch| %>
-        <li>
-          <% address = branch.address %>
-          <p><%= address.street %>  <%= address.number %>   </p>
 
-          <p> <%= address.postcode %> <%= address.city %></p>
+  <% if not @restaurant.branches.empty? %>
+      </div>
+      <div id="branches">
+        <% if @restaurant.branches.length.eql? 1 %>
+            <p class="bold"><%= @restaurant.name %> has at the moment only <%= @restaurant.branches.length %>
+              branch:</p>
+        <% else %>
+            <p class="bold"><%= @restaurant.name %> has <%= @restaurant.branches.length %> branches:</p>
+        <% end %>
+        <ul class="address_ul">
+          <% @restaurant.branches.each do |branch| %>
+              <li>
+                <% address = branch.address %>
+                <p><%= address.street %>  <%= address.number %>   </p>
 
-          <p class="small"> <%= branch.opening_hours %></p>
-        </li>
-    <% end %>
-  </ul>
+                <p> <%= address.postcode %> <%= address.city %></p>
 
-</div>
+                <p class="small"> <%= branch.opening_hours %></p>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>

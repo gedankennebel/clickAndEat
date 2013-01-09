@@ -1,0 +1,24 @@
+<h2>Notification Messages</h2>
+
+<% if not @messages.empty? %>
+    <% @messages.each do |message| %>
+        <ul class="form_structure">
+          <li>
+            <table class="decision">
+              <tr>
+                <td><%= message.message_text %> </td>
+                <% if message.message_type.eql? 'decision' %>
+                    <td><%= link_to 'Accept', url_for(controller: 'user_accounts', action: 'accept_employee', message_id: message.id), class: 'accept' %> </td>
+                    <td> <%= link_to 'Decline', url_for(controller: 'user_accounts', action: 'decline_employee', message_id: message.id), class: 'decline' %> </td>
+                <% else %>
+                    <td><%= link_to '(delete)', message, method: :delete, data: {confirm: 'Are you sure?'}, class: 'decline' %></td>
+                <% end %>
+              </tr>
+            </table>
+          </li>
+        </ul>
+    <% end %>
+<% else %>
+    <h1>No messages yet</h1>
+<% end %>
+

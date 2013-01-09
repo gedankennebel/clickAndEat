@@ -6,14 +6,16 @@ ClickAndEat::Application.routes.draw do
 
   #Picture
   get "/items/:item_id/picture" => "picture#get_item_picture"
-  get "/restaurants/:restaurant_id/picture" => "picture#get_restaurant_picture"
 
   get "/restaurants/:id/menu" => "restaurants#menu"
   get "/user_account" => "user_accounts#index"
   get "/user_account/filter_definition" => "user_accounts#get_filter_definition"
   put "/user_account/filter_definition" => "user_accounts#save_filter_definition"
 
-  resources :user_accounts, only: [:new, :create]
+  get "/joinRestaurant" => "user_accounts#join_restaurant"
+  post "/restaurantApply" => "user_accounts#apply_to_restaurant_as_employee"
+
+  resources :user_accounts, only: [:new, :create, :index]
 
   resources :restaurants do
     resources :item_categories
@@ -31,7 +33,13 @@ ClickAndEat::Application.routes.draw do
   resources :branches do
     resources :orders
   end
+
+  resources :messages
+
   match "branches/:branch_id/order_items", to: "order_items#monitor", as: :monitor
+
+  get "accept_employee/:message_id" => "user_accounts#accept_employee"
+  get "decline_employee/:message_id" => "user_accounts#decline_employee"
 
   root to: 'restaurants#index'
 end

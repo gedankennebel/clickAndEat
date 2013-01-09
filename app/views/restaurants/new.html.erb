@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag 'restaurants.css.scss' %>
+
+<h2 xmlns="http://www.w3.org/1999/html">Create your <span class="clickAndEat">click&and</span> restaurant</h2>
+<%= form_for @restaurant, url: restaurants_path, html: {multipart: true} do |form| %>
+    <% if @restaurant.errors.any? %>
+        <ul id="errors">
+          <% @restaurant.errors.full_messages.each do |msg| %>
+              <li><p id="alert"><%= msg %></p></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <ul class="form_structure">
+      <li>
+        <p><%= form.label :name, 'Name:' %></p>
+        <%= form.text_field :name %>
+      </li>
+      <li>
+        <p><%= form.label :avatar, 'Upload an image as your restaurant avatar:' %></p>
+        <%= form.file_field :avatar %>
+      </li>
+      <li>
+        <p>Select the type/s of your restaurant</p>
+        <ul class="types_ul">
+          <% @types.each do |type| %>
+              <li>
+                <table class="types_table">
+                  <tr>
+                    <td><%= form.label type.name %></td>
+                    <td><%= check_box_tag 'type[name][]', type.name, false %></td>
+                  </tr>
+                </table>
+              </li>
+          <% end %>
+        </ul>
+        <p>or set your own type</p>
+        <%= text_field_tag 'extra_type' %>
+      </li>
+      <%= hidden_field_tag 'type[name][]' %>
+      <li>
+        <p> <%= form.label :info_text, 'Write an info text about your restaurant:' %> </p>
+        <%= form.text_area :info_text, class: 'text_area' %>
+      </li>
+
+      <li><p><%= form.submit %></p>
+      </li>
+    </ul>
+<% end %>

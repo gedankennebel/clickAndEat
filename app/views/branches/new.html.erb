@@ -1,0 +1,31 @@
+<h2>Create your branch</h2>
+<%= form_for @branch do |form| %>
+    <% if @branch.errors.any? %>
+        <ul id="errors">
+          <% @branch.errors.full_messages.each do |msg| %>
+              <li><p id="alert"><%= msg %></p></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <ul class="form_structure">
+      <li>
+        <p><%= form.label :opening_hours, 'Set opening hours:' %>
+          <%= form.text_area :opening_hours, class: 'text_area' %> </p>
+      </li>
+      <li>
+        <p>Select the number of tables in this branch:</p>
+        <%= select_tag :tables_amount, options_for_select(1..20) %>
+      </li>
+      <li>
+        <p>Street</p>
+        <%= text_field_tag :street %>
+        <p>Number</p>
+        <%= text_field_tag :number %>
+        <p>City</p>
+        <%= text_field_tag :city %>
+        <p>Postcode</p>
+        <%= text_field_tag :postcode %>
+      </li>
+      <li><%= form.submit %></li>
+    </ul>
+<% end %>

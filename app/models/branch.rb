@@ -1,5 +1,5 @@
 class Branch < ActiveRecord::Base
-  attr_accessible :info_text, :opening_hours
+  attr_accessible :opening_hours
   belongs_to :address
   has_many :tables
   belongs_to :restaurant
@@ -16,5 +16,14 @@ class Branch < ActiveRecord::Base
     {
         tables: tables
     }
+  end
+
+  def self.create_new_branch restaurant, branch, street, number, city, postcode
+    branch = Branch.new branch
+    branch.restaurant = restaurant
+    branch.address = Address.create_new_adress street, number, city, postcode
+    restaurant.branches << branch
+    restaurant.save!
+    branch
   end
 end

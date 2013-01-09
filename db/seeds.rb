@@ -7,7 +7,6 @@
 #
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
-
 #roles
 user_role = Role.create!(name: 'user')
 employee_role = Role.create!(name: 'employee')
@@ -31,7 +30,6 @@ definition = FilterDefinition.create!(cookable: false, tables: [1, 2, 3])
 employee.filter_definition = definition
 employee.save!
 
-
 #restaurants
 indian_type = Type.create!(name: "indian")
 chinese_type = Type.create!(name: "chinese")
@@ -39,21 +37,31 @@ vietnamese_type = Type.create!(name: "vietnamese")
 pakistani_type = Type.create!(name: "pakistani")
 mexian_type = Type.create!(name: "mexican")
 
+# restaurants info_text
+pakistani_info_text = "The word tandoor came originally from the Middle East with the name deriving from the Babylonian word 'tinuru' from the Semitic word nar meaning fire. Hebrew and Arabic then made it tannur then tandur in Turkey, Central Asia and, finally Pakistan and India, who made it famous worldwide. Understandably, many people assume the tandoor to be native to Pakistan & India as evidence exists of early tandoors around 3000 BC. The traditional rounded-top tandoor oven is made of brick and clay. It's used to bake foods over direct heat produced from a smoky fire. The dough for the delicious Indian bread NAAN is slapped directly onto the oven's clay walls and left to bake until puffy and lightly browned. Meats cooked in the tall, rather cylindrical tandoor are usually skewered and thrust into the oven's heat, which is so intense (usually over 500°F) that it cooks a chicken half in less than 5 minutes..."
+chinese_info_text = "Traditional Chinese food recipes tend to use lots of fresh vegetables and touches of salty sauces. Remember that very few Chinese food recipes use just one single list of ingredients. The exact combination changes from region to region and family to family."
+mexian_info_text = "We are a relatively new restaurant that is excited to bring you the traditional flavors of Mexico. The talented chefs at El Charro treat you with exotic, delicious flavors of authentic Mexican tacos, nachos, and burritos. Everything is prepared fresh and with the finest ingredients, but the best part is how quickly we have it ready for you. We have everything from cheesy nachos to mouth-watering burritos, so you are sure to find something you enjoy any time of the day. The casual atmosphere, the friendly staff, and our wonderful Mexican cuisine provide the perfect setting for lunch or dinner."
+indian_info_text = "Royal India - Indian restaurant in Munich"
+
 #indian restaurant
-indian_restaurant = Restaurant.new(name: "Royal India", picture: File.new(Rails.root.join "app/assets/indian.jpeg").read)
+indian_restaurant = Restaurant.new(name: "Royal India", info_text: indian_info_text)
+indian_restaurant.avatar = File.open(Rails.root.join "public/seed_image/indian.jpeg")
 indian_restaurant.types << indian_type
 
 #chinese restaurant
-chinese_restaurant = Restaurant.new(name: "Chopstix", picture: File.new(Rails.root.join "app/assets/chinese.jpeg").read)
+chinese_restaurant = Restaurant.new(name: "Chopstix", info_text: chinese_info_text)
+chinese_restaurant.avatar = File.open(Rails.root.join "public/seed_image/chinese.jpeg")
 chinese_restaurant.types << [chinese_type, vietnamese_type]
 chinese_restaurant.save!
 
 #pakistani_restaurant
-pakistani_restaurant = Restaurant.new(name: "Tandoori Palace", picture: File.new(Rails.root.join "app/assets/pakistan.png").read)
+pakistani_restaurant = Restaurant.new(name: "Tandoori Palace", info_text: pakistani_info_text,)
+pakistani_restaurant.avatar = File.open(Rails.root.join "public/seed_image/pakistan.png")
 pakistani_restaurant.types << [pakistani_type, indian_type]
 
 #mexian restaurant
-mexican_restaurant = Restaurant.new(name: "El Charro", picture: File.new(Rails.root.join "app/assets/mexican.jpg").read)
+mexican_restaurant = Restaurant.new(name: "El Charro", info_text: mexian_info_text)
+mexican_restaurant.avatar = File.open(Rails.root.join "public/seed_image/mexican.jpg")
 mexican_restaurant.types << [mexian_type]
 
 #branches
@@ -63,23 +71,18 @@ pakistani_address1 = Address.create!(city: "Munich", number: "23", postcode: "81
 pakistani_address2 = Address.create!(city: "Munich", number: "99", postcode: "80999", street: "Sendlingerstraße")
 mexian_address = Address.create!(city: "Munich", number: "929", postcode: "87999", street: "Nachostraße")
 
-# restaurants info_text
-pakistani_info_text = "The word tandoor came originally from the Middle East with the name deriving from the Babylonian word 'tinuru' from the Semitic word nar meaning fire. Hebrew and Arabic then made it tannur then tandur in Turkey, Central Asia and, finally Pakistan and India, who made it famous worldwide. Understandably, many people assume the tandoor to be native to Pakistan & India as evidence exists of early tandoors around 3000 BC. The traditional rounded-top tandoor oven is made of brick and clay. It's used to bake foods over direct heat produced from a smoky fire. The dough for the delicious Indian bread NAAN is slapped directly onto the oven's clay walls and left to bake until puffy and lightly browned. Meats cooked in the tall, rather cylindrical tandoor are usually skewered and thrust into the oven's heat, which is so intense (usually over 500°F) that it cooks a chicken half in less than 5 minutes..."
-chinese_info_text = "Traditional Chinese food recipes tend to use lots of fresh vegetables and touches of salty sauces. Remember that very few Chinese food recipes use just one single list of ingredients. The exact combination changes from region to region and family to family."
-mexian_info_text = "We are a relatively new restaurant that is excited to bring you the traditional flavors of Mexico. The talented chefs at El Charro treat you with exotic, delicious flavors of authentic Mexican tacos, nachos, and burritos. Everything is prepared fresh and with the finest ingredients, but the best part is how quickly we have it ready for you. We have everything from cheesy nachos to mouth-watering burritos, so you are sure to find something you enjoy any time of the day. The casual atmosphere, the friendly staff, and our wonderful Mexican cuisine provide the perfect setting for lunch or dinner."
-
-mexian_branch = Branch.new(info_text: mexian_info_text, opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
+mexian_branch = Branch.new(opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
 mexian_branch.restaurant = mexican_restaurant
 
-indian_branch = Branch.new(info_text: "Royal India - Indian restaurant in Munich", opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
+indian_branch = Branch.new(opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
 indian_branch.restaurant = indian_restaurant
 
-pakistani_branch1= Branch.new(info_text: pakistani_info_text, opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
-pakistani_branch2= Branch.new(info_text: pakistani_info_text, opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
+pakistani_branch1= Branch.new(opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
+pakistani_branch2= Branch.new(opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
 pakistani_branch1.restaurant = pakistani_restaurant
 pakistani_branch2.restaurant = pakistani_restaurant
 
-chinese_branch = Branch.new(info_text: chinese_info_text, opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
+chinese_branch = Branch.new(opening_hours: "daily from 11:30 – 14:30 Uhr, 17:30 – 23:00 Uhr")
 chinese_branch.restaurant = chinese_restaurant
 
 indian_branch.address = address
@@ -153,6 +156,19 @@ order = Order.create!(table: table1)
 OrderItem.create!(order: order, item: pappad)
 OrderItem.create!(order: order, item: lassi)
 OrderItem.create!(order: order, item: jalfrezi)
+
+# generate 20 test user, to make restaurants and testing around
+i = 0
+20.times do
+  mail = i.to_s + "@lol.de"
+  name = "Test Name " + i.to_s
+  user = UserAccount.create!(email: mail, name: name, password: "lol", password_confirmation: "lol")
+  user.roles << [user_role]
+  user.save!
+  i += 1
+end
+
+
 
 
 

@@ -4,6 +4,7 @@ class CreateUserAccounts < ActiveRecord::Migration
       t.string :email
       t.string :password_digest
       t.string :name
+      t.boolean :lock, default: 0
 
       t.timestamps
       #foreign key

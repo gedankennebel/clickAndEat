@@ -55,6 +55,7 @@ header a {
 
 header a:hover {
   color: $white;
+  font-weight: bold;
   text-shadow: -1px 1px 8px #ffc, 1px -1px 8px $white;
 }
 
@@ -75,6 +76,7 @@ header #welcome {
 
 footer {
   background-color: #a09e9d;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($red), to($grey));
   color: white;
   padding: 40px;
 }
@@ -112,7 +114,7 @@ input[type="submit"] {
   margin-top: 0.5em;
 }
 
-.no_enum_ul {
+.restaurant_info {
   list-style-type: none;
   li {
     margin-left: -25px;
@@ -126,3 +128,60 @@ input[type="submit"] {
 .menu button {
   width: 100%;
 }
+
+.text_area {
+  width: 20em;
+  height: 5em;
+  resize: none;
+}
+
+.form_structure {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF5EE;
+}
+
+.form_structure > li {
+  padding: 15px;
+  border: solid;
+  border-style: groove;
+}
+
+.form_structure input {
+  padding: 3px;
+}
+
+.form_structure p {
+  font-weight: bold;
+}
+
+.decision a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.decision td {
+  padding: 10px;
+  font-size: 1em;
+}
+
+.accept {
+  color: $green;
+}
+
+.decline {
+  color: $red;
+}
+
+.accept:hover {
+  text-shadow: -1px 1px 8px $green, 1px -1px 8px $green;
+}
+
+.decline:hover {
+  text-shadow: -1px 1px 8px $red, 1px -1px 8px $red;
+}
+
+
+
+

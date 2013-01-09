@@ -60,6 +60,35 @@ td {
   display: none;
 }
 
+.types_ul {
+  list-style-type: none;
+  li {
+    display: inline-block;
+  }
+  li:hover {
+    font-weight: bold;
+  }
+}
+
+.types_table {
+  margin-left: 5px;
+  margin-right: 5px;
+  td {
+    padding: 10px;
+  }
+}
+
+$red: #990b02;
+
+.clickAndEat:hover {
+  color: white;
+  text-shadow: -1px 1px 8px $red, 1px -1px 8px $red;
+}
+
+
+
+
+
 
 
 
