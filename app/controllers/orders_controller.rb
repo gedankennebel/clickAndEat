@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order.closed=0
     #@order.save
     if @order.save
-      redirect_to(@order, :notice => 'Order was successfully created.')
+      redirect_to(branch_order_url(params[:branch_id], @order))
       @order.broadcast("/branches/#{params[:branch_id]}/order_items")
     else
       render :action => "show"
