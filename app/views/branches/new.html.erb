@@ -3,7 +3,7 @@
     <% if @branch.errors.any? %>
         <ul id="errors">
           <% @branch.errors.full_messages.each do |msg| %>
-              <li><p id="alert"><%= msg %></p></li>
+              <li><p class="alert"><%= msg %></p></li>
           <% end %>
         </ul>
     <% end %>

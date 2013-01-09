@@ -30,6 +30,21 @@ class UserAccountsController < ApplicationController
 
   def index
     @user_account = current_user
+    unless current_user.restaurant.blank?
+      unless current_user.restaurant.branches.blank?
+        @branches = @user_account.restaurant.branches
+        @current_branch_id = @branches.first.id
+      end
+    end
+  end
+
+  def change_branch
+    @user_account = current_user
+    unless current_user.restaurant.branches.blank?
+      @branches = @user_account.restaurant.branches
+      @current_branch_id = params[:branch_id]
+      render 'index'
+    end
   end
 
   def join_restaurant

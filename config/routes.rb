@@ -38,8 +38,9 @@ ClickAndEat::Application.routes.draw do
 
   match "branches/:branch_id/order_items", to: "order_items#monitor", as: :monitor
 
-  get "accept_employee/:message_id" => "user_accounts#accept_employee"
-  get "decline_employee/:message_id" => "user_accounts#decline_employee"
+  get "accept_employee/:message_id" => "user_accounts#accept_employee", as: :accept_employee
+  get "decline_employee/:message_id" => "user_accounts#decline_employee", as: :decline_employee
+  post "change_branch" => "user_accounts#change_branch", as: :change_branch
 
   root to: 'restaurants#index'
 end

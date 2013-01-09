@@ -53,7 +53,7 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    if not current_user.restaurant.nil?
+    unless current_user.restaurant.nil?
       @types = Type.all
       if current_user.restaurant_id.eql? params[:id]
         @restaurant = Restaurant.find params[:id]

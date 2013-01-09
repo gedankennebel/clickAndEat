@@ -151,11 +151,11 @@ pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16, descri
 pappad.item_category = starters
 pappad.save!
 
-order = Order.create!(table: table1)
-
-OrderItem.create!(order: order, item: pappad)
-OrderItem.create!(order: order, item: lassi)
-OrderItem.create!(order: order, item: jalfrezi)
+#order = Order.create!(table: table1)
+#
+#OrderItem.create!(order: order, item: pappad)
+#OrderItem.create!(order: order, item: lassi)
+#OrderItem.create!(order: order, item: jalfrezi)
 
 # generate 20 test user, to make restaurants and testing around
 i = 0

@@ -16,13 +16,14 @@
 
   <% if user_signed_in? %>
       <div id="notifications">
-        <!--TODO monitor_path parametrisieren-->
-        <p><%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span></p>
+
+        <p><%= link_to "Monitor notifications", user_accounts_path %>
+          <span id="notification-count">(0)</span></p>
 
         <p><%= link_to "Messages", messages_path %> (<%= current_user.messages.size %>)</p>
       </div>
 
-      <p id="welcome"> Welcome <%= current_user.name %>!</p>
+      <p id="welcome"> Welcome <%= current_user.name %></p>
 
       <p> <%= link_to "My Account", user_account_path %></p>
 
@@ -34,11 +35,11 @@
 </header>
 
 <div id="content">
-  <p id="notice" <%= "style=display:none" unless flash[:notice] %>>
+  <p class="notice" <%= "style=display:none" unless flash[:notice] %>>
     <%= flash[:notice] %>
   </p>
 
-  <p id="alert" <%= "style=display:none" unless flash[:alert] %>>
+  <p class="alert" <%= "style=display:none" unless flash[:alert] %>>
     <%= flash[:alert] %>
   </p>
 

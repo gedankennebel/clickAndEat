@@ -8,8 +8,8 @@
               <tr>
                 <td><%= message.message_text %> </td>
                 <% if message.message_type.eql? 'decision' %>
-                    <td><%= link_to 'Accept', url_for(controller: 'user_accounts', action: 'accept_employee', message_id: message.id), class: 'accept' %> </td>
-                    <td> <%= link_to 'Decline', url_for(controller: 'user_accounts', action: 'decline_employee', message_id: message.id), class: 'decline' %> </td>
+                    <td><%= link_to 'Accept', accept_employee_path(message.id), class: 'accept' %> </td>
+                    <td> <%= link_to 'Decline', decline_employee_path(message.id), class: 'decline' %> </td>
                 <% else %>
                     <td><%= link_to '(delete)', message, method: :delete, data: {confirm: 'Are you sure?'}, class: 'decline' %></td>
                 <% end %>

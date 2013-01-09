@@ -15,25 +15,31 @@
     <% else %>
         <% @user_account.roles.each do |role| %>
             <% if role.name.eql? 'employee' or role.name.eql? 'manager' %>
-                <p class="option_type">Service options:</p>
-                <ul class="account_options">
-                  <li>Take a new order</li>
-                  <li>Open cook monitor</li>
-                </ul>
+                <% unless @user_account.restaurant.branches.blank? %>
+                    <p class="option_type">Service options:</p>
+                    <ul class="account_options">
+                      <%= form_tag change_branch_path do %>
+                          Select
+                          branch:  <%= select_tag :branch_id, options_for_select(@branches.collect { |branch| [branch.address.street, branch.id] }, @current_branch_id), {onchange: "this.form.submit();"} %>
+                      <% end %>
+                      <li><%= link_to "Take new order", branch_orders_path(@current_branch_id) %></li>
+                      <li><%= link_to "Open cook monitor", monitor_path(@current_branch_id) %></li>
+                    </ul>
+                <% else %>
+                    <p class="alert">Create at least one branch, to use the awesome order and monitor feature</p>
+                <% end %>
             <% end %>
             <% if role.name.eql? 'manager' %>
-                <% if not @user_account.restaurant.nil? %>
-                    <p class="option_type">Management options:</p>
-                    <ul class="account_options">
-                      <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
-                      <li><%= link_to "Create a branch", new_branch_path %></li>
-                      <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
-                          <li>Edit your online menu</li>
-                      <% else %>
-                          <li>Create your online menu</li>
-                      <% end %>
-                    </ul>
-                <% end %>
+                <p class="option_type">Management options:</p>
+                <ul class="account_options">
+                  <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
+                  <li><%= link_to "Create a branch", new_branch_path %></li>
+                  <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
+                      <li>Edit your online menu</li>
+                  <% else %>
+                      <li>Create your online menu</li>
+                  <% end %>
+                </ul>
             <% end %>
         <% end %>
     <% end %>

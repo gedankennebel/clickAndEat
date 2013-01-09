@@ -27,7 +27,7 @@ class Restaurant < ActiveRecord::Base
       restaurant.types.delete_all
       restaurant = set_types_to_restaurant restaurant, selected_types, extra_type
     end
-    if not avatar_flag.blank?
+    unless avatar_flag.blank?
       restaurant.avatar = nil
     end
     restaurant.update_attributes restaurant_update
@@ -40,7 +40,7 @@ class Restaurant < ActiveRecord::Base
     # dirty hack with hidden field for types, please forgive me! :(
     # if first element is blank
     # it means no types selected (only hidden field)
-    if not selected_types.first.blank?
+    unless selected_types.first.blank?
       # if types are selected then
       # the last element is always the hidden field, so cut it off
       types = selected_types.shift(selected_types.size-1)
@@ -50,15 +50,15 @@ class Restaurant < ActiveRecord::Base
     end
     # if user typed an extra type in form
     # e.g. if 'chinese' was not available to choose
-    if not extra_type.blank?
+    unless extra_type.blank?
       # insert new type into database, if not already has been
       Type.create_type extra_type.downcase
       # if no types selected as checkbox
       # choose extra_type directly
-      if not types.blank?
+      unless types.blank?
         # check if extra_type is not same
         # as one of the selected one, before adding
-        if not types.include? extra_type.downcase
+        unless types.include? extra_type.downcase
           add_type_to_restaurant restaurant, extra_type.downcase
         end
       else

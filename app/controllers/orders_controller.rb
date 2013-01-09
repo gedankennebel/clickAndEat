@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_filter :require_login
+
   def index
     @order = Order.new
     @tables = Table.where(branch_id: params[:branch_id])

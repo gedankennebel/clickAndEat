@@ -86,7 +86,7 @@ footer p {
   text-align: center;
 }
 
-#notice {
+.notice {
   margin: 0.5em;
   padding: 0.5em;
   border: 1px solid $green;
@@ -94,7 +94,7 @@ footer p {
   background-color: $lightgreen;
 }
 
-#alert {
+.alert {
   margin: 0.5em;
   padding: 0.5em;
   border: 1px solid $red;

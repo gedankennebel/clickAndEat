@@ -4,7 +4,7 @@
     <% if @user_account.errors.any? %>
         <ul id="errors">
           <% @user_account.errors.full_messages.each do |msg| %>
-              <li><p id="alert"><%= msg %></p></li>
+              <li><p class="alert"><%= msg %></p></li>
           <% end %>
         </ul>
     <% end %>
