@@ -4,7 +4,6 @@
   <title>ClickAndEat</title>
   <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,400' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <!--TODO refactor javascript files-->
   <%= javascript_include_tag :jquery, :jquery_ujs, :filter, :notifications, :order_items_helper, :order_items_templates, "http://localhost:9292/faye.js" %>
   <%= yield(:head) %>
   <%= csrf_meta_tags %>
@@ -16,7 +15,7 @@
 
   <% if user_signed_in? %>
       <div id="notifications">
-        <!--TODO monitor_path parametrisieren-->
+        <!--TODO monitor_path parametrisieren monitor_path(current_user.current_branch.id)-->
         <p><%= link_to "Notifications", monitor_path(2) %> <span id="notification-count">(0)</span></p>
 
         <p><%= link_to "Messages", messages_path %> (<%= current_user.messages.size %>)</p>

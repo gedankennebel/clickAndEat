@@ -5,6 +5,7 @@ class UserAccount < ActiveRecord::Base
   belongs_to :filter_definition
   has_secure_password
   has_many :messages
+  # TODO Najum current_branch
 
   # validate email with RFC-822
   validates :email, uniqueness: true, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,

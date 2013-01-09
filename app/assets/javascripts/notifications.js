@@ -25,7 +25,7 @@ function Index() {
 
 Index.get = function (done, fail) {
     $.ajax({
-        url:'/',
+        url:'/restaurants.json',
         dataType:'json'
     }).done(function (index) {
             index.getLink = function (rel) {
