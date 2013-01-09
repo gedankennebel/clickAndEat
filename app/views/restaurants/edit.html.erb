@@ -30,7 +30,11 @@
                 <table class="types_table">
                   <tr>
                     <td><%= form.label type.name %></td>
-                    <td><%= check_box_tag 'type[name][]', type.name, false %></td>
+                    <% if @restaurant.types.include? type %>
+                        <td><%= check_box_tag 'type[name][]', type.name, true %></td>
+                    <% else %>
+                        <td><%= check_box_tag 'type[name][]', type.name, false %></td>
+                    <% end %>
                   </tr>
                 </table>
               </li>
