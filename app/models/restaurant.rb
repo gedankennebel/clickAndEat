@@ -55,10 +55,10 @@ class Restaurant < ActiveRecord::Base
       Type.create_type extra_type.downcase
       # if no types selected as checkbox
       # choose extra_type directly
-      if not selected_types.first.blank?
+      if not types.blank?
         # check if extra_type is not same
         # as one of the selected one, before adding
-        if not contains_type_name? types, extra_type
+        if not types.include? extra_type.downcase
           add_type_to_restaurant restaurant, extra_type.downcase
         end
       else
@@ -71,17 +71,6 @@ class Restaurant < ActiveRecord::Base
   # add types to a given restaurant
   def self.add_type_to_restaurant restaurant, type_name
     restaurant.types << Type.find_by_name(type_name)
-  end
-
-  # check if the given type_name matchs one of the type_names in list
-  # return true if match successful, otherwise false
-  def self.contains_type_name? type_name_list, type_name
-    type_name_list.each do |name|
-      if name.eql? type_name.downcase
-        return true
-      end
-    end
-    return false
   end
 
 end

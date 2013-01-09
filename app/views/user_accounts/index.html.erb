@@ -21,22 +21,22 @@
                   <li>Open cook monitor</li>
                 </ul>
             <% end %>
-                <% if role.name.eql? 'manager' %>
-                    <% if not @user_account.restaurant.nil? %>
-                        <p class="option_type">Management options:</p>
-                        <ul class="account_options">
-                          <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
-                          <li>Set your branch</li>
-                          <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
-                              <li>Edit your online menu</li>
-                          <% else %>
-                              <li>Create your online menu</li>
-                          <% end %>
-                        </ul>
-                    <% end %>
+            <% if role.name.eql? 'manager' %>
+                <% if not @user_account.restaurant.nil? %>
+                    <p class="option_type">Management options:</p>
+                    <ul class="account_options">
+                      <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
+                      <li>Set your branch</li>
+                      <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
+                          <li>Edit your online menu</li>
+                      <% else %>
+                          <li>Create your online menu</li>
+                      <% end %>
+                    </ul>
                 <% end %>
             <% end %>
         <% end %>
-        <% else %>
-        <h1>Your account console is currently unavailable, until your employee request has been responsed</h1>
     <% end %>
+<% else %>
+    <h1>Your account console is currently unavailable, until your employee request has been responsed</h1>
+<% end %>
