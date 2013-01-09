@@ -28,7 +28,6 @@ class UserAccountsController < ApplicationController
     render json: current_user.filter_definition
   end
 
-
   def index
     @user_account = current_user
   end

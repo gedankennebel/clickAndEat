@@ -129,6 +129,12 @@ input[type="submit"] {
   width: 100%;
 }
 
+.text_area {
+  width: 20em;
+  height: 5em;
+  resize: none;
+}
+
 .form_structure {
   list-style-type: none;
   padding: 0;
