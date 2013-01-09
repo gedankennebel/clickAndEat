@@ -8,7 +8,6 @@ class RestaurantsController < ApplicationController
       format.html {
         @restaurants = Restaurant.all(order: 'created_at DESC')
       }
-      # TODO: verursacht FEHLER bei back-button im chrome-browser -> 'current_user.restaurant' (bei safari browser aber kein fehler)
       format.json {
         expires_in 5.seconds
         render json: {links: [
