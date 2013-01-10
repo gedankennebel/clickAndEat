@@ -22,7 +22,7 @@
                           Select
                           branch:  <%= select_tag :branch_id, options_for_select(@branches.collect { |branch| [branch.address.street, branch.id] }, @current_branch_id), {onchange: "this.form.submit();"} %>
                       <% end %>
-                      <li><%= link_to "Take new order", branch_orders_path(@current_branch_id) %></li>
+                      <li><%= link_to "Orders", branch_orders_path(@current_branch_id) %></li>
                       <li><%= link_to "Open cook monitor", monitor_path(@current_branch_id) %></li>
                     </ul>
                 <% else %>
