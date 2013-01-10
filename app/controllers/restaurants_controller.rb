@@ -11,8 +11,11 @@ class RestaurantsController < ApplicationController
       format.json {
         expires_in 5.seconds
         render json: {links: [
-            {rel: 'monitor', href: monitor_path(2)}, #TODO get branch_id from current_user.current_branch
-            {rel: 'current_restaurant', href: restaurant_path(current_user.restaurant)}
+
+            {rel: 'current_restaurant', href: restaurant_path(current_user.restaurant)},
+            if current_user.branch
+              {rel: 'monitor', href: monitor_path(current_user.branch)} #TODO get branch_id from current_user.current_branch
+            end
         ]}
       }
     end

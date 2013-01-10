@@ -103,6 +103,11 @@ pakistani_branch1.save!
 pakistani_branch2.save!
 chinese_branch.save!
 
+cook.branch = indian_branch
+cook.save!
+waiter.branch = indian_branch
+waiter.save!
+
 mexican_restaurant.branches [mexian_branch]
 indian_restaurant.branches = [indian_branch]
 pakistani_restaurant.branches = [pakistani_branch1, pakistani_branch2]
