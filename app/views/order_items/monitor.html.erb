@@ -9,25 +9,25 @@
       <li>
         <label for="cookable">Cookable</label>
         <select id="cookable" name="cookable">
-          <option value="null" <%= "selected" if filter.cookable == nil %> >both</option>
-          <option value="false" <%= "selected" if filter.cookable == false %> >Not cookable</option>
-          <option value="true" <%= "selected" if filter.cookable == true %> >Cookable</option>
+          <option value="null" <%= "selected" if !filter || filter.cookable == nil %> >both</option>
+          <option value="false" <%= "selected" if filter && filter.cookable == false %> >Not cookable</option>
+          <option value="true" <%= "selected" if filter && filter.cookable == true %> >Cookable</option>
         </select>
       </li>
       <li>
         <label for="cooked">Cooked</label>
         <select id="cooked" name="cooked">
-          <option value="null" <%= "selected" if filter.cooked == nil %> >both</option>
-          <option value="false" <%= "selected" if filter.cooked == false %> >Not cooked</option>
-          <option value="true" <%= "selected" if filter.cooked == true %> >Cooked</option>
+          <option value="null" <%= "selected" if !filter || filter.cooked == nil %> >both</option>
+          <option value="false" <%= "selected" if filter && filter.cooked == false %> >Not cooked</option>
+          <option value="true" <%= "selected" if filter && filter.cooked == true %> >Cooked</option>
         </select>
       </li>
       <li>
         <label for="served">Served</label>
         <select id="served" name="served">
-          <option value="null" <%= "selected" if filter.served == nil %> >both</option>
-          <option value="false" <%= "selected" if filter.served == false %> >Not served</option>
-          <option value="true" <%= "selected" if filter.served == true %> >Served</option>
+          <option value="null" <%= "selected" if !filter || filter.served == nil %> >both</option>
+          <option value="false" <%= "selected" if filter && filter.served == false %> >Not served</option>
+          <option value="true" <%= "selected" if filter && filter.served == true %> >Served</option>
         </select>
       </li>
       <li>
@@ -35,7 +35,7 @@
 
         <select id="tables" name="tables" multiple>
           <% @tables.each do |table| %>
-                  <option value='<%= table.table_number %>'<%= "selected" if filter.tables.include?(table.table_number) %>>Table  <%= table.table_number %></option>
+              <option value='<%= table.table_number %>'<%= "selected" if !filter || !filter.tables || filter.tables.include?(table.table_number) %>>Table  <%= table.table_number %></option>
           <% end %>
         </select>
       </li>

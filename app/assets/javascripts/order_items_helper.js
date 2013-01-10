@@ -50,12 +50,12 @@ function getCurrentPath() {
 }
 
 function showSuccess(message) {
-    var selector = '#notice';
+    var selector = '.notice';
     showFlash(selector, message);
 }
 
 function showError(message) {
-    var selector = '#alert';
+    var selector = '.alert';
     showFlash(selector, message);
 }
 

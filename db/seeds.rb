@@ -14,8 +14,12 @@ manager_role = Role.create!(name: 'manager')
 
 employee = UserAccount.create!(email: "emp@test.de", name: "Tom de Rofl", password: "test", password_confirmation: "test")
 employee.roles << [employee_role, user_role]
-#
-#
+
+waiter = UserAccount.create!(email: "waiter@test.de", name: "Waiter", password: "test", password_confirmation: "test")
+waiter.roles << [employee_role, user_role]
+
+cook = UserAccount.create!(email: "cook@test.de", name: "Cook", password: "test", password_confirmation: "test")
+cook.roles << [employee_role, user_role]
 manager = UserAccount.create!(email: "mgr@test.de", name: "Big Boss", password: "test", password_confirmation: "test")
 manager.roles << [manager_role, user_role]
 manager.save!
@@ -26,9 +30,11 @@ user.save!
 
 
 #filter definitions
-definition = FilterDefinition.create!(cookable: false, tables: [1, 2, 3])
-employee.filter_definition = definition
-employee.save!
+waiter.filter_definition = FilterDefinition.create!(cooked: true, served: false)
+waiter.save!
+
+cook.filter_definition = FilterDefinition.create!(cookable: true, cooked: false, served: false)
+cook.save!
 
 #restaurants
 indian_type = Type.create!(name: "indian")
@@ -112,6 +118,10 @@ manager.restaurant = indian_restaurant
 manager.save!
 employee.restaurant = indian_restaurant
 employee.save!
+waiter.restaurant = indian_restaurant
+waiter.save!
+cook.restaurant = indian_restaurant
+cook.save!
 
 #tables
 table1 = Table.new(table_number: 1)

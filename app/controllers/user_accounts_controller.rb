@@ -20,7 +20,12 @@ class UserAccountsController < ApplicationController
   end
 
   def save_filter_definition
-    current_user.filter_definition.from_json(request.body).save!
+    if current_user.filter_definition
+      current_user.filter_definition.from_json(request.body).save!
+    else
+      current_user.filter_definition = FilterDefinition.new.from_json(request.body)
+      current_user.save!
+    end
     render status: :no_content, nothing: true
   end
 
