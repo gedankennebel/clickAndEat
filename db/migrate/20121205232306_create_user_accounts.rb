@@ -9,6 +9,7 @@ class CreateUserAccounts < ActiveRecord::Migration
       t.timestamps
       #foreign key
       t.integer :restaurant_id
+      t.integer :branch_id
       t.references :filter_definition
     end
   end

@@ -29,22 +29,12 @@ class UserAccountsController < ApplicationController
   end
 
   def index
-    @user_account = current_user
-    unless current_user.restaurant.blank?
-      unless current_user.restaurant.branches.blank?
-        @branches = @user_account.restaurant.branches
-        @current_branch_id = @branches.first.id
-      end
-    end
+    @user_account = UserAccount.current_user_for_index current_user
   end
 
   def change_branch
-    @user_account = current_user
-    unless current_user.restaurant.branches.blank?
-      @branches = @user_account.restaurant.branches
-      @current_branch_id = params[:branch_id]
-      render 'index'
-    end
+    @user_account = UserAccount.change_current_branch current_user, params[:branch_id]
+    render 'index'
   end
 
   def join_restaurant
@@ -52,7 +42,7 @@ class UserAccountsController < ApplicationController
 
   def apply_to_restaurant_as_employee
     if UserAccount.send_employee_request_to_manager current_user, params[:restaurant_name]
-      redirect_to user_account_path,
+      redirect_to user_accounts_path,
                   notice: 'Sent request to the manager of restaurant ' + params[:restaurant_name]
     else
       redirect_to user_accounts_path,

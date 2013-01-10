@@ -16,8 +16,10 @@
   <% if user_signed_in? %>
       <div id="notifications">
 
-        <p><%= link_to "Monitor notifications", user_accounts_path %>
-          <span id="notification-count">(0)</span></p>
+        <% unless current_user.branch.blank? %>
+            <p><%= link_to "Monitor notifications", monitor_path(current_user.branch_id) %>
+              <span id="notification-count">(0)</span></p>
+        <% end %>
 
         <p><%= link_to "Messages", messages_path %> (<%= current_user.messages.size %>)</p>
       </div>

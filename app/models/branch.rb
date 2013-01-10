@@ -3,6 +3,7 @@ class Branch < ActiveRecord::Base
   belongs_to :address
   has_many :tables
   belongs_to :restaurant
+  has_many :user_accounts
 
   validates_presence_of :restaurant
   validates_associated :restaurant, :address

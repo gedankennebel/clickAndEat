@@ -19,11 +19,11 @@
                     <p class="option_type">Service options:</p>
                     <ul class="account_options">
                       <%= form_tag change_branch_path do %>
-                          Select
-                          branch:  <%= select_tag :branch_id, options_for_select(@branches.collect { |branch| [branch.address.street, branch.id] }, @current_branch_id), {onchange: "this.form.submit();"} %>
+                          Select your current
+                          branch:  <%= select_tag :branch_id, options_for_select(@user_account.restaurant.branches.collect { |branch| [branch.address.street, branch.id] }, @user_account.branch_id), {onchange: "this.form.submit();"} %>
                       <% end %>
-                      <li><%= link_to "Take new order", branch_orders_path(@current_branch_id) %></li>
-                      <li><%= link_to "Open cook monitor", monitor_path(@current_branch_id) %></li>
+                      <li><%= link_to "Take new order", branch_orders_path(@user_account.branch_id) %></li>
+                      <li><%= link_to "Open cook monitor", monitor_path(@user_account.branch_id) %></li>
                     </ul>
                 <% else %>
                     <p class="alert">Create at least one branch, to use the awesome order and monitor feature</p>

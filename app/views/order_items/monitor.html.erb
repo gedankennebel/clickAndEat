@@ -3,7 +3,7 @@
 <h2>Monitor</h2>
 <div id="filterDefinition">
   <h1>Filter</h1>
-  <% filter = @filter_definition %>
+  <% filter = current_user.filter_definition %>
   <form>
     <ul>
       <li>
@@ -35,11 +35,7 @@
 
         <select id="tables" name="tables" multiple>
           <% @tables.each do |table| %>
-              <% unless filter.tables.nil? %>
                   <option value='<%= table.table_number %>'<%= "selected" if filter.tables.include?(table.table_number) %>>Table  <%= table.table_number %></option>
-              <% else %>
-                  <option value='<%= table.table_number %>'>Table  <%= table.table_number %></option>
-              <% end %>
           <% end %>
         </select>
       </li>

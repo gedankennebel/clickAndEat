@@ -5,7 +5,7 @@ class UserAccount < ActiveRecord::Base
   belongs_to :filter_definition
   has_secure_password
   has_many :messages
-  # TODO Najum current_branch
+  belongs_to :branch
 
   # validate email with RFC-822
   validates :email, uniqueness: true, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
@@ -61,6 +61,38 @@ class UserAccount < ActiveRecord::Base
     message.delete
     decline_message_text = "Your application to restaurant "+ manager_account.restaurant.name + " has been rejected!"
     Message.create_new_info_message manager_account.id, employee_account.id, decline_message_text
+  end
+
+  def self.current_user_for_index current_user
+    unless current_user.restaurant.blank?
+      unless current_user.restaurant.branches.blank?
+        unless current_user.branch.blank?
+          current_user
+        else
+          current_user.branch = current_user.restaurant.branches.first
+          current_user.save!
+          current_user
+        end
+      else
+        current_user
+      end
+    else
+      current_user
+    end
+  end
+
+  def self.change_current_branch current_user, new_branch_id
+    unless current_user.restaurant.blank?
+      unless current_user.restaurant.branches.blank?
+        current_user.branch = Branch.find new_branch_id
+        current_user.save
+        current_user
+      else
+        current_user
+      end
+    else
+      current_user
+    end
   end
 
   private
