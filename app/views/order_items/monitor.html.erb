@@ -35,7 +35,7 @@
 
         <select id="tables" name="tables" multiple>
           <% @tables.each do |table| %>
-              <option value='<%= table.table_number %>'<%= "selected" if !filter || filter.tables.include?(table.table_number) %>>Table  <%= table.table_number %></option>
+              <option value='<%= table.table_number %>'<%= "selected" if !filter || !filter.tables || filter.tables.include?(table.table_number) %>>Table  <%= table.table_number %></option>
           <% end %>
         </select>
       </li>
