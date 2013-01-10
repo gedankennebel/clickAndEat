@@ -19,7 +19,7 @@ class Item < ActiveRecord::Base
         price: self.price,
         cookable: self.item_category.cookable,
         cooktime: self.cooktime,
-        picture: "/items/#{id}/picture"
+        picture: self.picture.url(:medium)
     }
   end
 end
