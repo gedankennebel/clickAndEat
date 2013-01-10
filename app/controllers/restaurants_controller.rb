@@ -14,7 +14,7 @@ class RestaurantsController < ApplicationController
 
             {rel: 'current_restaurant', href: restaurant_path(current_user.restaurant)},
             if current_user.branch
-              {rel: 'monitor', href: monitor_path(current_user.branch)} #TODO get branch_id from current_user.current_branch
+              {rel: 'monitor', href: monitor_path(current_user.branch)}
             end
         ]}
       }
