@@ -13,12 +13,12 @@ on the the running machine you use this project.
 
 Settings for Mac:
 
--check if ImageMagick is already installed with command: which convert 
+- check if ImageMagick is already installed with command: which convert 
 
--if not, download with command (if Homebrew installed): brew install imagemagick 
+- if not, download with command (if Homebrew installed): brew install imagemagick 
 -or download from here (for all OS): http://www.imagemagick.org/script/binary-releases.php
 
--add this line: Paperclip.options[:command_path] = "/usr/local/bin/"
+- add this line: Paperclip.options[:command_path] = "/usr/local/bin/"
  to into this file: config/environments/development.rb
 
 - "/usr/local/bin/" is the path where ImageMagick is installed 
