@@ -1,8 +1,15 @@
 <h2>Create your branch</h2>
 <%= form_for @branch do |form| %>
     <% if @branch.errors.any? %>
-        <ul id="errors">
+        <ul id="errors" class="simple_ul">
           <% @branch.errors.full_messages.each do |msg| %>
+              <li><p class="alert"><%= msg %></p></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <% if @address.errors.any? %>
+        <ul id="errors" class="simple_ul">
+          <% @address.errors.full_messages.each do |msg| %>
               <li><p class="alert"><%= msg %></p></li>
           <% end %>
         </ul>

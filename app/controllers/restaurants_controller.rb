@@ -30,6 +30,48 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
 
+  def create_or_edit_menu
+    unless current_user.restaurant.nil?
+      @restaurant = current_user.restaurant
+      @item_category = ItemCategory.new
+      @item = Item.new
+    else
+      redirect_to new_restaurant_path
+    end
+  end
+
+  def create_item
+    @item = Item.new params[:item]
+    unless params[:category_id].blank?
+      @item.item_category = ItemCategory.find params[:category_id]
+      if @item.save
+        redirect_to create_or_edit_menu_path
+      else
+        @restaurant = current_user.restaurant
+        @item_category = ItemCategory.new
+        render 'create_or_edit_menu'
+      end
+    else
+      @restaurant = current_user.restaurant
+      @item_category = ItemCategory.new
+      @item.errors.add(:no, 'item category selected')
+      render 'create_or_edit_menu'
+    end
+
+  end
+
+  def create_item_category
+    @item_category = ItemCategory.new params[:item_category]
+    @item_category.restaurant = current_user.restaurant
+    if @item_category.save
+      redirect_to create_or_edit_menu_path
+    else
+      @restaurant = current_user.restaurant
+      @item = Item.new
+      render 'create_or_edit_menu'
+    end
+  end
+
   def new
     if current_user.restaurant.nil?
       @restaurant = Restaurant.new
@@ -79,4 +121,5 @@ class RestaurantsController < ApplicationController
       redirect_to user_accounts_path
     end
   end
+
 end

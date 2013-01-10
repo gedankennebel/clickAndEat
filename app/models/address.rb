@@ -4,7 +4,7 @@ class Address < ActiveRecord::Base
 
   validates_presence_of :city, :street, :postcode, :number
 
-  def self.create_new_adress street, number, city, postcode
-    Address.create!(city: city, number: number, postcode: postcode, street: street)
+  def self.new_adress street, number, city, postcode
+    Address.new(city: city, number: number, postcode: postcode, street: street)
   end
 end

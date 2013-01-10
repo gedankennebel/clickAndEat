@@ -18,12 +18,9 @@ class Branch < ActiveRecord::Base
     }
   end
 
-  def self.create_new_branch restaurant, branch, street, number, city, postcode
+  def self.create_new_branch restaurant, branch
     branch = Branch.new branch
     branch.restaurant = restaurant
-    branch.address = Address.create_new_adress street, number, city, postcode
-    restaurant.branches << branch
-    restaurant.save!
     branch
   end
 end

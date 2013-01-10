@@ -1,0 +1,117 @@
+<%= stylesheet_link_tag 'restaurants.css.scss' %>
+
+<h2 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Edit your online menu card</h2>
+<% if @item_category.errors.any? %>
+    <ul id="errors" class="simple_ul">
+      <% @item_category.errors.full_messages.each do |msg| %>
+          <li><p class="alert"><%= msg %></p></li>
+      <% end %>
+    </ul>
+<% end %>
+<% if @item.errors.any? %>
+    <ul id="errors" class="simple_ul">
+      <% @item.errors.full_messages.each do |msg| %>
+          <li><p class="alert"><%= msg %></p></li>
+      <% end %>
+    </ul>
+<% end %>
+<h2><%= @restaurant.name %> </h2>
+<div id="menu_preview">
+  <% if @restaurant.item_categories.length == 0 || @restaurant.item_categories.nil? %>
+      <h2>This restaurant has no online menu yet</h2>
+  <% else %>
+      <ul>
+        <% @restaurant.item_categories.each do |category| %>
+            <li>
+              <p class="category_name">
+                <%= category.name %></p>
+              <ul>
+                <% category.items.each do |item| %>
+                    <li class="item">
+                      <%= image_tag item.picture.url(:thumb) %>
+                      <%= item.name %>  <%= item.price %>&#8364;
+                <span class="hidden_text">
+                <p class="item_description"><%= item.description %></p>
+                </span>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
+        <% end %>
+      </ul>
+  <% end %>
+</div>
+
+
+<div class="menu_form">
+  <p> Create new item category:</p>
+  <%= form_for @item_category, url: menu_item_category_new_path, method: 'PUT', html: {multipart: true} do |form| %>
+      <ul class="form_structure">
+        <li>
+          <p><%= form.label :name, 'Item category name:' %></p>
+          <%= form.text_field :name %>
+        </li>
+        <li>
+          <p>
+            Cookable item category?
+            <%= check_box 'item_category', 'cookable' %>
+          </p>
+        </li>
+        <li><p><%= form.submit %></p>
+        </li>
+      </ul>
+  <% end %>
+</div>
+
+<% unless @restaurant.item_categories.length == 0 || @restaurant.item_categories.nil? %>
+    <div class="menu_form">
+      <p> Create new item:</p>
+      <%= form_for @item, url: menu_item_new_path, method: 'PUT', html: {multipart: true} do |form| %>
+          <ul class="form_structure">
+            <li>
+              <p><%= form.label :name, 'Item name:' %></p>
+              <%= form.text_field :name %>
+            </li>
+            <li>
+              <p>
+                <%= form.label :picture, 'Item category image' %>
+                <%= form.file_field :picture %>
+              </p>
+            </li>
+            <li>
+              <p><%= form.label :cooktime, 'Cooking time in minutes' %></p>
+              <%= form.number_field :cooktime %>
+            </li>
+            <li>
+              <p><%= form.label :price %></p>
+              <%= form.number_field :price %>
+            </li>
+            <li>
+              <p><%= form.label :item_number, 'Item number (optional)' %></p>
+              <%= form.number_field :item_number %>
+            </li>
+            <li>
+              <p><%= form.label :description, 'Item description (optional)' %></p>
+              <%= form.text_field :description %>
+            </li>
+            <li>
+              <p>Select item category</p>
+              <ul class="types_ul">
+                <% @restaurant.item_categories.each do |item_category| %>
+                    <li>
+                      <table class="types_table">
+                        <tr>
+                          <td><%= form.label item_category.name %></td>
+                          <td><%= radio_button_tag :category_id, item_category.id, false %></td>
+                        </tr>
+                      </table>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
+            <li><p><%= form.submit %></p></li>
+          </ul>
+      <% end %>
+    </div>
+<% end %>
+

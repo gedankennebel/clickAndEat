@@ -10,12 +10,23 @@ class BranchesController < ApplicationController
   end
 
   def create
-    @branch = Branch.create_new_branch current_user.restaurant, params[:branch], params[:street], params[:number], params[:city], params[:postcode]
-    if @branch.save
-      Table.create_branch_tables params[:tables_amount], @branch.id
-      redirect_to user_accounts_path, notice: 'Your branch has been created!'
+    @address = Address.new_adress params[:street], params[:number], params[:city], params[:postcode]
+    if @address.save
+      @branch = Branch.create_new_branch current_user.restaurant, params[:branch]
+      @branch.address = @address
+      current_user.restaurant.branches << @branch
+      if @branch.save
+        current_user.restaurant.save!
+        Table.create_branch_tables params[:tables_amount], @branch.id
+        redirect_to user_accounts_path, notice: 'Your branch has been created!'
+      else
+        @address = Address.new
+        render 'new'
+      end
     else
-      render "new"
+      @branch = Branch.new
+      render 'new'
     end
+
   end
 end

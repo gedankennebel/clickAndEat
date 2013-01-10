@@ -12,11 +12,11 @@
             <ul class="no_enum_ul">
               <% category.items.each do |item| %>
                   <li class="item">
-                    <%= image_tag url_for(controller: 'picture', action: 'get_item_picture', item_id: item.id) %>
+                    <%= image_tag item.picture.url(:thumb) %>
                     <%= item.name %>  <%= item.price %>&#8364;
-                <span class="hidden_text">
-                <p class="item_description"><%= item.description %></p>
-                </span>
+                   <span class="hidden_text">
+                   <p class="item_description"><%= item.description %></p>
+                   </span>
                   </li>
               <% end %>
             </ul>

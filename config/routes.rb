@@ -7,8 +7,12 @@ ClickAndEat::Application.routes.draw do
   #Picture
   get "/items/:item_id/picture" => "picture#get_item_picture"
 
-  get "/restaurants/:id/menu" => "restaurants#menu"
-  get "/user_account" => "user_accounts#index"
+  get "/restaurant/:id/menu" => "restaurants#menu", as: :restaurant_menu
+  get "/restaurant/menu/edit" => "restaurants#create_or_edit_menu", as: :create_or_edit_menu
+
+  put "/menu/item/new" => "restaurants#create_item", as: :menu_item_new
+  put "/menu/item_category/new" => "restaurants#create_item_category", as: :menu_item_category_new
+
   get "/user_account/filter_definition" => "user_accounts#get_filter_definition"
   put "/user_account/filter_definition" => "user_accounts#save_filter_definition"
 

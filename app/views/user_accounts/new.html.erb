@@ -2,7 +2,7 @@
 
 <%= form_for @user_account do |form| %>
     <% if @user_account.errors.any? %>
-        <ul id="errors">
+        <ul id="errors" class="simple_ul">
           <% @user_account.errors.full_messages.each do |msg| %>
               <li><p class="alert"><%= msg %></p></li>
           <% end %>

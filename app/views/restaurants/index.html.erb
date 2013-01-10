@@ -8,7 +8,7 @@
           <%= image_tag restaurant.avatar.url(:thumb) %>
         </td>
         <td>
-          <ul class="restaurant_info">
+          <ul class="simple_ul">
             <li class="name"><%= restaurant.name %></li>
             <li>Kitchen:
               <% restaurant.types.each do |type| %>
@@ -20,8 +20,8 @@
               <% end %>
             </li>
             <li class="restaurant_links">
-              <%= link_to "show menu", url_for(controller: 'restaurants', action: 'menu', id: restaurant.id) %>
-              <%= link_to "show details", url_for(controller: 'restaurants', action: 'show', id: restaurant.id) %>
+              <%= link_to "show menu", restaurant_menu_path(restaurant.id) %>
+              <%= link_to "show details", restaurant_path(restaurant.id) %>
             </li>
           </ul>
         </td>

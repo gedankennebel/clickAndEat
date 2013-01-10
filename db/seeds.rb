@@ -17,7 +17,7 @@ employee.roles << [employee_role, user_role]
 #
 #
 manager = UserAccount.create!(email: "mgr@test.de", name: "Big Boss", password: "test", password_confirmation: "test")
-manager.roles << [manager_role, employee_role, user_role]
+manager.roles << [manager_role, user_role]
 manager.save!
 
 user = UserAccount.create!(email: "user@test.de", name: "Normal Boy", password: "test", password_confirmation: "test")
@@ -138,16 +138,20 @@ starters.restaurant=indian_restaurant
 starters.save!
 
 #items
-lassi = Item.new(cooktime: 5, name: "Mango Lassi", price: 2.9, item_number: 123, description: "Mango lassi is most commonly found in India and Pakistan though it is gaining popularity worldwide. It is made from yogurt, water and mango pulp.", picture: File.new(Rails.root.join "app/assets/mango_lassi.jpg").read)
+lassi = Item.new(cooktime: 5, name: "Mango Lassi", price: 2.9, item_number: 123, description: "Mango lassi is most commonly found in India and Pakistan though it is gaining popularity worldwide. It is made from yogurt, water and mango pulp.")
+lassi.picture = File.open(Rails.root.join "app/assets/mango_lassi.jpg")
 lassi.item_category = drinks
 lassi.save!
-jalfrezi = Item.new(cooktime: 25, name: "Chicken Jalfrezi", price: 10.9, item_number: 49, description: "Jalfrezi is a type of curry in which marinated pieces of meat or vegetables are fried in oil and spices to produce a dry, thick sauce. It is cooked with green chillies, with the result that a jalfrezi can range in heat from a medium dish to a very hot one. ", picture: File.new(Rails.root.join "app/assets/jalfrezi.jpg").read)
+jalfrezi = Item.new(cooktime: 25, name: "Chicken Jalfrezi", price: 10.9, item_number: 49, description: "Jalfrezi is a type of curry in which marinated pieces of meat or vegetables are fried in oil and spices to produce a dry, thick sauce. It is cooked with green chillies, with the result that a jalfrezi can range in heat from a medium dish to a very hot one. ")
+jalfrezi.picture = File.open(Rails.root.join "app/assets/jalfrezi.jpg")
 jalfrezi.item_category = food
 jalfrezi.save!
-biryani = Item.new(cooktime: 35, name: "Biryani", price: 13.9, item_number: 50, description: "Biryani is a set of rice-based foods made with spices, rice (usually basmati) and Chicken, mutton, fish, eggs or vegetables.", picture: File.new(Rails.root.join "app/assets/biryani.jpg").read)
+biryani = Item.new(cooktime: 35, name: "Biryani", price: 13.9, item_number: 50, description: "Biryani is a set of rice-based foods made with spices, rice (usually basmati) and Chicken, mutton, fish, eggs or vegetables.")
+biryani.picture = File.open(Rails.root.join "app/assets/biryani.jpg")
 biryani.item_category = food
 biryani.save!
-pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16, description: "Pappad is a thin, crisp Indian preparation sometimes described as a cracker. It is typically served as an accompaniment to a meal in India.", picture: File.new(Rails.root.join "app/assets/pappad.jpg").read)
+pappad = Item.new(cooktime: 5, name: "Pappad", price: 2, item_number: 16, description: "Pappad is a thin, crisp Indian preparation sometimes described as a cracker. It is typically served as an accompaniment to a meal in India.")
+pappad.picture = File.open(Rails.root.join "app/assets/pappad.jpg")
 pappad.item_category = starters
 pappad.save!
 

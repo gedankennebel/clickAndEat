@@ -35,9 +35,11 @@
                   <li> <%= link_to "Edit your restaurant", edit_restaurant_path(@user_account.restaurant) %> </li>
                   <li><%= link_to "Create a branch", new_branch_path %></li>
                   <% if not @user_account.restaurant.item_categories.nil? and not @user_account.restaurant.item_categories.size.eql? 0 %>
-                      <li>Edit your online menu</li>
+                      <li>
+                        <%= link_to "Edit your online menu", create_or_edit_menu_path %></li>
                   <% else %>
-                      <li>Create your online menu</li>
+                      <li>
+                        <%= link_to "Create your online menu", create_or_edit_menu_path %></li>
                   <% end %>
                 </ul>
             <% end %>
