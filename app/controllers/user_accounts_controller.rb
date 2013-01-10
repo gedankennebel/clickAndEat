@@ -20,7 +20,12 @@ class UserAccountsController < ApplicationController
   end
 
   def save_filter_definition
-    current_user.filter_definition.from_json(request.body).save!
+    if current_user.filter_definition
+      current_user.filter_definition.from_json(request.body).save!
+    else
+      current_user.filter_definition = FilterDefinition.new.from_json(request.body)
+      current_user.save!
+    end
     render status: :no_content, nothing: true
   end
 
@@ -52,7 +57,7 @@ class UserAccountsController < ApplicationController
 
   def apply_to_restaurant_as_employee
     if UserAccount.send_employee_request_to_manager current_user, params[:restaurant_name]
-      redirect_to user_account_path,
+      redirect_to user_accounts_path,
                   notice: 'Sent request to the manager of restaurant ' + params[:restaurant_name]
     else
       redirect_to user_accounts_path,

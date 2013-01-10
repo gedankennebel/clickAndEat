@@ -16,7 +16,8 @@
   <% if user_signed_in? %>
       <div id="notifications">
 
-        <p><%= link_to "Monitor notifications", user_accounts_path %>
+        <!--TODO monitor_path parametrisieren monitor_path(current_user.current_branch.id)-->
+        <p><%= link_to "Monitor notifications", monitor_path(2) %>
           <span id="notification-count">(0)</span></p>
 
         <p><%= link_to "Messages", messages_path %> (<%= current_user.messages.size %>)</p>

@@ -18,12 +18,15 @@
                 <% unless @user_account.restaurant.branches.blank? %>
                     <p class="option_type">Service options:</p>
                     <ul class="account_options">
+                      <!-- TODO Najum submit form onchange and set current_branch on current_user -->
                       <%= form_tag change_branch_path do %>
                           Select
                           branch:  <%= select_tag :branch_id, options_for_select(@branches.collect { |branch| [branch.address.street, branch.id] }, @current_branch_id), {onchange: "this.form.submit();"} %>
                       <% end %>
+                      <!--TODO Najum branch_orders_path(current_user.current_branch)-->
                       <li><%= link_to "Orders", branch_orders_path(@current_branch_id) %></li>
-                      <li><%= link_to "Open cook monitor", monitor_path(@current_branch_id) %></li>
+                      <!--TODO Najum monitor_path(current_user.current_branch)-->
+                      <li><%= link_to "Open monitor", monitor_path(@current_branch_id) %></li>
                     </ul>
                 <% else %>
                     <p class="alert">Create at least one branch, to use the awesome order and monitor feature</p>

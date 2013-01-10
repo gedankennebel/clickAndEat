@@ -28,10 +28,6 @@ class OrderItemsController < ApplicationController
     respond_to do |format|
       format.html {
         @tables = Table.where(branch_id: params[:branch_id])
-
-        #default filter defintion
-        table_array = Table.get_table_numbers_as_array @tables
-        @filter_definition = FilterDefinition.new(cookable: true, cooked: false, served: false, tables: table_array)
       }
       format.json {
         @orders = Order.joins(:table => :branch).where('branches.id' => params[:branch_id])
