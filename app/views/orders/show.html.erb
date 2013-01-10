@@ -1,15 +1,65 @@
 <%= stylesheet_link_tag 'orders.css.scss' %>
 <% content_for :head, javascript_include_tag(:orders) %>
+
+<script id="categories-template" type="text/x-handlebars-template">
+  <ul>
+    {{#each item_categories}}
+    <li>
+      <button class='categoryLink' value='{{this.items}}'>{{this.name}}</button>
+    </li>
+    {{/each}}
+  </ul>
+</script>
 <div id="categories" class="menu">
   loading...
 </div>
 
+
+<script id="items-template" type="text/x-handlebars-template">
+  <ul>
+    {{#this}}
+    <li>
+      <div class="item" id="{{id}}">
+        <input type='image' src='{{picture}}'/>
+
+        <p>{{name}}</p>
+
+        <p>#{{itemNumber}}</p>
+
+        <p>{{asEUR price}}</p>
+      </div>
+    </li>
+    {{/this}}
+  </ul>
+</script>
 <div id="items">
   Select a category
 </div>
 
+<script id="order-template" type="text/x-handlebars-template">
+  <ul>
+    {{#order_items}}
+    <li>
+      <div class='orderItem' id='{{id}} '>
+        <span class='plusminus'>
+         <input type='image' class='plus' src='/images/plus.png'><br/>
+         <input type='image' class='minus' src='/images/minus.png'>
+        </span>
+        <span style="float: left">
+            <p>{{item.name}} ({{quantity}})</p>
 
-<div class="footer">
+            <p>{{amount this}}</p>
+        </span>
+      </div>
+    </li>
+    {{/order_items}}
+  </ul>
+  <div class='totalAmount'>
+    <h1>Total Amount: </h1>{{totalAmount}}
+  </div>
+  <input id='submitOrder' type='button' value='Submit'>
+</script>
+<div class="order">
   <hr/>
   <h1>Order</h1>
 

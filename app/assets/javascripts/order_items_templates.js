@@ -23,7 +23,12 @@ function renderItems(items) {
     $('#items').html(html);
 }
 
-function renderOrderItems(orderItems) {
+function renderOrderItems(order) {
+    var source = $("#order-template").html();
+    var template = Handlebars.compile(source);
+    $('#order').html(template(order));
+}
+function renderOrderItemsBak(orderItems) {
     var html = "<ul>";
     $.each(orderItems, function (index, orderItem) {
         html += "<li>";

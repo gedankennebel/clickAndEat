@@ -89,3 +89,15 @@ $.fn.serializeObject = function () {
     return o;
 };
 
+// Handlebars helpers
+Handlebars.registerHelper('asEUR', function (number) {
+    return asEUR(number);
+});
+
+function asEUR(number) {
+    return parseFloat(number).toFixed(2) + "€";
+}
+
+Handlebars.registerHelper('amount', function (orderItem) {
+    return asEUR(orderItem.item.price * orderItem.quantity);
+});

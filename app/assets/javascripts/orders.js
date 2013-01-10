@@ -38,7 +38,9 @@ function getCategories() {
             url:index.getLink('current_restaurant') + '.json',
             dataType:"json"
         }).done(function (restaurant) {
-                $('#categories').html(createCategoriesHtml(restaurant.item_categories));
+                var source = $("#categories-template").html();
+                var template = Handlebars.compile(source);
+                $('#categories').html(template(restaurant));
             });
     });
 }
@@ -49,7 +51,9 @@ function getItems(url) {
         dataType:"json"
     }).done(function (items) {
             _items = items;
-            renderItems(items);
+            var source = $("#items-template").html();
+            var template = Handlebars.compile(source);
+            $('#items').html(template(items));
         });
 }
 
@@ -62,7 +66,7 @@ function addToOrder(itemId) {
         var newOrderItem = {id:Math.random(), quantity:1, item:item};
         _order.order_items.push(newOrderItem);
     }
-    renderOrderItems(_order.order_items);
+    renderOrderItems(_order);
 }
 
 function getOrder() {
@@ -71,7 +75,10 @@ function getOrder() {
         dataType:'json'
     }).done(function (order) {
             _order = order;
-            renderOrderItems(order.order_items);
+            _order.totalAmount = function () {
+                return asEUR(getTotalAmount(order.order_items));
+            };
+            renderOrderItems(order);
         });
 }
 
@@ -98,5 +105,5 @@ function incrementQuantity(increment, orderItemId) {
 
         _order.order_items.splice(_order.order_items.indexOf(orderItem), 1);
     }
-    renderOrderItems(_order.order_items);
+    renderOrderItems(_order);
 }
