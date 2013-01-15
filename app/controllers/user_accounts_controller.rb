@@ -1,6 +1,5 @@
 class UserAccountsController < ApplicationController
-  before_filter :require_login
-  skip_before_filter :require_login, only: [:new, :create]
+  before_filter :require_login, except: [:new, :create]
 
   def new
     @user_account = UserAccount.new

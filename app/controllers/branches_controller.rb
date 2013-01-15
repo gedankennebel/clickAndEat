@@ -1,4 +1,6 @@
 class BranchesController < ApplicationController
+  before_filter :require_login
+
   def show
     @branch = Branch.find(params[:id])
     render json: @branch
