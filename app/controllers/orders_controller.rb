@@ -2,9 +2,17 @@ class OrdersController < ApplicationController
   before_filter :require_login
 
   def index
-    @order = Order.new
-    @tables = Table.where(branch_id: params[:branch_id])
-    @orders = Order.where(table_id: @tables.map(&:id), closed: false)
+    unless current_user.branch.nil?
+      branch_id = params[:branch_id]
+      @order = Order.new
+      unless current_user.branch_id.eql? branch_id
+        branch_id = current_user.branch_id
+      end
+      @tables = Table.where(branch_id: branch_id)
+      @orders = Order.where(table_id: @tables.map(&:id), closed: false)
+    else
+      redirect_to user_accounts_path
+    end
   end
 
   def show

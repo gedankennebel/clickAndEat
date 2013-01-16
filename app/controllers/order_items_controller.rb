@@ -25,14 +25,22 @@ class OrderItemsController < ApplicationController
   end
 
   def monitor
-    respond_to do |format|
-      format.html {
-        @tables = Table.where(branch_id: params[:branch_id])
-      }
-      format.json {
-        @orders = Order.joins(:table => :branch).where('branches.id' => params[:branch_id])
-        render json: @orders
-      }
+    unless current_user.branch_id.nil?
+      branch_id = params[:branch_id]
+      unless current_user.branch_id.eql? branch_id
+        branch_id = current_user.branch_id
+      end
+      respond_to do |format|
+        format.html {
+          @tables = Table.where(branch_id: branch_id)
+        }
+        format.json {
+          @orders = Order.joins(:table => :branch).where('branches.id' => branch_id)
+          render json: @orders
+        }
+      end
+    else
+      redirect_to user_accounts_path
     end
   end
 

@@ -24,7 +24,7 @@ manager = UserAccount.create!(email: "mgr@test.de", name: "Big Boss", password: 
 manager.roles << [manager_role, user_role]
 manager.save!
 
-user = UserAccount.create!(email: "user@test.de", name: "Normal Boy", password: "test", password_confirmation: "test")
+user = UserAccount.create!(email: "user@test.de", name: "Test User", password: "test", password_confirmation: "test")
 user.roles << [user_role]
 user.save!
 

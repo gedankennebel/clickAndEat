@@ -1,6 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  after_filter :set_vary_header
+  after_filter :set_vary_header #
+
+  protected
+
+  def require_login
+    unless user_signed_in?
+      redirect_to login_path,
+                  alert: 'Please log in first.'
+    end
+  end
 
   private
   def set_vary_header
@@ -21,10 +30,4 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :current_user
 
-  def require_login
-    unless user_signed_in?
-      redirect_to login_path,
-                  alert: 'Please log in first.'
-    end
-  end
 end
